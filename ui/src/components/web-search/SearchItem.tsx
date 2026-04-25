@@ -38,6 +38,15 @@ export default function SearchItem({
   onSelect,
   onFocusOption
 }: IProps ) {
+  const snippet = useMemo(() => {
+    return item.snippet
+      .replace(/\s+/g, ' ')
+      .replace(/\bFirst Name Last Name Organization Email Project Email Project\b/gi, '')
+      .replace(/\bFirst Name Last Name Organization Email\b/gi, '')
+      .replace(/\bPlease email me the\b/gi, 'Request the')
+      .trim();
+  }, [item.snippet]);
+
   const isHeader = useMemo(() => {
     if (index === 0) return true;
     return list[index - 1].pageTitle !== list[index].pageTitle;
@@ -54,9 +63,11 @@ export default function SearchItem({
 
   const header = useMemo(() => (
     <li role="presentation" aria-hidden="true" className="web-search-group">
-      <div className="web-search-group-marker" />
       <div className="web-search-group-content">
-        <h3 className="web-search-group-title">{item.pageTitle}</h3>
+        <div className="web-search-group-heading">
+          <span className="web-search-group-label">Page</span>
+          <h3 className="web-search-group-title">{item.pageTitle}</h3>
+        </div>
         <span className="web-search-group-meta">
           {pageSummary.results} {pageSummary.results === 1 ? 'result' : 'results'}, {pageSummary.matches} {pageSummary.matches === 1 ? 'match' : 'matches'}
         </span>
@@ -92,12 +103,12 @@ export default function SearchItem({
             </span>
           </div>
           <p className="web-search-snippet">
-            <SearchHighlightedSnippet text={item.snippet} searchStr={searchStr} />
+            <SearchHighlightedSnippet text={snippet} searchStr={searchStr} />
           </p>
         </div>
       </a>
     </li>
-  ), [item, searchStr, active, linkRef, optionId, onFocusOption, onSelect]);
+  ), [item, snippet, searchStr, active, linkRef, optionId, onFocusOption, onSelect]);
 
   return (
     <>
