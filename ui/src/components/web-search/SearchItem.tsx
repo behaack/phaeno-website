@@ -42,8 +42,14 @@ export default function SearchItem({
     return item.snippet
       .replace(/\s+/g, ' ')
       .replace(/\bFirst Name Last Name Organization Email Project Email Project\b/gi, '')
+      .replace(/\bFirst Name Last\b/gi, '')
+      .replace(/\bFirst Name\b/gi, '')
+      .replace(/\bLast Name\b/gi, '')
+      .replace(/\bOrganization\b/gi, '')
+      .replace(/\bProject Email Project\b/gi, '')
       .replace(/\bFirst Name Last Name Organization Email\b/gi, '')
       .replace(/\bPlease email me the\b/gi, 'Request the')
+      .replace(/\s{2,}/g, ' ')
       .trim();
   }, [item.snippet]);
 
@@ -65,7 +71,6 @@ export default function SearchItem({
     <li role="presentation" aria-hidden="true" className="web-search-group">
       <div className="web-search-group-content">
         <div className="web-search-group-heading">
-          <span className="web-search-group-label">Page</span>
           <h3 className="web-search-group-title">{item.pageTitle}</h3>
         </div>
         <span className="web-search-group-meta">
