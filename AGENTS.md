@@ -16,7 +16,7 @@
 - Prefer existing project patterns over introducing new abstractions
 - Explain root cause briefly before large refactors
 - After schema changes, do not modify migrations but prompt me to add a migration
-
+- Do not stage or commit git changes
 ## Stop and ask first
 
 - Architecture or folder structure changes
