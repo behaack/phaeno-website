@@ -30,10 +30,10 @@ jobs:
           dotnet-version: 10.0.x
 
       - name: Restore
-        run: dotnet restore ./phaeno.api/phaeno.api.csproj
+        run: dotnet restore ./api/phaeno.api/phaeno.api.csproj
 
       - name: Build
-        run: dotnet build ./phaeno.api/phaeno.api.csproj --configuration Release --no-restore
+        run: dotnet build ./api/phaeno.api/phaeno.api.csproj --configuration Release --no-restore
 
       - name: Validate deployment secrets
         env:
@@ -79,7 +79,7 @@ jobs:
             --exclude=documents \
             --exclude='**/bin' \
             --exclude='**/obj' \
-            -C . .
+            -C api .
 
       - name: Upload archive
         env:
@@ -95,7 +95,7 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
           ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" \
-            "cd '$DEPLOY_PATH' && tar -xzf '/tmp/$DEPLOY_ARCHIVE' && docker compose up -d --build api db"
+            "mkdir -p '$DEPLOY_PATH' && cd '$DEPLOY_PATH' && tar -xzf '/tmp/$DEPLOY_ARCHIVE' && docker compose up -d --build api db"
 
       - name: Smoke test root page
         run: |
