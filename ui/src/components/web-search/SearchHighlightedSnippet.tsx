@@ -19,7 +19,7 @@ function SearchHighlightedSnippet({ text }: ISearchResult) {
 
     // Push highlighted match
     parts.push(
-      <mark key={match.index} className="bg-yellow-300">
+      <mark key={match.index} className="web-search-highlight">
         {match[1]}
       </mark>
     );

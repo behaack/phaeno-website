@@ -1,6 +1,5 @@
 import type { articletypes, webtypes } from '@/assets/docTypes';
 import { useMemo } from 'react';
-import { BsFiletypeHtml } from "react-icons/bs";
 import SearchHighlightedSnippet from './SearchHighlightedSnippet';
 
 export interface ISearchItem {
@@ -44,16 +43,26 @@ export default function SearchItem({
     return list[index - 1].pageTitle !== list[index].pageTitle;
   }, [index, list]);
 
+  const pageSummary = useMemo(() => {
+    const pageItems = list.filter((result) => result.pageTitle === item.pageTitle);
+    const matches = pageItems.reduce((total, result) => total + result.count, 0);
+    return {
+      results: pageItems.length,
+      matches,
+    };
+  }, [item.pageTitle, list]);
+
   const header = useMemo(() => (
-    <li role="presentation" aria-hidden="true" className="bg-[#789946] text-white p-2">
-      <div className="flex gap-2 items-center">
-        <BsFiletypeHtml size={16} />
-        <h3 className="p-0 m-0 text-sm text-white font-semibold inline-flex items-center gap-2">
-          {item.pageTitle}
-        </h3>
+    <li role="presentation" aria-hidden="true" className="web-search-group">
+      <div className="web-search-group-marker" />
+      <div className="web-search-group-content">
+        <h3 className="web-search-group-title">{item.pageTitle}</h3>
+        <span className="web-search-group-meta">
+          {pageSummary.results} {pageSummary.results === 1 ? 'result' : 'results'}, {pageSummary.matches} {pageSummary.matches === 1 ? 'match' : 'matches'}
+        </span>
       </div>
     </li>
-  ), [item.pageTitle]);
+  ), [item.pageTitle, pageSummary]);
 
   const link = useMemo(() => (
     <li
@@ -75,18 +84,16 @@ export default function SearchItem({
           window.location.href = item.url;
         }}
       >
-        <div className="p-1">
-          <div className="flex items-center gap-1">
-            <div className="p-0 m-0 text-sm font-semibold inline-flex items-center">
-              <div>{item.anchorTitle}</div>
-            </div>
-            <div className="text-[9px] bg-amber-800 text-white max-w-fit py-1 px-2 rounded-lg font-bold">
-              {item.count}&nbsp;{(item.count===1)?'match':'matches'}
-            </div>
+        <div className="web-search-result">
+          <div className="web-search-result-heading">
+            <h4 className="web-search-result-title">{item.anchorTitle}</h4>
+            <span className="web-search-match-count">
+              {item.count} {(item.count === 1) ? 'match' : 'matches'}
+            </span>
           </div>
-          <div className="text-[10px]">
+          <p className="web-search-snippet">
             <SearchHighlightedSnippet text={item.snippet} searchStr={searchStr} />
-          </div>
+          </p>
         </div>
       </a>
     </li>

@@ -304,7 +304,7 @@ export default function Search() {
           className="fixed inset-0 z-9999 h-dvh w-dvw flex justify-center items-start bg-black/20 backdrop-blur-sm"
           onClick={handleBackdropClick}
         >
-          <div className="bg-white w-[calc(100vw-2rem)] md:w-1/2 mt-10 rounded-md max-h-[calc(100dvh-5rem-env(safe-area-inset-bottom))] flex flex-col overflow-hidden">
+          <div className="web-search-panel">
             <h2 id="search-title" className="sr-only">
               Search site
             </h2>
@@ -370,7 +370,7 @@ export default function Search() {
               </button>
             </div>
 
-            <div className="px-1 overflow-y-auto">
+            <div className="web-search-results-scroll">
               <div id="search-status" className="sr-only" aria-live="polite">
                 {ariaMessage}
               </div>
@@ -383,7 +383,7 @@ export default function Search() {
                 id="search-results"
                 role="listbox"
                 aria-labelledby="search-results-title"
-                className="list-none divide-y divide-gray-200 p-0 pb-2 m-0 gap-0"
+                className="web-search-results-list"
                 onKeyDown={(e) => {
                   if (e.key === 'ArrowDown') {
                     e.preventDefault()
