@@ -27,6 +27,28 @@ export interface IProps {
   onFocusOption: (index: number) => void;
 }
 
+const productionWebsiteHosts = new Set([
+  'www.phaenobiotech.com',
+  'phaenobiotech.com',
+]);
+
+function resolveSearchResultUrl(url: string) {
+  if (!import.meta.env.DEV || typeof window === 'undefined') {
+    return url;
+  }
+
+  try {
+    const parsed = new URL(url, window.location.origin);
+    if (!productionWebsiteHosts.has(parsed.hostname.toLowerCase())) {
+      return url;
+    }
+
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  } catch {
+    return url;
+  }
+}
+
 export default function SearchItem({ 
   list, 
   index, 
@@ -38,6 +60,8 @@ export default function SearchItem({
   onSelect,
   onFocusOption
 }: IProps ) {
+  const targetUrl = useMemo(() => resolveSearchResultUrl(item.url), [item.url]);
+
   const isHeader = useMemo(() => {
     if (index === 0) return true;
     return list[index - 1].pageTitle !== list[index].pageTitle;
@@ -71,7 +95,7 @@ export default function SearchItem({
       className={`web-search-item ${active ? 'web-search-item-active' : ''}`}
     >
       <a
-        href={item.url}
+        href={targetUrl}
         ref={linkRef}
         className="web-search-link"
         role="option"
@@ -82,7 +106,7 @@ export default function SearchItem({
         onClick={(e) => { 
           e.preventDefault();
           onSelect();
-          window.location.href = item.url;
+          window.location.href = targetUrl;
         }}
       >
         <div className="web-search-result">
@@ -98,7 +122,7 @@ export default function SearchItem({
         </div>
       </a>
     </li>
-  ), [item, searchStr, active, linkRef, optionId, onFocusOption, onSelect]);
+  ), [item, targetUrl, searchStr, active, linkRef, optionId, onFocusOption, onSelect]);
 
   return (
     <>
