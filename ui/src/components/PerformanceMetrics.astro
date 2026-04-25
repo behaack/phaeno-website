@@ -1,0 +1,218 @@
+---
+---
+
+<div class="mt-8">
+  <h2 id="performance-metrics" data-phaeno-search="PSeq Performance Metrics">Performance Metrics</h2>
+  <ul class="data-table">
+    <li>
+      <div class="data-item metric">Metric</div>
+      <div class="data-item pseq">PSeq</div>
+      <div class="data-item short-read">Short Read&nbsp;<sup class="text-[7px]">1</sup></div>
+      <div class="data-item long-read">Long Read&nbsp;<sup class="text-[8px]">2</sup></div>
+    </li>
+    <li class="sub-title justify-center"><div>Qualitative Metrics</div></li>
+    <li>
+      <div class="data-item metric">Isoform Resolution</div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><span style="color: red;">✖</span></div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: green;">✔</span></div>
+    </li>
+    <li>
+      <div class="data-item metric">Full UTR resolution</div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><span style="color: red;">✖</span></div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><div><span style="color: red;">✖</span></div><div class="comment">Partial only</div></div>
+    </li>    
+    <li>
+      <div class="data-item metric">Fully assembled transcripts</div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><div><span style="color: green;">✔</span></div><div class="comment">Every molecule is assembled (5’ to 3’).</div></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><div><span style="color: red;">✖</span></div><div class="comment">Fragments require statistical reconstuction.</div></div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: green;">✔</span></div>
+    </li>    
+    <li>
+      <div class="data-item metric">Quantitative</div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><div><span style="color: green;">✔</span></div><div class="comment">Fully quantitative. (Molecule-counting, no inference)</div></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><div><span style="color: red;">✖</span></div><div class="comment">Semi-quantitative.</div></div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><div><span style="color: red;">✖</span></div><div class="comment">Semi-quantitative.</div></div>
+    </li>        
+    <li>
+      <div class="data-item metric">Direct cloning</div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><span style="color: red;">✖</span></div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: red;">✖</span></div>
+    </li>   
+    <li>
+      <div class="data-item metric">Simple workflow</span></div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><div><span style="color: green;">✔</span></div><div class="comment">But multi-step & model-dependant.</div></div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: red;">✖</span></div>
+    </li>
+    <li>
+      <div class="data-item metric">NGS Compatible</span></div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><span style="color: green;">✔</span></div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: red;">✖</span></div>
+    </li>    
+    <li>
+      <div class="data-item metric">AI/ML optimized</span></div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><span style="color: red;">✖</span></div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: red;">✖</span></div>
+    </li>        
+    <li class="sub-title justify-center"><div>Performance Metrics<sup> 3</sup></div></li>            
+    <li>
+      <div class="data-item metric">Rare<sup>4</sup> isoform sensitivity</span></div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><span style="font-weight: 900; font-size: larger">&gt;87%</span></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div>&lt;5%</div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div>~45%</div>
+    </li>
+    <li>
+      <div class="data-item metric">Full-length isoform recovery rate</span></div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><span style="font-weight: 900; font-size: larger">&gt;94%</span></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div>~72%</div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div>~88%</div>
+    </li>
+    <li>
+      <div class="data-item metric">Hands-on time per sample</span></div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div>&lt;2 hours</div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div>~3 hours</div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div>~6 hours</div>
+    </li>
+    <li>
+      <div class="data-item metric">Turn-around time (library to FASTA)</span></div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div>&lt;24 hours</div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div>~26 hours</div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div>~72 hours</div>
+    </li>                
+  </ul>   
+  <div class="text-xs text-muted flex flex-col gap-2 mt-3">
+    <div class="flex items-start gap-2"><div class="shrink-0"><sup>1</sup></div><div>Illumina TruSeq Stranded mRNA, STAR + RSEM quantification (v2.7).</div></div>
+    <div class="flex items-start gap-2"><div class="shrink-0"><sup>2</sup></div><div>PacBio Iso-Seq3, SMRT-Link v11, consensus polishing.</div></div>
+    <div class="flex items-start gap-2"><div class="shrink-0"><sup>3</sup></div><div>PSeq performance metrics are preliminary and may be refined as additional samples are evaluated under increasingly stringent validation conditions. Turnaround time reflects best-case performance at scale.</div></div>
+    <div class="flex items-start gap-2"><div class="shrink-0"><sup>4</sup></div><div>&lt;0.01% abundance.</div></div>
+    <div class="mt-3"><em>All data are for research use only (RUO). Not validated for clinical diagnostics.</em></div>
+  </div>
+</div> 
+
+<style lang="scss">
+ul.data-table {
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  border-right: 1px solid rgb(202, 202, 202);      
+  border-left: 1px solid rgb(202, 202, 202);
+  li {
+    display: flex;
+    font-size: .75rem;
+
+    div.data-item {
+      border-right: 1px solid rgb(179, 179, 179);
+      padding: 5px;
+      overflow-wrap: break-word;
+      word-break: break-word;          
+    }
+
+    div.data-item:last-of-type {
+      border-right: none;
+    }
+
+    div.data-label {
+      display: none;
+      font-weight: bolder;
+    }    
+    
+    .metric {
+      width: 40%;
+    }
+
+    .pseq,
+    .short-read,
+    .long-read {
+      width: 20%;
+      text-align: center;
+    }
+
+    &:nth-child(even) {
+      background-color: rgba(183, 204, 183, 0.589);
+    }
+
+    &:nth-child(odd) {
+      background-color: white;
+    }   
+    
+    &:first-child {      
+      display: flex;
+      font-size: .85rem;
+      font-weight: bold;
+      background-color: rgb(201, 201, 201);
+      border-bottom: 1px solid rgb(202, 202, 202);      
+    }  
+    
+    &:last-child {      
+      border-bottom: 1px solid rgb(202, 202, 202);      
+    }
+  }
+
+  .comment {
+    font-size: 9px;
+  }
+
+  li.sub-title {
+    display: flex;    
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-weight: 900;
+  }               
+}
+
+@media (max-width: 950px) {
+  ul.data-table {
+    display: block;
+    li {
+      padding: 10px;
+      display: block;
+      &:first-child {      
+        display: none;
+      }      
+      div.data-item {
+        border: none;
+        padding: 0;
+        display: flex;
+      } 
+      div.data-label {
+        display: block;
+        width: 5.75rem;
+        &::after {
+          content: ":";
+        }
+      }
+
+      .metric {
+        font-weight: 900;
+        font-size: larger;
+        margin-bottom: 5px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+
+      .metric,
+      .pseq, 
+      .short-read,
+      .long-read {
+        width: 100%;
+        display: block;
+        text-align: left;
+      }               
+    }
+    .comment {
+      font-size: 12px;
+      margin-left: 5px;
+    }    
+  }
+}  
+</style>

@@ -1,0 +1,51 @@
+---
+interface IProps {
+  size: 'narrow' | 'wide'
+}
+
+const { size } = Astro.props as IProps
+---
+
+<a
+  href="/contact/#sign-up"
+  role="button"
+  aria-label="Sign-up for updates"
+>
+  <span>
+    Get {(size==='narrow') && <br />}Updates!
+  </span>
+</a>
+
+<style>
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #545458;
+    color: white;
+    padding: 7px 9px;
+    border-radius: 7px;
+    text-decoration: none;
+    margin: 0 5px;
+    font-size: .75rem;
+    transition: transform 0.3s ease;
+    max-height: 2.75rem;  
+  }
+
+  a:hover {
+    background-color: #000000;
+    box-shadow: 0 4px 9px rgba(0, 0, 0, 0.2); /* Drop shadow */
+    transform: scale(1.02);
+    background-color: black;
+  }
+
+  a:active {
+    box-shadow: none;
+    transform: scale(1);
+  }
+
+  a > span {
+    text-align: center;
+    text-transform: uppercase;
+  }
+</style>

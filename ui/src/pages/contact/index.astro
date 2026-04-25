@@ -1,0 +1,70 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
+import ContactUsForms from '@/components/contact-forms/ContactUsForms';
+import TopPageBanner from '@/components/TopPageBanner.astro';
+import SocialMedia from '@/components/SocialMedia.astro';
+import ReCaptchaNotification from '@/components/ReCaptchaNotification.astro';
+//import ScheduleMeeting from '@/components/ScheduleMeeting.astro';
+---
+<Layout>
+  <SEOMeta 
+    slot="head"
+    title="Contact Us | Phaeno"
+    description="Get in touch with Phaeno to learn more about our RNA sequencing technology, team, or partnerships."
+    documentType="Web Page"
+  />  
+  <main id="main" tabindex="-1">
+    <TopPageBanner title="Contact Us" image="image-3"/>
+    <section>
+      <h2 id="contact-details" data-phaeno-search="Contact Details">Contact Details</h2>
+      <div class="contact-details-container">
+        <div class="flex flex-col gap-1.5">
+          <h3 class="p-0 text-[1.1rem]">Street Address</h3>
+          <div class="text-black text-sm">5270 California Avenue<br />Suite 300<br />Irvine, CA 92617</div>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <h3 class="p-0 text-[1.1rem]">Get in Touch</h3>
+          <!-- <div class="text-sm"><a href="tel:+1-###-###-####">+1-###-###-####</a></div>
+          <div class="text-sm"><a href="mailto:sales@phenobiotech.com">info@phaenobiotech.com</a></div> -->
+          <div class="text-sm"><a href="mailto:info@phenobiotech.com">info@phaenobiotech.com</a></div>
+          <!-- <ScheduleMeeting /> -->
+        </div>
+        <div class="flex flex-col social-media">
+          <h3 class="p-0 text-[1.1rem] mb-1">Stay In Touch</h3>
+          <SocialMedia size="lg" />
+        </div>
+      </div>
+      <br />
+      <ContactUsForms client:load />
+      <ReCaptchaNotification />
+    </section>
+  </main>
+</Layout>
+
+<style>
+.contact-details-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-items: start;
+  margin-top: 1rem;
+}
+
+.social-media {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+@media (max-width: 725px) {
+	.contact-details-container {
+    flex-direction: column;
+    gap: 2rem;
+	}
+
+  .social-media {
+    display: block;
+  }
+}
+</style>

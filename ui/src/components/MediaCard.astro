@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+import { FaArrowRight } from 'react-icons/fa6';
+
+interface IProps {
+  title: string
+  image?: string
+  link: string
+  searchString: string
+}
+const { title, image="", link, searchString } = Astro.props as IProps
+---
+
+<li 
+  class="media-card-item"
+  data-search={searchString} 
+>
+  <div class="photo-frame">
+    <Image
+      src={image}
+      alt={`Photo ${title}`} 
+      height={100}
+      width={100}
+    />
+  </div>
+  <div class="text-frame">
+    <div class="title-frame">
+      <h2>{title}</h2>
+    </div>    
+    <div class="details-frame">
+      <slot />
+    </div>
+    <div class="text-right">
+      <a class="btn" href={link}>
+        <FaArrowRight size={20} />
+      </a>
+    </div>
+  </div>
+</li>
+
+<style>
+.media-card-item {
+  border-radius: 0.5rem;
+  background: #eeeee8c5;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  min-width: 180px;  
+  overflow: hidden;
+}
+
+.photo-frame {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;  
+}
+
+.text-frame {
+  padding: 1rem;
+}
+
+.title-frame {
+  height: 4rem;
+  max-height: 2.5rem;
+  overflow: hidden;
+}
+
+.details-frame {
+  margin-top: 10px;
+  color: black;
+  font-size: .7rem;
+  max-width: 100%;
+}
+
+.btn {
+  text-align: center;
+  display:inline-block;
+  background-color: #545458;
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: black;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+h2 {
+  font-size: .95rem;
+  font-weight: 600;
+  padding: 0 0 5px 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+</style>

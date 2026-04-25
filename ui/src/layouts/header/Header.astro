@@ -1,0 +1,121 @@
+---
+import { Image } from 'astro:assets';
+import Menu from './Menu.astro';
+import SignupButton from '@/components/SignupButton.astro';
+import menu from './menu-versions/short-menu';
+import MobileMenuButton from './MobileMenuButton.astro';
+import Search from '@/components/web-search/Search';
+
+const currentPath = decodeURIComponent(Astro.url.pathname).toLowerCase();
+---
+
+<header id="site-header" class="visible">
+  <div class="header-container">
+    <a class="logo-link" href="/" aria-label="Phaeno – Home">
+      <Image 
+        src="/images/phaeno124x40.webp" 
+        alt="Phaeno Logo"
+        height={40}
+        width={124}
+      />
+    </a>
+    <div class="flex items-center">
+      <div class="mobile-signup-holder">
+        <Search client:load />
+        <SignupButton size="wide" />
+      </div>
+      <MobileMenuButton />
+      <Menu menuItems={menu} currentPath={currentPath} />
+      <div class="desktop-signup-holder">
+        <Search client:load />
+        <SignupButton size="wide" />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style> 
+header {
+  min-height: 5.09rem;  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: white; 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 0 0 .5rem;
+  transition: transform 0.3s ease;
+  box-shadow:
+    0 1px 0 0 hsl(0 0% 0% / 7%),   /* razor-thin border       */
+    0 3px 4px -3px hsl(0 0% 0% / 5%);/* gentle depth underneath */  
+}
+
+header.hidden {
+  transform: translateY(-100%);
+}
+
+header.visible {
+  transform: translateY(0);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 85rem;
+}
+
+.mobile-signup-holder {
+  display: none;
+}
+
+.desktop-signup-holder {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
+  display: inline-block;
+  padding: .25rem;
+  line-height: 0;
+}
+
+.logo-link img {
+  display: block;          /* removes baseline gap under the image */
+  height: 2.5rem;          /* keep logo size explicit */
+  width: auto;
+}
+
+@media (max-width: 1400px) {
+  header {
+    padding-right: .25rem;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 725px) {
+  header {
+    min-height: 0rem;      
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-right: .5rem;
+  }
+  .mobile-signup-holder {
+    display: flex;
+    justify-items: center;
+  }  
+  
+  .desktop-signup-holder {
+    display: none;
+  }
+  
+  .logo-link img {
+    height: 1.75rem;
+  }
+
+}
+</style>

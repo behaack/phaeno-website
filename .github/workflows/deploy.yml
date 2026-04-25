@@ -1,0 +1,124 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+env:
+  DEPLOY_PATH: /opt/phaeno.website-api
+  DEPLOY_ARCHIVE: phaeno.website-api.tar.gz
+  PUBLIC_URL: https://webops.phaenobiotech.com
+
+jobs:
+  deploy:
+    name: Deploy production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore ./phaeno.api/phaeno.api.csproj
+
+      - name: Build
+        run: dotnet build ./phaeno.api/phaeno.api.csproj --configuration Release --no-restore
+
+      - name: Validate deployment secrets
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          missing=0
+
+          if [ -z "$DEPLOY_HOST" ]; then
+            echo "::error::Missing repository secret DEPLOY_HOST."
+            missing=1
+          fi
+
+          if [ -z "$DEPLOY_USER" ]; then
+            echo "::error::Missing repository secret DEPLOY_USER."
+            missing=1
+          fi
+
+          if [ -z "$DEPLOY_SSH_KEY" ]; then
+            echo "::error::Missing repository secret DEPLOY_SSH_KEY."
+            missing=1
+          fi
+
+          exit "$missing"
+
+      - name: Configure SSH
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+
+      - name: Create deployment archive
+        run: |
+          tar -czf "$RUNNER_TEMP/$DEPLOY_ARCHIVE" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=.env \
+            --exclude=documents \
+            --exclude='**/bin' \
+            --exclude='**/obj' \
+            -C . .
+
+      - name: Upload archive
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          scp -i ~/.ssh/deploy_key "$RUNNER_TEMP/$DEPLOY_ARCHIVE" \
+            "$DEPLOY_USER@$DEPLOY_HOST:/tmp/$DEPLOY_ARCHIVE"
+
+      - name: Deploy on server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" \
+            "cd '$DEPLOY_PATH' && tar -xzf '/tmp/$DEPLOY_ARCHIVE' && docker compose up -d --build api db"
+
+      - name: Smoke test root page
+        run: |
+          for attempt in {1..12}; do
+            if curl -fsS --max-time 20 "$PUBLIC_URL/" > /dev/null; then
+              exit 0
+            fi
+
+            echo "Root page smoke test failed on attempt $attempt; retrying in 5 seconds."
+            sleep 5
+          done
+
+          curl -fsS --max-time 20 "$PUBLIC_URL/" > /dev/null
+
+      - name: Smoke test search API
+        run: |
+          for attempt in {1..12}; do
+            if curl -fsS --max-time 20 "$PUBLIC_URL/api/v1/web-ops/search-pages?search=technology" > /dev/null; then
+              exit 0
+            fi
+
+            echo "Search API smoke test failed on attempt $attempt; retrying in 5 seconds."
+            sleep 5
+          done
+
+          curl -fsS --max-time 20 "$PUBLIC_URL/api/v1/web-ops/search-pages?search=technology" > /dev/null

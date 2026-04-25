@@ -1,0 +1,61 @@
+---
+---
+
+<button         
+  id="burger-button" 
+  class="burger"
+  aria-label="Toggle Menu"
+  aria-haspopup="true"
+  aria-controls="nav"
+  aria-expanded="false"    
+>
+  <span class="sr-only">Main menu</span>
+  <span class="line top"></span>
+  <span class="line middle"></span>
+  <span class="line bottom"></span>
+</button>
+
+<style>
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.burger:focus {
+  outline: 1px solid var(--focus-ring-color);
+  outline-offset: 3px;
+  border-radius: .375rem;
+}
+
+.line {
+  width: 25px;
+  height: 3px;
+  border-radius: 2px;
+  background: black;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burger.open .top {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.open .middle {
+  opacity: 0;
+}
+
+.burger.open .bottom {
+  transform: rotate(-45deg) translate(7px, -8px);
+}
+
+@media (max-width: 725px) {
+  .burger {
+    display: flex;
+  }
+}
+</style>

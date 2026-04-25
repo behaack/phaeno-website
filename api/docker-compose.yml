@@ -1,0 +1,70 @@
+services:
+  api:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Production: Host=db;Port=5432;Database=website;Username=website;Password=${POSTGRES_PASSWORD}
+      GoogleAuthSettings__RecaptchaSecretKey: ${RECAPTCHA_SECRET}
+      GoogleAuthSettings__RecaptchaServiceAccountKeyPath: ${RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH:-/app/__DOCUMENTS/private/secrets/recaptcha-enterprise-service-account.json}
+      EmailServiceSettings__ApiKey: ${MAILGUN_API_KEY}
+    volumes:
+      - ./documents:/app/__DOCUMENTS
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5433:5432"
+    environment:
+      POSTGRES_DB: website
+      POSTGRES_USER: website
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  filebrowser:
+    image: filebrowser/filebrowser:v2
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8082:80"
+    volumes:
+      - ./documents/public:/srv
+      - filebrowser_data:/database
+    command:
+      - --database
+      - /database/filebrowser.db
+      - --root
+      - /srv
+      - --baseurl
+      - /manage-pseq-assets-7f3c9
+      - --address
+      - 0.0.0.0
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    profiles:
+      - caddy
+    environment:
+      SITE_HOST: ${SITE_HOST}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
+  filebrowser_data:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,36 @@
+---
+import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
+import TopPageBanner from '@/components/TopPageBanner.astro';
+import Layout from '@/layouts/Layout.astro';
+---
+<Layout>
+  <SEOMeta 
+    slot="head"
+    title="Investors | Phaeno"
+    description="Learn about Phaeno’s mission to sequence the functional genome and the opportunity it creates."
+    documentType="Web Page"
+  />    
+  <main id="main" tabindex="-1">
+    <TopPageBanner title="Investors" image="image-3" />
+    <section>
+      <h2 id="investor-page" data-phaeno-search="Welcome to our Investor Page">Welcome to our Investor Page</h2>
+      <p>
+        Phaeno has raised $1.4M in funding to date toward our mission to empower scientists to map the "functional" human genome. 
+        We strongly believe that our technology will help lead to cures for common diseases and improve the effectiveness and efficiency 
+        of the healthcare system around the globe. We are looking for qualified investors to help us in our mission.
+      </p>
+      <div class="flex justify-start items-center gap-3">
+        <p><span>If you are a qualified investor and would like to participate in our mission,</span>
+        <a 
+          target="_blank" 
+          aria-label="Email us to make an investment inquiry, opens a new window using your default email client."
+          href="mailto:info@phaenobiotech.com?subject=Investor Inquiry" 
+          rel="noopener noreferrer nofollow"
+        >
+          <span>please email us</span>.
+        </a>
+      </p>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,191 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '@/layouts/Layout.astro';
+import TopPageBanner from '@/components/TopPageBanner.astro';
+import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
+import Workflow from '@/components/workflow/Workflow.astro';
+import NewSeqCategory from '@/components/NewSeqCategory.astro';
+---
+<Layout>
+  <SEOMeta 
+    slot="head"
+    title="Technology | Phaeno"
+    description="Explore Phaeno’s technology and how integrated chemistry and software enable full-length, isoform-resolved transcriptome sequencing."
+    documentType="Web Page"
+  />  
+  <main id="main" tabindex="-1">
+    <TopPageBanner title="PSeq Technology" image="image-2"/>
+    <section>
+      <h2 id="pseq-technology" data-phaeno-search="PSeq — A New Category of Sequencing Technology">PSeq — A New Category of Sequencing Technology</h2>
+      <div class="flex justify-center my-5">
+        <NewSeqCategory />
+      </div>
+      <h2 id="new-insights-in-chemistry" data-phaeno-search="How PSeq Technology Works">How PSeq Technology Works</h2>
+      <div class="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+          <h3 class="text-[1.2rem] py-2">
+            Single-molecule tagging
+          </h3>
+          <p class="text-sm leading-6 text-neutral-700">
+            Each RNA molecule is reverse-transcribed using one of 4.3 trillion multifunctional tagging reagents,
+            uniquely labeling individual molecules.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+          <h3 class="text-[1.2rem] py-2">
+            Intramolecular library construction
+          </h3>
+          <p class="text-sm leading-6 text-neutral-700">
+            Tagged molecules are converted into sequencing-ready DNA libraries using reactions confined to
+            intramolecular rearrangements.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+          <h3 class="text-[1.2rem] py-2">
+            Automated data processing
+          </h3>
+          <p class="text-sm leading-6 text-neutral-700">
+            Standard FASTA files from the sequencer are processed end-to-end by the automated PSeq data pipeline.
+          </p>
+        </div>
+      </div>
+      <p>
+        PSeq long-read sequencing runs on unmodified NGS sequencers now widely in service, eliminating the need to purchase 
+        specialized Third Generation instruments and robotics, or hire highly specialized staff training.
+      </p>
+      <div class="mt-8 flex items-center justify-center gap-3 flex-row">
+        <a
+          href="/contact/#sign-up"
+          class="dark inline-flex items-center justify-center rounded-2xl
+           bg-slate-900 px-4 py-3 text-sm font-medium text-white 
+           shadow-sm hover:opacity-85"
+        >
+          Request Technical Brief →
+        </a>
+      </div>
+      <h2 id="pseq-workflow" data-phaeno-search="PSeq Workflow">PSeq Workflow</h2>
+      <p>
+        Phaeno PSeq phased long-read technology is easy to use and easily fits into existing workflows.
+      </p>
+      <br />
+      <Workflow /> 
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-1 mt-4">
+        <div style="background-color: #D6E3C3" class="work-flow-description">
+          <h4><i>apply</i>: <span class="uppercase font-bold">PSEQ Chemistry</span></h4>
+          <p>
+            Our sample preparation protocol consists of five steps.
+          </p>          
+          <ul class="ul-no-bullets text-[.9rem]">
+            <li>
+              <Image alt="step 1" height={35} width={35} src="/images/step-1.webp" />
+              <span><b>Molecular tagging</b>: reverse transcription molecular tagging with individual barcodes and strand discriminators.</span>
+            </li>
+            <li>
+              <Image alt="step 3" height={35} width={35} src="/images/step-2.webp" />
+              <span><b>Isothermal amplification</b>: PCR-free amplification.</span>
+            </li>
+            <li>
+              <Image alt="step 4" height={35} width={35} src="/images/step-3.webp" />
+              <span><b>Intermolecular UMI (tag) redistribution</b>: SMIDs are relocated intramolecularly to the start of Read 1 in standard paired-end NGS libraries.</span>
+            </li>
+            <li>
+              <Image alt="step 5" height={35} width={35} src="/images/step-4.webp" />
+              <span><b>Companion tools</b>: retrieval of individual, barcode identified molecules, discovered by sequencing.</span>
+            </li>
+          </ul>
+        </div>
+        <div style="background-color: #cedde4" class="work-flow-description">
+          <h4><i>execute</i>: <span class="uppercase font-bold">PSeq Software Stack</span></h4>
+          <p>
+            Phaeno's fully-automated pipeline enables direct, rapid data assembly.
+          </p>
+          <ul class="ul-no-bullets text-[.9rem]">
+            <li>
+              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
+              <span>Fully automated compute; data polishing unnecessary.</span>
+            </li>
+            <li>
+              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
+              <span>No use of priors or statistical algorithms.</span>
+            </li>
+            <li>
+              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
+              <span>Includes <i>in silico</i> tools for generating AI/ML training sets.</span>
+            </li>
+          </ul>
+        </div>
+        <div style="background-color: #F2F2F2" class="work-flow-description">
+          <h4><i>deliver</i>: <span class="uppercase font-bold">Isoform Resolved Insights</span></h4>
+          <p>
+            Detailed data at the individual molecule level. How you want it.
+          </p>
+          <ul class="ul-no-bullets text-[.9rem]">
+            <li>            
+              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
+              <span>Data consolidation for low-cost transmission, and optimized for ML.</span>
+            </li>
+            <li>
+              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
+              <span>ORF-constitutive and alternative protein-coding exons</span>
+            </li>
+            <li>              
+              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
+              <span>Alternative translation initiation sites</span>
+            </li>
+            <li>              
+              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
+              <span>Alternative polyadenylation (chain termination) sites</span>
+            <li>
+              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
+              <span>RNA trafficking “zip” codes</span>
+            </li>
+            <li>
+              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
+              <span>And much more...</span>
+            </li>
+          </ul>
+        </div>        
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style lang="scss">
+.work-flow-description {
+  padding: 1.5rem;
+  border: 1px solid black;
+  border-radius: 9px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ul-no-bullets {
+  list-style: none;
+  margin-left: 0;
+  margin-top: 20px;
+}
+
+ul.ul-no-bullets > li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.phased-sequencing-large {
+  display: block;
+}
+
+.phased-sequencing-compact {
+  display: none;
+}
+
+@media (max-width:  725px) {
+  .phased-sequencing-large {
+    display: none;
+  }
+  .phased-sequencing-compact {
+    display: block;
+  }
+}
+</style>

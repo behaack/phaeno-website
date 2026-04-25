@@ -1,0 +1,158 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import TopPageBanner from '@/components/TopPageBanner.astro';
+import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
+---
+
+<Layout>
+  <SEOMeta
+    slot="head"
+    title="Multi-omics | Phaeno"
+    description="Why multi-omics often breaks down in practice—and how PSeq strengthens the transcript layer for downstream biology and AI."
+    documentType="Web Page"
+  />
+
+  <main id="main" tabindex="-1">
+    <TopPageBanner title="PSeq & Multi-omics" image="image-2"/>
+
+    <section class="space-y-6">
+      {/* breadcrumb */}
+      <p class="p-0 m-0 text-sm">
+        <a href="/#pseq-intro" class="underline">Home</a>
+        <span>&nbsp;&gt;&nbsp;PSeq + Multi-omics</span>
+      </p>
+
+      {/* Hero */}
+      <div class="mt-6 grid gap-6 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-8">
+          <h2 id="first-line-discovery-layer" data-phaeno-search="PSeq is the first-line discovery layer for your multi-omics stack" class="font-semibold tracking-tight">
+            PSeq is the first-line discovery layer for your multi-omics stack.
+          </h2>
+          <p class="mt-4 text-lg leading-7 text-neutral-700 max-w-prose">
+            Multi-omics can be powerful—but it often becomes fragile and expensive when upstream measurements
+            are noisy or low-resolution. PSeq strengthens the transcript layer so downstream biology,
+            proteomics, and AI don’t rest on guesswork.
+          </p>
+        </div>
+
+        <aside class="lg:col-span-4 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+          <h3 class="text-[1.15rem] p-0 font-semibold tracking-wide uppercase">TL;DR</h3>
+          <p class="mt-0.5 text-sm leading-6 text-neutral-700">
+            Better inputs beat more layers. If the transcript layer is wrong, integration won’t save it.
+          </p>
+        </aside>
+      </div>
+
+      {/* Section: Why it breaks */}
+      <h2 class="mt-12" id="why-multi-omics-breaks-down" data-phaeno-search="Why multi-omics breaks down in practice">
+        Why multi-omics breaks down in practice
+      </h2>
+      <div>
+        <div class="flex items-end justify-between gap-6">
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+            <h3 class="py-2 text-[1.25rem] font-semibold">Errors compound</h3>
+            <p class="text-sm leading-6 text-neutral-700">
+              Each layer introduces bias and uncertainty. Integration multiplies those errors—especially
+              when upstream signals are weak.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+            <h3 class="py-2 text-[1.25rem] font-semibold">Integration is assumption-heavy</h3>
+            <p class="text-sm leading-6 text-neutral-700">
+              Many methods assume correspondence across modalities that biology doesn’t consistently obey.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+            <h3 class="py-2 text-[1.25rem] font-semibold">Workflow burden</h3>
+            <p class="text-sm leading-6 text-neutral-700">
+              More assays means more samples, more QC, more batch effects, and more operational complexity.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+            <h3 class="py-2 text-[1.25rem] font-semibold">Cost scales poorly</h3>
+            <p class="text-sm leading-6 text-neutral-700">
+              Marginal biological insight often drops as cost and coordination rise.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+            <h3 class="py-2 text-[1.25rem] font-semibold">Reproducibility suffers</h3>
+            <p class="text-sm leading-6 text-neutral-700">
+              Standardization is uneven across modalities, making results difficult to replicate across labs.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+            <h3 class="py-2 text-[1.25rem] font-semibold">Diminishing returns</h3>
+            <p class="text-sm leading-6 text-neutral-700">
+              Adding layers can look “holistic” while producing models that overfit noise.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Section: How PSeq helps */}
+      <div class="mt-5">
+        <div class="rounded-3xl border border-neutral-200 bg-neutral-50 p-4 sm:p-6 sm:pt-3">
+          <h2 id="how-pseq-improves-multi-omics" data-phaeno-search="How PSeq improves the highest-leverage layer">
+            How PSeq improves the highest-leverage layer
+          </h2>
+          <p class="mt-1 text-md leading-6 text-neutral-700 max-w-prose">
+            Proteomics and multi-omics workflows get dramatically better when transcript measurements resolve
+            isoforms and regulatory context instead of collapsing biology into a single “gene count.”
+          </p>
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+              <p class="text-sm font-semibold tracking-wide text-neutral-900 uppercase">Isoform resolution</p>
+              <p class="text-sm leading-6 text-neutral-800">
+                Reduces transcript → protein mismatch by capturing what’s actually expressed.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+              <p class="text-sm font-semibold tracking-wide text-neutral-900 uppercase">Proteomic lift</p>
+              <p class="text-sm leading-6 text-neutral-800">
+                Improves protein discovery and interpretation with higher-fidelity transcript features.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+              <p class="text-sm font-semibold tracking-wide text-neutral-900 uppercase">Regulatory context</p>
+              <p class="text-sm leading-6 text-neutral-800">
+                Captures signals shaping translation without adding a new assay layer.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+              <p class="text-sm font-semibold tracking-wide text-neutral-900 uppercase">Simpler workflows</p>
+              <p class="text-sm leading-6 text-neutral-800">
+                Collapses multiple questions into one sample prep + run.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+              <p class="text-sm font-semibold tracking-wide text-neutral-900 uppercase">Less fragility</p>
+              <p class="text-sm leading-6 text-neutral-800">
+                Reduces error compounding and improves downstream model stability.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+              <p class="text-sm font-semibold tracking-wide text-neutral-900 uppercase">AI-ready inputs</p>
+              <p class="text-sm leading-6 text-neutral-800">
+                Produces structured, molecule-level features designed for ML pipelines.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

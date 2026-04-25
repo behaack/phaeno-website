@@ -1,0 +1,95 @@
+---
+interface IProps {
+  title: string
+  image: "image-1" | "image-2" | "image-3"
+}
+
+const { title, image } = Astro.props as IProps
+const id = title.toLocaleLowerCase().replace(" ", "_")
+---
+<div class="top-banner">
+  <div class=`${image} background-layer`>
+    <div class=`dark-overlay ${image}-overlay`></div>
+    <div class="title-holder">
+      <div class="inner-title-holder" >
+        <h1 id={id} data-phaeno-search={title} class="text-white">{ title }</h1>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<style scoped lang="scss">
+.top-banner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .background-layer {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .dark-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .title-holder {
+      z-index: 1;
+      max-width: 80rem;
+      width: 100%;
+      padding: 1rem .5rem;	
+      height: fit-content;  
+      display: flex;
+      justify-content: center;
+      color: white;
+
+      .inner-title-holder {
+        width: 100%;
+        padding-top: 0.5rem;
+      }
+    }
+  }
+}
+
+.image-1 {
+  background-image: url('/images/banner-1.webp');
+}
+
+.image-2 {
+  background-image: url('/images/banner-2.webp');
+} 
+
+.image-3 {
+  background-image: url('/images/banner-3.webp');
+} 
+
+.image-1-overlay {
+  background-color: rgba(17, 17, 17, 0.432);
+}
+
+.image-2-overlay {
+  background-color: rgba(17, 17, 17, 0.185);
+}
+
+.image-3-overlay {
+  background-color: rgba(17, 17, 17, 0.596);
+}
+
+@media (max-width: 725px) {
+  .top-banner {
+    min-height: 6rem;
+  }
+}
+</style>

@@ -1,0 +1,53 @@
+---
+import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro';
+import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro';
+import Layout from '@/layouts/Layout.astro';
+import TopPageBanner from '@/components/TopPageBanner.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+
+export async function getStaticPaths() {
+  const blogs = await getCollection('blog');
+  return blogs.map((job) => ({
+    params: { slug: job.slug },   // use the built-in slug
+    props:  { job }               // pass the entry
+  }));
+}
+
+const path = decodeURIComponent(Astro.url.pathname).toLowerCase();
+const { job: blog } = Astro.props as { job: CollectionEntry<'blog'> };
+const { title, image, authors, date, summary } = blog.data;
+const { Content } = await blog.render();
+---
+
+<Layout>
+  <ArticleSEOMeta 
+    slot="head"
+    title={title}
+    description={summary}
+    authors={authors}
+    datePosted={date}
+    image={image}
+    documentType="Web Page"
+  />  
+  <main id="main">
+    <TopPageBanner title="Blog Post" image="image-2"/>
+    <section>
+      <p>Media | <a href="/media/blog">Blog</a> | {blog.slug}</p>
+      <h1  id={`${title.replace(/\s+/g, '-').toLowerCase()}`} class="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">{title}</h1>
+      <p class="text-sm text-gray-600">{authors}</p>
+      <p class="text-sm text-gray-500">Posted {new Date(date).toLocaleDateString('en-US')}</p>          
+      <Content />
+
+      <hr class="text-zinc-200 mt-12" />
+      
+      <div class="flex justify-end my-10">
+        <ShareWithSocialMedia 
+          title={title} 
+          link={path} 
+          summary={summary} 
+        />
+      </div>      
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,153 @@
+---
+const bannerUrl = '/images/home-page-banner.webp'
+---
+<Fragment set:head>
+  <link
+    rel="preload"
+    as="image"
+    href={bannerUrl}
+    type="image/webp"
+    fetchpriority="high"
+  />
+</Fragment>
+
+<div class="image-div">
+  <div
+    class="background-layer"
+    style={`background-image: url('${bannerUrl}');`}
+  >
+    <div class="dark-overlay"></div>
+
+    <!-- Animated circles (unchanged) -->
+    <div class="circle small"></div>
+    <div class="circle medium"></div>
+    <div class="circle large"></div>
+    <div class="circle small"></div>
+    <div class="circle medium"></div>
+    <div class="circle large"></div>
+    <div class="circle medium"></div>
+    <div class="circle small"></div>
+    <div class="circle large"></div>
+
+    <div class="circle-2 small"></div>
+    <div class="circle-2 medium"></div>
+    <div class="circle-2 large"></div>
+    <div class="circle-2 small"></div>
+    <div class="circle-2 medium"></div>
+    <div class="circle-2 large"></div>
+    <div class="circle-2 medium"></div>
+    <div class="circle-2 small"></div>
+    <div class="circle-2 large"></div>
+  </div>
+  
+  <div class="tag-holder">
+    <h1>Turning RNA into full-length, isoform-resolved insight—at scale</h1>
+    <h2>Phaeno produces fully quantitative, ML-ready outputs from short-read sequencing</h2>
+  </div>
+</div>
+
+<style>
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25%      { transform: translateY(15px) translateX(-15px); }
+  50%      { transform: translateY(-30px) translateX(125px); }
+  75%      { transform: translateY(9px) translateX(-10px); }
+}
+
+/* Layout */
+.image-div {
+  position: relative;
+  overflow: hidden;
+  margin-top: 14px;
+  width: 100%;
+  height: calc(100vh - 14px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.background-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: .9;
+  z-index: 0;
+}
+
+.dark-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.466);
+  z-index: 1;
+}
+
+.tag-holder {
+  position: relative;
+  z-index: 2;
+  left: 10vw;
+  font-weight: 700;
+  max-width: 60vw;
+}
+
+/* Circle styling */
+.circle, .circle-2 {
+  position: absolute;
+  border-radius: 50%;
+  animation: float ease-in-out infinite;
+}
+
+.circle  { opacity: .6; background: linear-gradient(to right, rgba(127,143,145,.5) 30%, rgba(120,140,137,.8) 100%); animation-duration: 20s; }
+.circle-2{ opacity: .7; background: linear-gradient(to right, rgba(91,83,71,.4) 20%, rgba(95,80,74,.8) 100%);   animation-duration: 15s; }
+
+.circle.small  { width: 20px; height: 20px; }
+.circle.medium { width: 35px; height: 35px; }
+.circle.large  { width: 55px; height: 55px; }
+
+.circle-2.small  { width: 10px; height: 10px; }
+.circle-2.medium { width: 17px; height: 17px; }
+.circle-2.large  { width: 32px; height: 35px; }
+
+/* Circle positions (unchanged) */
+.circle:nth-child(3)  { top: 5%;  left: 15%; animation-delay: 0s;  }
+.circle:nth-child(4)  { top: 20%; left: 70%; animation-delay: 1s;  }
+.circle:nth-child(5)  { top: 40%; left: 25%; animation-delay: 1.4s;}
+.circle:nth-child(6)  { top: 60%; left: 80%; animation-delay: 1s;  }
+.circle:nth-child(7)  { top: 70%; left: 20%; animation-delay: .5s; }
+.circle:nth-child(8)  { top: 15%; left: 70%; animation-delay: 3s;  }
+.circle:nth-child(9)  { top: 90%; left: 5%;  animation-delay: .9s; }
+.circle:nth-child(10) { top: 35%; left: 65%; animation-delay: 1.2s;}
+.circle:nth-child(11) { top: 12%; left: 85%; animation-delay: 1.2s;}
+
+/* …circle-2 nth-child selectors remain untouched… */
+
+/* Typography */
+h1 {
+  font-size: 4rem;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 2.5rem;
+  padding-top: 1rem;
+  color: rgb(212, 212, 212);
+  font-weight: 500;
+}
+
+/* Responsive tweaks */
+@media (max-width: 1050px) { h1 { font-size: 3.5rem; } h2 { font-size: 1.9rem; } }
+@media (max-width: 950px) { h1 { font-size: 3rem; } h2 { font-size: 1.85rem; } }
+@media (max-width: 850px) { h1 { font-size: 2.75rem;} h2 { font-size: 1.8rem; } }
+@media (max-width: 750px) { h1 { font-size: 2.5rem; }  h2 { font-size: 1.7rem; } }
+@media (max-width: 600px) { h1 { font-size: 2.1rem; }  h2 { font-size: 1.3rem; } }
+@media screen and (max-height: 500px) { 
+  .tag-holder { padding-top: 1.5rem; } 
+  h1 { font-size: 2rem; }  
+  h2 { font-size: 1.7rem; }
+}
+
+</style>

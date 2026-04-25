@@ -1,0 +1,105 @@
+---
+import footerItems from './versions/short'
+import FooterSection from './components/FooterSection.astro';
+import FooterLink from './components/FooterLink.astro';
+import FooterExternalLink from './components/FooterExternalLink.astro';
+import SocialMedia from '@/components/SocialMedia.astro';
+
+const copyYear = new Date().getFullYear()
+---
+
+<footer id="site-footer">
+  <div class="footer-container">
+    <div class="top-container">
+      <div class="top-container-item">
+        {footerItems.left.sections.map(item => (
+          <FooterSection section={item} />
+        ))}
+      </div>
+      <div class="top-container-item">
+        {footerItems.center.sections.map(item => (
+          <FooterSection section={item} />
+        ))}        
+      </div>
+      <div class="top-container-item">
+        {footerItems.right.sections.map(item => (
+          <FooterSection section={item} />
+        ))}        
+      </div>
+    </div>
+    <hr class="border-t my-1" />
+    <div class="middle-container">
+      {footerItems.bottom.map(item => (
+        <>
+          {(item.type === 'link')
+            ? <FooterLink contentItem={item} />
+            : <FooterExternalLink contentItem={item}  />
+          }
+        </>
+      ))}         
+    </div>
+    <div class="socal-media">      
+      <SocialMedia size="md" width="narrow" />
+    </div>
+    <div class="bottom-container">
+      <div class="text-xs">Copyright &copy;{ copyYear } Phaeno Inc.</div>
+    </div>
+  </div>
+</footer>
+
+<style>
+footer {
+  background-color: #e9efea8a;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  color: black;
+}
+
+.footer-container {
+  padding: 10px;
+  max-width: 85rem;
+  width: 100%;
+}
+
+.top-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: .5rem;
+  font-size: 13px;
+}
+
+.top-container-item {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 22%; /* 4 columns with space between */
+  min-width: 180px; /* prevents squishing on smaller screens */
+  padding: 10px;
+  text-align: center;
+}
+
+.middle-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 3rem;  
+  padding: 1rem 0 .5rem 0;
+  font-size: 13px;
+}
+
+.bottom-container {
+  display: flex;
+  justify-content: center;
+  padding: 3px;
+  font-size: 10px;
+}
+
+.socal-media {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+</style>

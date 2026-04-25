@@ -1,0 +1,56 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro';
+import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro';
+
+
+export async function getStaticPaths() {
+  const news = await getCollection('news');
+  return news.map((newsItem) => ({
+    params: { slug: newsItem.slug },   // use the built-in slug
+    props:  { newsItem }               // pass the entry
+  }));
+}
+
+const path = decodeURIComponent(Astro.url.pathname).toLowerCase();
+const host = Astro.url.host;
+const { newsItem } = Astro.props as { newsItem: CollectionEntry<'news'> };
+const { title, date, summary, image } = newsItem.data;
+const { Content } = await newsItem.render();   // returns an Astro component
+---
+
+<title>News & Events | Phaeno</title>
+<meta name="description" content="Phaeno is revolutionizing RNA sequencing with full-length, high-fidelity reads. Discover our platform and team." />
+
+<Layout>
+  <ArticleSEOMeta 
+    slot="head"
+    title={title}
+    description={summary}
+    datePosted={date}
+    image={image}
+    documentType="Web Page"
+  />    
+  <main id="main">
+    <section>
+      <p>Media | <a href="/media/news-and-events">News & Events</a> | {newsItem.slug}</p>
+      <h1 id={`${title.replace(/\s+/g, '-').toLowerCase()}`} class="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">{title}</h1>
+      <p class="text-sm text-gray-500">Posted {new Date(date).toLocaleDateString('en-US')}</p>
+
+      <article>
+        <Content />
+      </article>
+
+      <hr class="text-zinc-200 mt-12" />
+
+      <div class="flex justify-end my-10">
+        <ShareWithSocialMedia 
+          title={title} 
+          link={`http://${host}${path}`} 
+          summary={summary} 
+        />
+      </div>      
+    </section>
+  </main>
+</Layout>

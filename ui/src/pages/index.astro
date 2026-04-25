@@ -1,0 +1,139 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Tagline from '@/components/home-page-sections/Tagline.astro';
+import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
+import PerformanceMetrics from '@/components/PerformanceMetrics.astro';
+---
+<Layout>
+  <SEOMeta 
+    slot="head"
+    title="Home | Phaeno"
+    description="Phaeno is revolutionizing RNA sequencing with full-length, isoform-resolved sequencing using short-read NGS instruments."
+    documentType="Web Page"
+  />  
+  <Tagline />
+  <main class="main-fix" id="main" tabindex="-1">
+    <section class="mb-5 mt-10">
+      <h2 id="pseq-intro" data-phaeno-search="Phaeno's PSeq — The Phased Sequencing Platform">Phaeno's PSeq™ — The Phased Sequencing Platform</h2>
+      <div class="rounded-3xl border border-slate-200 bg-white/60 p-3 pt-4 shadow-sm sm:p-6">
+        <p class="mt-2 text-md text-slate-600">
+          Gene-level counts compress biology. Isoforms capture splicing, promoter usage, UTR variation, and
+          transcript-specific regulation — often the true functional drivers.
+        </p>
+        <ul class="mt-4 space-y-2 text-sm text-slate-600">
+          <li class="flex gap-2 text-md"><span>✓</span>Isoform-resolved quantification, not gene counts</li>
+          <li class="flex gap-2 text-md"><span>✓</span>Deterministic, chemistry-anchored measurements</li>
+          <li class="flex gap-2 text-md"><span>✓</span>ML-native feature matrices</li>
+          <li class="flex gap-2 text-md"><span>✓</span>The discovery layer your multi-omics stack is missing</li>
+        </ul>
+        <div class="mt-6 border-t border-slate-200 py-4">
+          <p class="text-md font-medium text-slate-700 leading-relaxed">
+            PSeq exposes the molecular phenotype of each sample, revealing biological drivers obscured by gene-level summaries and incomplete isoform resolution.
+          </p>
+        </div>
+        <div class="flex justify-center gap-2 sm:justify-end">
+          <a
+            href="/why-isoforms-matter"
+            class="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-xs font-medium hover:bg-slate-50 sm:text-sm"
+            aria-label="Learn more about why Phaeno's full-length, isoform-resolved technology matters."   
+          >
+            Resolved isoforms →
+          </a>  
+          <a
+            href="/multi-omics"
+            class="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-xs font-medium hover:bg-slate-50 sm:text-sm"
+            aria-label="Learn more about how PSeq is ideal as a first-line discovery layer for your multi-omics stack."   
+          >
+            PSeq + multi-omics →
+          </a>            
+        </div>
+      </div>  
+
+      <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {[
+          {
+            k: "High-quality output",
+            v: "PSeq Clear-Signal Architecture™ — signal-first RNA data",
+            sub: "Full-length 5′–3′ RNA sequencing, including UTRs, without dependence on prior annotations. Uncompressed measurement of what is present, not what is expected.",
+          },
+          {
+            k: "Individual molecules",
+            v: "Individual molecules, directly measured",
+            sub: "True molecule-level counting of every RNA, including rare and low-frequency isoforms. No inferred abundance. No statistical reconstruction.",
+          },
+          {
+            k: "Automated pipeline",
+            v: "Fully automated, annotation-independent pipeline",
+            sub: "End-to-end isoform assembly from raw reads with no manual intervention and no reference bias.",
+          },
+          {
+            k: "AI-ready data",
+            v: "Built for machine learning from first principles",
+            sub: "Structured, molecule-level features derived from real measurements—not averaged signals or approximations.",
+          },
+        ].map((s) => (
+          <div
+            class="rounded-2xl border border-slate-200 bg-white/50 p-4 text-left shadow-sm transition hover:shadow-md hover:-translate-y-px"
+          >
+            <div class="text-xs text-slate-500">{s.k}</div>
+
+            <h3
+              data-phaeno-search={s.v}
+              class="mt-1 text-base font-semibold leading-snug text-slate-800"
+            >
+              {s.v}
+            </h3>
+
+            <p class="mt-1 text-xs leading-relaxed text-slate-500">
+              {s.sub}
+            </p>
+          </div>
+        ))}
+      </div>
+      
+
+      <div class="mt-8 flex items-center justify-center gap-3 flex-row">
+        <a
+          href="/contact/#request-demo"
+          class="dark inline-flex items-center justify-center rounded-2xl
+           bg-slate-900 px-4 py-3 text-sm font-medium text-white 
+           shadow-sm hover:opacity-85"
+        >
+          Request demo →
+        </a>
+
+        <a
+          href="/technology"
+          class="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium hover:bg-slate-50"
+          aria-label="Learn more about Phaeno's technology and how it addresses the shortcomings of genomic analysis"   
+        >
+          Learn more →
+        </a>
+      </div>
+
+      <PerformanceMetrics />  
+    </section>
+  </main>
+</Layout> 
+
+<style>
+  .main-fix {
+    margin-top: -6.5rem;
+  }
+
+  ul {
+    margin: 1.5rem 0;    
+    display: flex;
+    flex-direction: column;
+    padding-left: 1.25rem;
+    list-style-type: disc;
+    font-size: 1.1rem;
+  }    
+
+  @media (max-width:  725px) {
+    .main-fix {
+      margin-top: -3.5rem;
+    }    
+  }  
+</style>
+  

@@ -1,0 +1,55 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro';
+import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro';
+
+
+export async function getStaticPaths() {
+  const papers = await getCollection('white_papers');
+  return papers.map((paper) => ({
+    params: { slug: paper.slug },   // use the built-in slug
+    props:  { paper }               // pass the entry
+  }));
+}
+
+const { paper } = Astro.props as { paper: CollectionEntry<'white_papers'> };
+const { title, authors, date, summary, image } = paper.data;
+const { Content } = await paper.render();   // returns an Astro component
+---
+
+<title>White Papers | Phaeno</title>
+<meta name="description" content="Phaeno is revolutionizing RNA sequencing with full-length, high-fidelity reads. Discover our platform and team." />
+
+<Layout>
+  <ArticleSEOMeta 
+    slot="head"
+    title={title}
+    description={summary}
+    datePosted={date}
+    authors={authors}
+    image={image}
+    documentType="Web Page"
+  />     
+  <main id="main">
+    <section>
+      <p>Media | <a href="/media/white-papers">White Papers</a> | {paper.slug}</p>
+      <h1 id={`${title.replace(/\s+/g, '-').toLowerCase()}`} class="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">{title}</h1>
+      <p class="text-sm text-gray-600">{authors.join(', ')}</p>
+      <p class="text-sm text-gray-500">Published {new Date(paper.data.date).toLocaleDateString('en-US')}</p>
+      <article>
+        <Content />
+      </article>
+
+      <hr class="text-zinc-200 mt-12" />
+
+      <div class="flex justify-end my-10">
+        <ShareWithSocialMedia 
+          title={title} 
+          link={Astro.url.pathname}
+          summary={summary} 
+        />
+      </div>        
+    </section>
+  </main>
+</Layout>
