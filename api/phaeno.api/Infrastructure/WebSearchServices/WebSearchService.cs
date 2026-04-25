@@ -126,10 +126,14 @@ public class WebSearchService : IWebSearchService
 
         results = results
             .Where(w => w.Count > 0)
-            .OrderBy(o => o.PageTitle)
-            .ThenBy(o => o.AnchorTitle)
-            .ThenByDescending(r => r.Count ?? 0)
-            .ThenByDescending(r => r.Score)
+            .GroupBy(r => r.PageTitle)
+            .OrderByDescending(g => g.Sum(r => r.Count ?? 0))
+            .ThenByDescending(g => g.Max(r => r.Score ?? 0))
+            .ThenBy(g => g.Key)
+            .SelectMany(g => g
+                .OrderByDescending(r => r.Count ?? 0)
+                .ThenByDescending(r => r.Score)
+                .ThenBy(r => r.AnchorTitle))
             .ToList();
 
         return results;
@@ -139,7 +143,15 @@ public class WebSearchService : IWebSearchService
     {
         var doc = new Document();
 
-        var stemmedWords = Regex.Matches(page.Text, "\\b[\\w']+\\b")
+        var searchableText = string.Join(" ", new[]
+        {
+            page.PageTitle,
+            page.AnchorTitle,
+            page.Description,
+            page.Text
+        }.Where(value => !string.IsNullOrWhiteSpace(value)));
+
+        var stemmedWords = Regex.Matches(searchableText, "\\b[\\w']+\\b")
             .Cast<Match>()
             .Select(m => NormalizeAndStem(m.Value))
             .Where(term => !string.IsNullOrWhiteSpace(term))
@@ -259,7 +271,7 @@ public class WebSearchService : IWebSearchService
         word = Regex.Replace(word, "[^\\w\\s]", "");
         word = word.Replace("-", " ");
 
-        if (Regex.IsMatch(word, @"\\Id{3,}") || !Regex.IsMatch(word, @"[a-zA-Z]"))
+        if (Regex.IsMatch(word, @"\d{3,}") || !Regex.IsMatch(word, @"[a-zA-Z]"))
             return "";
 
         return stemmer.Stem(word);

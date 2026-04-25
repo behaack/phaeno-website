@@ -52,21 +52,25 @@ import PerformanceMetrics from '@/components/PerformanceMetrics.astro';
       <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {[
           {
+            id: "clear-signal-architecture",
             k: "High-quality output",
             v: "PSeq Clear-Signal Architecture™ — signal-first RNA data",
             sub: "Full-length 5′–3′ RNA sequencing, including UTRs, without dependence on prior annotations. Uncompressed measurement of what is present, not what is expected.",
           },
           {
+            id: "individual-molecules",
             k: "Individual molecules",
             v: "Individual molecules, directly measured",
             sub: "True molecule-level counting of every RNA, including rare and low-frequency isoforms. No inferred abundance. No statistical reconstruction.",
           },
           {
+            id: "automated-pipeline",
             k: "Automated pipeline",
             v: "Fully automated, annotation-independent pipeline",
             sub: "End-to-end isoform assembly from raw reads with no manual intervention and no reference bias.",
           },
           {
+            id: "ai-ready-data",
             k: "AI-ready data",
             v: "Built for machine learning from first principles",
             sub: "Structured, molecule-level features derived from real measurements—not averaged signals or approximations.",
@@ -78,6 +82,7 @@ import PerformanceMetrics from '@/components/PerformanceMetrics.astro';
             <div class="text-xs text-slate-500">{s.k}</div>
 
             <h3
+              id={s.id}
               data-phaeno-search={s.v}
               class="mt-1 text-base font-semibold leading-snug text-slate-800"
             >

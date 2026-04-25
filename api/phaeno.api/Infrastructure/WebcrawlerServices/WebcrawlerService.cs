@@ -159,7 +159,7 @@ public sealed class WebcrawlerService : IWebcrawlerService
         var bodyText = HtmlTextExtractor.ExtractCleanText(main);
 
         // Sections: index each heading with an id as a separate anchor
-        var headings = main.QuerySelectorAll("h1[id], h2[id], h3[id], h4[id], h5[id]");
+        var headings = main.QuerySelectorAll("h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], [id][data-phaeno-search]");
         if (headings.Length > 0)
         {
             foreach (var heading in headings)
@@ -176,7 +176,7 @@ public sealed class WebcrawlerService : IWebcrawlerService
                     heading.GetAttribute("data-phaeno-search")?.Trim()
                     ?? headingText;
 
-                var sectionText = HtmlTextExtractor.ExtractSectionText(heading);
+                var sectionText = HtmlTextExtractor.ExtractSectionText(heading, anchorTitle);
 
                 results.Add(new IndexedPage
                 {
