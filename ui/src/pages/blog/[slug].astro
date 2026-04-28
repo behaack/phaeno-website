@@ -1,0 +1,134 @@
+---
+import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro';
+import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro';
+import Layout from '@/layouts/Layout.astro';
+import TopPageBanner from '@/components/TopPageBanner.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+
+export async function getStaticPaths() {
+  const blogs = await getCollection('blog');
+  return blogs.map((job) => ({
+    params: { slug: job.slug },   // use the built-in slug
+    props:  { job }               // pass the entry
+  }));
+}
+
+const path = decodeURIComponent(Astro.url.pathname).toLowerCase();
+const { job: blog } = Astro.props as { job: CollectionEntry<'blog'> };
+const { title, image, authors, date, summary } = blog.data;
+const slugLabel = blog.slug.replace(/-/g, ' ');
+const blogSlugLabel = slugLabel.charAt(0).toUpperCase() + slugLabel.slice(1);
+const { Content } = await blog.render();
+---
+
+<Layout>
+  <ArticleSEOMeta 
+    slot="head"
+    title={title}
+    description={summary}
+    authors={authors}
+    datePosted={date}
+    image={image}
+    documentType="Web Page"
+  />  
+  <main id="main">
+    <TopPageBanner title="Blog Post" image="image-2"/>
+    <section>
+      <header class="blog-post-header">
+        <nav class="blog-post-breadcrumb" aria-label="Breadcrumb">
+          <a href="/blog">Blog</a>
+          <span aria-hidden="true">/</span>
+          <span>{blogSlugLabel}</span>
+        </nav>
+        <h1 id={`${title.replace(/\s+/g, '-').toLowerCase()}`}>{title}</h1>
+        <div class="blog-post-meta">
+          <span>{authors.join(', ')}</span>
+          <span aria-hidden="true">|</span>
+          <span>{new Date(date).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          })}</span>
+        </div>
+      </header>
+      <article class="blog-post-content">
+        <Content />
+      </article>
+
+      <hr class="blog-post-divider text-zinc-200 mt-12" />
+      
+      <div class="flex justify-end my-10">
+        <ShareWithSocialMedia 
+          title={title} 
+          link={path} 
+          summary={summary} 
+        />
+      </div>      
+    </section>
+  </main>
+</Layout>
+
+<style>
+.blog-post-header {
+  margin: 0 0 1.5rem;
+  padding-top: 1rem;
+}
+
+.blog-post-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  color: #59606b;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-breadcrumb a {
+  color: #B35D0C;
+}
+
+.blog-post-header h1 {
+  color: #111827;
+  font-size: var(--h2-font-size-desktop);
+  font-weight: var(--h-font-weight);
+  letter-spacing: 0;
+  line-height: var(--h-line-height);
+  margin: 0;
+  padding: 0;
+  text-transform: none;
+}
+
+.blog-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  color: #4b5563;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-top: 0.75rem;
+}
+
+.blog-post-content {
+  margin: 0;
+}
+
+.blog-post-divider {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 725px) {
+  .blog-post-header {
+    padding-top: 0.75rem;
+  }
+
+  .blog-post-header h1 {
+    font-size: var(--h2-font-size-mobile);
+    line-height: var(--h-line-height);
+  }
+}
+</style>

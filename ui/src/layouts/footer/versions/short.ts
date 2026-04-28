@@ -26,6 +26,11 @@ const footer =
         content: [
           {
             type: 'link',
+            label: 'Blog',
+            value: '/blog'
+          },
+          {
+            type: 'link',
             label: 'Job Openings',
             value: '/about/job-openings'
           },
