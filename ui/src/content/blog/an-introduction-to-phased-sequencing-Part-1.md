@@ -1,203 +1,214 @@
 ---
-title: "An introduction to Phased Sequencing: Part 1"
+title: "An Introduction to Phased Sequencing, Part 1: Why RNA Needs Better Measurement (New)"
 tagline: "Why full-length, molecule-resolved RNA measurement brings transcriptomics closer to biological function and phenotype"
 image: "/images/media/blog/an-introduction-to-phased-sequencing.png"
 authors: ["William Agnew"]
 date: '2026-04-28'
-summary: "Phaeno PSeq technology opens the door to aspects of RNA biology that have been largely overlooked, in part because the information has been challenging to access with available methods. Phaeno phased sequencing (Pseq) allows whole molecule resolution of individual RNAs on high-throughput, high accuracy, short-read NGS instruments.  The articles in this series will explore how this capability can prove useful."
+summary: "Phaeno PSeq technology opens the door to aspects of RNA biology that have been largely overlooked because they have been difficult to measure with existing tools. PSeq is designed to preserve the identity of individual RNA molecules through short-read sequencing, enabling full-length, molecule-resolved RNA measurement on existing high-throughput NGS instruments. This series explains why that capability matters for biology, machine learning, and precision medicine."
 ---
-<p align="center"><strong><i>This is part 1 of a 3 part series</i></strong></p>
+
+<p align="center"><strong><i>This is part 1 of a 3-part series</i></strong></p>
 
 ### Summary
 
-RNA is rapidly emerging as an exciting and productive focus for both diagnostics and therapeutic approaches in genomic medicine. A significant advance in RNA tools promises to be disproportionately impactful.
+Biology is not controlled by DNA sequence alone. Cells use DNA to produce RNA, and RNA processing determines which protein isoforms and functional RNAs are actually made.
 
-Phaeno PSeq technology opens the door to aspects of RNA biology that have been largely overlooked, in part because the information has been challenging to access with available methods. Phaeno phased sequencing (**Pseq**) allows whole molecule resolution of individual RNAs on high-throughput, high accuracy, short-read NGS instruments. The articles in this series will explore how this capability can prove useful.
+That matters because many disease-relevant signals live at the transcript level: alternative splicing, RNA editing, promoter choice, UTR variation, and isoform abundance. Existing RNA sequencing methods have been powerful, but they often reconstruct these structures statistically from fragments.
+
+Phaeno’s PSeq technology is designed to preserve the identity of each RNA molecule through short-read sequencing, allowing full-length, molecule-resolved RNA measurement on existing NGS instruments. This series explains why that matters, how PSeq works, and why molecule-resolved RNA data may be especially valuable for machine learning and precision biology.
 
 ### Introduction
-A striking outcome of the Human Genome Project is a growing appreciation that thephenotypic potential of the human genome does not fully arise until after complex steps in RNA processing.
 
-Precursor mRNAs are transcribed from every gene. The cell’s influence begins at determining what region of each gene is to be used, by activating alternative promoter sites to initiate transcription, and alternative chain termination and polyadenylation sequences. Between these boundaries, the RNAs are alternatively spliced, edited and otherwise modified to produce multiple products from each gene. Very often, these different products have different molecular functions.
+A striking lesson from the Human Genome Project is that DNA sequence alone does not explain phenotype. Much of the information that determines biological function emerges later, as cells process RNA.
 
-For protein-coding genes, it is not unusual for a single gene to produce 40 or more protein isoforms, or the same isoforms with different cellular patterns of expression. Each isoform is specifically recombined with untranslated UTR sequences that regulate where, when, and at what levels the proteins will be expressed: RNA trafficking codes, riboswitches, ribozymes, restriction sites for turnover-regulated endonucleases, micro-RNA binding sites, etc. The precision allowed, for instance, in sending the RNA to distant extensions in a cell where the protein can be synthesized, is extraordinary.
+During RNA processing, cells choose where transcription begins and ends, which exons are included, how transcripts are edited, and which regulatory regions are attached. These choices can produce many different RNA and protein products from the same genomic locus.
 
-In short, every transcript is a quantum of genetic information that can change with cell differentiation, aging, or the progression of disease. Typically, a cell will express products from 8,000 to 10,000 DNA genes, an almost uncountable number of alternative proteomes, which are subject to rapid changes and fluctuations as the cell operates in the local environment of tissues and organs.
+For many protein-coding genes, a single DNA locus can produce many RNA isoforms. These isoforms may encode different protein variants, or they may carry different regulatory regions that influence where, when, and how strongly a protein is expressed.
 
-This article describes our methods for whole-molecule resolution of protein-coding and functional RNAs. Phaeno **PSeq** resolves entire, end-to-end sequences of each individual RNA molecules, with high accuracy. This can be performed on a scale approaching that of solution chemistry. This technology, PSeq, offers a wide range of opportunities for in depth biomedical inquiry.
+In other words, the transcript is not just a copy of a gene. It is a packaged biological message: coding sequence plus regulatory context.
 
-### Aside from demonstrating technical virtuosity, why is whole molecule sequencing useful? In understanding biological function and phenotype?
-Before commenting on this question, we should clarify what we mean by the terms used to describe whole-molecule phased-sequencing (WMPS).
+Every transcript can be understood as a quantum of genetic information that changes with cell differentiation, aging, environmental response, or disease progression. A typical cell expresses products from thousands of genes, but the biological meaning depends not only on which genes are active, but on which RNA molecules are produced from them.
 
-- **Single molecule sequencing:** Sequencing an individual molecule (e.g. not merely and individual ‘kind’ of molecule) from end to end.
-- **Phased sequencing:** As a direct consequence of sequencing a full diversity of many separate, potentially similar molecules in a complex mixture, this represents “phased” sequencing – in which the intramolecular linkages of all sequence elements in every molecule is resolved – e.g., exon junctions, random-mutations, allele-denoting SNPs, gene-fusion boundaries, etc.
-- **Shotgun sequencing:** a sequencing strategy, of which modern NGS is the most advanced embodiment – in which individual molecules are replicated, sheared into small random fragments, are sequenced on a massively parallel scale, after which the unique consensus sequence of the source molecule is reconstructed by tiling overlapping fragments.
-**\[figure\]**
-- **Accuracy:** Error frequency and accuracy can be thought of as reciprocal functions. For example where the former represents the number of errors per base called, the latter (accuracy)represents the number of bases that have to be read before encountering the first error. When the accuracy significantly exceeds the average size of the target molecule population, true single-molecule sequencing can be performed.
+This article introduces why whole-molecule RNA measurement matters. Phaeno **PSeq** is designed to resolve end-to-end sequences of individual RNA molecules with high accuracy, using existing short-read NGS instruments. That capability creates new opportunities for biomedical research, machine learning, and precision medicine.
 
-Accuracy includes the ***intrinsic*** accuracy with which the platform calls each base and the ***consensus*** accuracy when each base in a target molecule is repeatedly sequenced.
+### Why does whole-molecule RNA measurement matter?
 
-In sequencing genomic DNA, fragments of multiple chromosomes from different cells are sequenced, and indeterminant results can result when, in particular locations, differentiation or disease (e.g. cancer) produces heterogeneity.
+Before comparing PSeq with other RNA technologies, three terms are useful:
 
-In PSeq phased sequencing of single RNA molecules, consensus accuracy can maximized as the exponential expansion of the intrinsic accuracy. If 1000 bases can be sequenced before encountering the first error (Q30), the likelihood of encountering the same error twice is approximately 1 in 9 million at 2X,
+- **Single-molecule measurement:** preserving the identity of an individual RNA molecule rather than only measuring an average signal from many molecules.
+- **Phased sequencing:** determining which sequence features occur together on the same molecule.
+- **Whole-molecule resolution:** reconstructing the end-to-end structure of an RNA transcript, including coding and regulatory regions.
 
-By sequencing at 5x depth of coverage, target of RNAs of any sizes likely to be encountered in nature can be sequenced many times before encountering **a platform error.** This platform accuracy exceeds, at present, the accuracy with which target molecules can be reverse transcribed. This accuracy distinguishes PSeq from RNA-Seq and all Third-Generation platforms, and the sequencing of genomic DNA.
+This matters because RNA molecules are not simply interchangeable fragments of gene activity. A full-length transcript can link together promoter choice, splice structure, open reading frame, RNA editing, UTR sequence, and regulatory signals. If those features are separated during measurement, some of the biological meaning must be reconstructed indirectly.
 
-- **A further note on phasing:** In genetics, haplotype-phasing describes the segregation of alleles, SNPs, rearrangements and other mutations, between maternal and paternal chromosomes. At the genomic level, accurate phasing can be an involved process: moreover, because single molecules are not analyzed (in the sense used in this article) developmental variations, or alternations during disease progression, can cast doubt on. Some of these details. Similar ambiguities are not expected to arise for WMPS of transcripts.
+PSeq is designed to preserve that linkage. Instead of treating RNA molecules only as a collection of fragments, PSeq retains source-molecule identity so that reads from the same starting molecule can be assembled together.
 
-### Why does whole-molecule sequencing have special bearing on explaining biological functions and phenotypes?
-- **Phenotypes are observables:**
-The term “phenotype” is almost unmanageably broad – defined as any observable aspect of biological form, behavior or function. A phenotype might be as discrete eye color, or as general as a vague as a life-time health record. Despite this –
-- **Biological phenotypes have a molecular concomitant.**
-- Cells of a wide variety of types develop in associations to form tissues, organs and organ systems: (nominally 100 trillion cells live together in the adult human body).
-- Virtually all aspects of cellular form and function are under the control of specific proteins – and perhaps to a lesser extent, functional RNAs (fRNAs).
-- Transcriptomes encode the isoforms of proteins and fRNAs, as well as the details about where, when and how abundantly they are expressed.
+### RNA as molecular phenotype
 
-**It follows that the transcriptome of a cell or of the cells of a tissue, organ or organ system is a form of ‘molecular phenotype.’**
+The term “phenotype” is broad. It can refer to something as discrete as eye color or as complex as a lifetime health history. But biological phenotypes have molecular causes and molecular correlates.
 
-Understanding how the molecular phenotype translates into the extraordinary details of reactive, living tissues will be a generational challenge. However, It seems certain, given the potential for machine learning to discover and exploit “languages,” AI will prove useful in exploring the relationship between information in the molecular phenotype and phenotypic manifestations more generally.
+Cells form tissues, organs, and organ systems. Their structure and behavior are largely governed by proteins and functional RNAs. The transcriptome encodes many of these molecules, along with information about when, where, and how strongly they are expressed.
 
-### How does PSeq compare with other RNA technology
-Among other commercial platforms, PSeq most closely resembles RNA-Seq. While both methods employ short-read sequencing, they are fundamentally different
+**It follows that the transcriptome of a cell, tissue, organ, or organ system can be understood as a form of molecular phenotype.**
 
-Although the sequencing of short-reads is highly accurate, RNA-Seq relies on any of a variety of packages of statistical algorithms to reconstruct a weighted likelihoods of particular full-length RNAs that may be in a sample. At the outset, RNA-Seq destroys information which it then tries to recover statistically.
+Understanding how molecular phenotype translates into living function will remain a major scientific challenge. But it seems increasingly likely that machine learning will be useful in exploring the relationship between RNA-level information and broader biological outcomes — provided that the input data are sufficiently precise.
 
-In many cases RNA-Seq is fundamentally incapable of choosing between possible transcriptomes even for a single gene,[^1] let alone among products of thousands of genes.
+### How does PSeq compare with other RNA technologies?
 
-In respect to the composition of single molecules, the actual presence of Individual RNAs cannot be accepted without independent validation. This uncertainty prevents optimal use of machine learning to elucidate fundamental biology or, discovery of the molecular causes of disease, or targeted drug or immune therapies
+Among commercial platforms, PSeq most closely resembles RNA-Seq because both can use short-read sequencing. But the two methods are fundamentally different.
 
-Despite these significant limitations, RNA-Seq has been a foundational technology of the pipeline for gene annotation cataloging the identity of splice variants for human genes in the **NCBI RefSeq** database.[^2] It is also often the tool of choice for single cell RNA-Seq (scRNA-Seq).[^3]
+Conventional RNA-Seq fragments transcripts early in the workflow, so downstream software must infer which fragments came from which full-length molecules. For many applications, this has been extraordinarily useful. RNA-Seq has supported gene expression analysis, transcript discovery, annotation pipelines, and single-cell RNA studies.
 
-PSeq promises to greatly accelerate and reduce the costs for programs like the NCBI annotation pipeline.
+But for complex genes, RNA-Seq can struggle to distinguish among plausible full-length transcript structures without additional validation. The difficulty is not merely sequencing accuracy. It is that the original linkage among transcript features has often been lost and must be inferred statistically.
 
-**Third generation** long-read technology, such as that of Oxford Nanotechnology (ONT) or PacBio chip-based sequencing effectively perform a form of distributed cloning, in which molecules are physically separated for sequencing. Elsewhere we will discuss the limitations of these approaches that constrain their use and cost efficiency.
+Third-generation long-read technologies, such as Oxford Nanopore Technologies and PacBio, approach the problem differently by reading longer molecules directly. These tools are valuable for discovery and reference building, but they can face constraints in cost, throughput, sampling depth, and adoption because they require dedicated instrumentation.
 
-### PSeq vs RNA Seq
-While both methods run on unmodified NGS instruments, PSeq differs qualitatively from RNA-Seq.
+PSeq is intended to combine two advantages: the scale and installed base of short-read NGS with molecule-level RNA resolution.
 
-PSeq preserves the identity of each RNA source molecule throughout sample processing.
+<table style="border-collapse: collapse; width: 100%; margin: 1.25rem 0; font-size: 0.95rem;">
+  <thead>
+    <tr>
+      <th style="border-bottom: 1px solid #d1d5db; padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; font-weight: 700;">Question</th>
+      <th style="border-bottom: 1px solid #d1d5db; padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; font-weight: 700;">Conventional RNA-Seq</th>
+      <th style="border-bottom: 1px solid #d1d5db; padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; font-weight: 700;">Third-generation long-read sequencing</th>
+      <th style="border-bottom: 1px solid #d1d5db; padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; font-weight: 700;">PSeq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Does it run on existing short-read NGS instruments?</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Yes</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">No</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Yes</td>
+    </tr>
+    <tr>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Does it preserve molecule identity?</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Usually no</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Yes, through physical separation</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Yes, through molecular tagging</td>
+    </tr>
+    <tr>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Does it measure full-length transcript structure?</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Inferred statistically</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Directly sampled</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Directly assembled molecule by molecule</td>
+    </tr>
+    <tr>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Main limitation</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Fragmented, inference-heavy data</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Cost, throughput, and sampling depth</td>
+      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">New platform requiring validation and adoption</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.65rem 0.75rem; vertical-align: top;">Best use</td>
+      <td style="padding: 0.65rem 0.75rem; vertical-align: top;">Gene expression and broad transcriptomic surveys</td>
+      <td style="padding: 0.65rem 0.75rem; vertical-align: top;">Long-read discovery and reference building</td>
+      <td style="padding: 0.65rem 0.75rem; vertical-align: top;">High-scale, molecule-resolved transcriptomics</td>
+    </tr>
+  </tbody>
+</table>
 
-The automated pipeline for assembling RNAs does not rely on statistical guesswork. Assembly is based on comparing information in fragments all from the same source molecule.
+### PSeq vs. RNA-Seq
 
-Another important benefit of the computational strategy is that the pipeline records details on how each starting molecule proceeds through the steps in library preparation. It also renders the raw data files exiting the sequencer, each of the steps from identifying the source and sense of the source gene, assembly of the full-length transcripts and compilation of molecules comprising the sample. The enormous depth of this information allows for validation the output, down to the most elemental level. This is essential for validating the reliability of conclusions as the scale of analysis increases.
+While both methods can run on unmodified NGS instruments, PSeq differs qualitatively from RNA-Seq.
+
+PSeq preserves the identity of each RNA source molecule throughout sample processing. Assembly is based on comparing reads known to come from the same starting molecule, rather than reconstructing likely transcripts from a mixed pool of fragments.
+
+Another important benefit is that the data pipeline can retain a detailed record of how each starting molecule moves through library preparation, sequencing, assembly, and reporting. This supports validation of the output at a very granular level, which becomes increasingly important as transcriptomic datasets become larger and more complex.
 
 ### How does PSeq accomplish whole-molecule resolution?
-PSeq chemistry attaches a multifunctional tagging reagent to each reverse transcript, followed by preparation of short-fragment DNA sequencing libraries. In PSeq libraries, source-molecule information is retained on each random read-fragment. Library protocols are performed in free solution, employing reactions confined to intramolecular rearrangements.
 
-After conventional sequencing, the ***data*** for the target molecules effectively “cloned” (binned into computer files) for each molecule. Trimmed reads are used for gene identification and transcript assembly for whole-molecule resolution.
+PSeq chemistry attaches a multifunctional tagging reagent to each reverse transcript, followed by preparation of short-fragment DNA sequencing libraries. In PSeq libraries, source-molecule information is retained on each random read fragment. Library protocols are performed in free solution, using reactions designed to preserve molecular identity.
 
-Because every base is independently sequenced with a user-selected depth of coverage, PSeq can achieve **accuracy** exceeding the gold-standard of Sanger Sequencing, but at scale.
+After conventional sequencing, reads are computationally sorted into molecule-specific bins. Trimmed reads are then used for gene identification and transcript assembly, enabling whole-molecule resolution.
+
+Because every base can be independently sequenced with a user-selected depth of coverage, PSeq is designed to achieve high consensus accuracy at scale.
 
 ### PSeq returns more information than RNA-Seq
-This can be illustrated in three successive examples.
 
-1. Analyzing 1 million *identical* RNA molecules,
-- RNA-Seq will yield the accurate consensus sequence and, with ‘indexing,’ report 1 million copies.
-- PSeq returns 1 million individual sequences, in this case, all identical.
-2. Changing the task slightly: analyzing 1 million randomly mutated RNA virus genomes:
-- RNA-Seq would yield no actual virus genome, but will yield statistics regarding the incidence of individual, unlinked mutations.
-- PSeq will again return 1 million sequences, with the linked ensemble of random mutations of each: whole virus genomes.
-3. Sequencing isoforms of protein-coding messenger RNAs or fRNAs:
-- RNA-Seq estimates the likelihood of constructs from each gene, but identifying actual isoforms requires extensive, independent confirmation.
-- PSeq whole-molecular resolution bundles each protein isoform with the associated UTR promoters, trafficking codes, riboswitches, ribozymes, sites for interaction with micro-RNAs or turn-over regulating endonucleases, etc. If even further confirmation is essential, copies of any individual molecule can be cloned, from retained starting material,
-- with kits designed for use with the barcodes, to biobank the cDNA, produce RNA or crystallography-grade protein.
+Consider three examples:
 
-### PSeq vs RNA-Seq data processing:
-By the time **RNA-Seq** data reach downstream pipelines, transcripts have already been fragmented and aggregated. Structures have been inferred and averaged — often into gene-level counts that obscure the very regulatory structure that is generally overlooked: promoter choices, protein coding ORF alternative splicing, and RNA editing and UTR variations that specify isoform-specific trafficking and expression are treated as secondary features, reconstructed statistically if at all. Each full-length transcript is an integrated quantum of genetic information.
-
-In contrast, **PSeq** proprietary chemistry preserves molecular identification of each individual target molecule, from initial tagging with one of up to 4.3 trillion barcodes, through DNA library preparation, sequencing and final data assembly by the automated data pipeline.
-
-Resolution of full-length isoform-specific RNAs – with the associated regulatory features— renders PSeq convenient for the discovery and validation of new isoforms.
-
-<figure class="pseq-folding-figure">
-  <div class="pseq-folding-images">
-    <img src="/images/media/blog/image10.png" alt="Predicted folding of whole molecule RNA" loading="lazy" />
-    <img src="/images/media/blog/image20.png" alt="Predicted protein folding" loading="lazy" />
+<div style="margin: 1rem 0 1.25rem;">
+  <div style="margin: 0 0 1.15rem;">
+    <div style="font-weight: 700; margin-bottom: 0.35rem;">1. One million identical RNA molecules</div>
+    <div style="margin: 0.35rem 0 0.35rem 1.25rem;">• RNA-Seq can report the consensus sequence and estimate abundance.</div>
+    <div style="margin: 0.35rem 0 0.35rem 1.25rem;">• PSeq can return one million molecule-level observations.</div>
   </div>
-  <figcaption>
-    Predicted folding of whole molecule RNA (left) and predicted protein-folding (right) for a single Pre-mRNA Processing Factor 31 (PRPF31) mRNA molecule sequenced by <strong>PSec</strong> from human RNA.
-  </figcaption>
-</figure>
 
-<style>
-  .pseq-folding-figure {
-    margin: 1.75rem 0 1.5rem;
-  }
+  <div style="margin: 0 0 1.15rem;">
+    <div style="font-weight: 700; margin-bottom: 0.35rem;">2. One million randomly mutated RNA virus genomes</div>
+    <div style="margin: 0.35rem 0 0.35rem 1.25rem;">• RNA-Seq can report mutation frequencies, but not necessarily which mutations occur together on the same genome.</div>
+    <div style="margin: 0.35rem 0 0.35rem 1.25rem;">• PSeq can preserve the linked mutation pattern of each individual viral genome.</div>
+  </div>
 
-  .pseq-folding-images {
-    align-items: end;
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
-    max-width: 38rem;
-  }
+  <div style="margin: 0 0 1.15rem;">
+    <div style="font-weight: 700; margin-bottom: 0.35rem;">3. Protein-coding RNA isoforms</div>
+    <div style="margin: 0.35rem 0 0.35rem 1.25rem;">• RNA-Seq estimates likely transcript structures from fragments.</div>
+    <div style="margin: 0.35rem 0 0.35rem 1.25rem;">• PSeq is designed to assemble each molecule with its associated coding sequence and regulatory regions.</div>
+  </div>
+</div>
 
-  .pseq-folding-images img {
-    height: auto;
-    max-width: 100%;
-    width: 14.5rem;
-  }
+The practical difference is linkage. RNA-Seq is excellent at measuring many transcriptomic signals, but it often requires statistical reconstruction of full-length molecular structure. PSeq is designed to preserve source-molecule identity so that full-length structures can be measured more directly.
 
-  .pseq-folding-figure figcaption {
-    color: #111827;
-    font-size: 0.85rem;
-    font-style: italic;
-    line-height: 1.45;
-    margin-top: 1rem;
-    max-width: 58rem;
-  }
+### PSeq vs. RNA-Seq data processing
 
-  @media (max-width: 520px) {
-    .pseq-folding-images {
-      gap: 1.25rem;
-      grid-template-columns: 1fr;
-      justify-items: start;
-    }
-  }
-</style>
+By the time RNA-Seq data reach downstream pipelines, transcripts have already been fragmented and aggregated. Structures are inferred and averaged, often into gene-level counts that can obscure promoter choices, alternative splicing, RNA editing, and UTR variation.
 
-As we will describe in future articles, the information in each transcript is written in multiple languages, only one of which is the open-reading frame for a protein variant.
+In contrast, PSeq preserves molecular identification of each individual target molecule, from initial tagging through DNA library preparation, sequencing, and final data assembly by an automated data pipeline.
 
-### Producing first class data for machine learning. TRANSITION HEFE
-The figures shown above illustrate just part of the unambiguous data available for one individual molecule sequenced, with PSeq.
+Resolution of full-length isoform-specific RNAs, together with associated regulatory features, makes PSeq useful for discovering and validating new isoforms.
 
-Messenger RNAs are predicted to fold into a mostly double-stranded secondary structures. *Within* the RNA, a stretch of the nucleotide bases encompasses the open reading frame encoding the polypeptide at right. The polypeptide, in turn, encodes the shape of the protein. This sequence also embodies a highly specialized kinetic pathway for folding the protein into its final, active configuration, perhaps under the influence of yet another protein, called a chaperone.
+As we will describe in future articles, the information in each transcript is written in multiple languages, only one of which is the open reading frame for a protein variant.
 
-This example, PRPF31 encodes a crucial protein constituent of the cellular molecular complex that splices mRNAs … ironically including this mRNA that encodes this particular splice variant of this particular protein. Three hundred such proteins help form this complex, the spliceosome, all subject to alternative splicing isoforms. This poses some fascinating puzzles ahead.
+### Why molecule-resolved RNA data matter for machine learning
 
-### Why is PSeq better than RNA-Seq and 3<sup>rd</sup> Generation long sequencing for Machine Learning
-We might think of the activity of each of the genes at work in a cell as a conversation. The number of transcripts – or ‘gene count’ – is comparable to how loud the gene is talking. In this comparison, the structure of each transcript is akin to the sentences of the conversation … the content of the message.
+Molecule-resolved RNA data may be especially useful for machine learning because models learn best from stable, well-defined features. If the input data collapse multiple transcript structures into a single gene-level number, the model may be asked to learn from mixed biological signals.
 
-RNA-Seq readily captures ***gene-counts*** –the relative activity of each gene contributing to phenotype, but the “words” are garbled. The ***structure*** of each transcript, best captured with PSeq, is the actual message each active gene is contributing to the genetic conversation; in this case, gene counts are also resolved. Extending this metaphor, **3<sup>rd</sup> Generation** long sequencing can capture many of the words of the conversation … great for building a dictionary, but a tendency to miss rare variants.
+Messenger RNAs are predicted to fold into mostly double-stranded secondary structures. Within the RNA, a stretch of nucleotide bases encompasses the open reading frame encoding the polypeptide. The polypeptide, in turn, encodes the shape of the protein. This sequence also embodies a specialized pathway for folding the protein into its final active configuration, sometimes under the influence of another protein called a chaperone.
 
-Each molecule is thus a bundled quantum of information that machine learning has at its disposal for analysis. Gene counts indicate that genes are talking; the structure of the RNAs indicate what is being said.
+The example of PRPF31 illustrates the layered complexity that RNA-level measurement must confront. PRPF31 encodes a crucial protein constituent of the spliceosome, the molecular complex that splices mRNAs — including the mRNA that encodes this particular splice variant. Hundreds of proteins help form or regulate this complex, many of which are themselves subject to alternative splicing.
+
+Molecule-resolved RNA data can provide more precise features: complete isoforms, linked regulatory elements, and isoform-level abundance.
+
+### Gene counts tell us who is speaking. Isoforms tell us what is being said.
+
+A simple analogy is conversation. Gene-level expression tells us which genes are speaking, and roughly how loudly. Isoform-level structure tells us what they are saying.
+
+For machine learning, that distinction matters. A model trained only on gene-level counts may see activity, but miss the transcript-level features that explain function.
+
+Each molecule is thus a bundled unit of information available for analysis. Gene counts indicate that genes are active. Transcript structures help explain what those active genes are contributing to phenotype.
 
 ### Why this matters for machine learning
-Gene-level features captured in RNA-Seq data can conflate multiple biological states. When discrete transcripts with different functional consequences are collapsed into one value, the model is forced to learn across mixed signals.
 
-This matters because inference-heavy inputs propagate uncertainty into the model. Many transcript-level estimates are reconstructed statistically rather than directly observed. This uncertainty can rarely be encoded explicitly and nevertheless denies ML robust learning opportunities.
+Gene-level features captured in RNA-Seq data can conflate multiple biological states. When transcripts with different functional consequences are collapsed into one value, a model is forced to learn across mixed signals.
 
-Information is, formally, the reduction of uncertainty in a message. With propagation of RNA-Seq data, uncertainty progressively increases. In short, not using first class data – e.g. whole-molecule resolved structures – progressively undermines the effectiveness of machine learning as the scale of data expands.
+This matters because inference-heavy inputs can propagate uncertainty into downstream models. Many transcript-level estimates are reconstructed statistically rather than directly observed. That uncertainty is rarely encoded explicitly, but it can still weaken model performance and interpretability.
 
-Last, feature instability undermines generalization. Gene-level summaries often vary with different ground-truth assumptions (prior information), alignment strategies or reference updates. For ML systems intended to generalize across datasets, timepoint or cohorts, this instability can produce hard-to-control variance – a picture that progressively loses focus.
+Feature instability can also undermine generalization. Gene-level summaries may vary with reference annotations, alignment strategies, prior assumptions, or software updates. For ML systems intended to generalize across datasets, timepoints, and cohorts, this instability can create variance that is difficult to control.
 
-### How RNA-Seq and PSeq differ.
-### Conclusion:
-Most kinds of molecules do not merit being analyzed individually. Informational macromolecules, such as DNA, RNA and proteins, present exceptions. Because of its scale, accuracy, high throughput -- its intrinsic design, Next Generation sequencing provides a powerful tool with which to analyze the bundles of information created in the cell, encoding proteins and functional RNAs.
+Molecule-resolved RNA data may reduce this problem by giving models more direct, biologically meaningful features.
 
-Perhaps only a chemistry allowing molecule by molecule analysis, at scale, can match the complexity of diseases like advanced cancer. PSeq has been designed to exploit these exact advantages.
+### How RNA-Seq and PSeq differ
 
-### Looking Ahead to Future Discussions!
-In 2026, perhaps somewhat unexpectedly – and 20 years late --- we can fairly state that precision medicine has been launched in an era of ‘unsettled science.’ What is, in fact, the definition of a gene? And the eponymous field of ‘genomics.’
+The practical difference is simple:
 
-The classical model of the molecular gene elegantly captured our intuitive notions of genes. The **inherited gene** that is passed between generations (double stranded DNA), the **functional gene** that is the source of expressed characteristics (the open reading frame for a protein), and in combination, these constitute the **evolutionary gene**, the substrate for mutation and natural selection. An important overlay to formulation is the well conserved genetic code as the singular language of the Mendelian inheritance.
+- RNA-Seq measures fragments and reconstructs likely transcript structures.
+- PSeq preserves source-molecule identity and assembles each RNA molecule from reads known to come from that same molecule.
+- RNA-Seq is powerful for gene-level expression and broad transcriptomic surveys.
+- PSeq is designed for cases where the exact structure of individual RNA molecules matters.
 
-We now comprehend that the simplicity of the cistronic, one-gene: one-protein gene of microbial species has expanded during the long course of evolution, to produce a vastly more sophisticated informational framework. Almost none of these classical intuitions have been confirmed. The inherited, functional and evolutionary genes are not one and the same, few diseased traits follow simple Mendelian principles, and the genetic code is only one of many languages used by inheritance.
+### Conclusion
 
-For genomic medicine and fundamental biological research to advance, our technology will have to advance. In subsequent entries, we will discuss the concepts that now leading clinical and basic scientists, to expand and adapt our technology to be more effective.
+Most molecules do not need to be analyzed one by one. Informational molecules are different.
 
-[^1]: Reagan et al 2020; Reagan: Emerick:
+RNA molecules carry linked information: coding sequence, splice structure, regulatory context, and abundance. When these features are separated or averaged, important biological meaning can be lost.
 
-[^2]:
+PSeq is designed to preserve that linked information at scale. By combining short-read NGS with molecule-preserving chemistry and automated assembly, PSeq aims to make full-length, isoform-resolved RNA measurement practical for discovery biology, translational research, and machine learning.
 
-[^3]:
+In Part 2, we will explain how PSeq preserves source-molecule identity and turns short-read sequencing into whole-molecule RNA measurement.
+
+### Looking ahead
+
+In 2026, precision medicine is advancing in an era of unsettled science. The definition of a gene is no longer as simple as the classical one-gene, one-protein model. In complex organisms, DNA loci can produce many RNA and protein products, and the genetic code is only one layer of biological information.
+
+For genomic medicine and fundamental biological research to advance, our measurement technologies must advance as well. In subsequent entries, we will discuss how PSeq works, how it differs from existing sequencing platforms, and how full-length RNA measurement may help researchers connect molecular information to phenotype.
