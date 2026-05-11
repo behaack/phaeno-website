@@ -1,6 +1,6 @@
 ---
-title: "An Introduction to Phased Sequencing, Part 1: Why RNA Needs Better Measurement (New)"
-summary: "Why full-length, molecule-resolved RNA sequencing matters for biology, machine learning, and precision medicine."
+title: "An Introduction to Phased Sequencing: Part 1(New)"
+summary: "Why RNA Needs Better Measurement"
 image: "/images/media/blog/an-introduction-to-phased-sequencing.png"
 authors: ["William Agnew"]
 date: '2026-04-28'
