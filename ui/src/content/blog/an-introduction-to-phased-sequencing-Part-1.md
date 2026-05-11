@@ -1,10 +1,9 @@
 ---
 title: "An Introduction to Phased Sequencing, Part 1: Why RNA Needs Better Measurement (New)"
-tagline: "Why full-length, molecule-resolved RNA measurement brings transcriptomics closer to biological function and phenotype"
+summary: "Why full-length, molecule-resolved RNA sequencing matters for biology, machine learning, and precision medicine."
 image: "/images/media/blog/an-introduction-to-phased-sequencing.png"
 authors: ["William Agnew"]
 date: '2026-04-28'
-summary: "Phaeno PSeq technology opens the door to aspects of RNA biology that have been largely overlooked because they have been difficult to measure with existing tools. PSeq is designed to preserve the identity of individual RNA molecules through short-read sequencing, enabling full-length, molecule-resolved RNA measurement on existing high-throughput NGS instruments. This series explains why that capability matters for biology, machine learning, and precision medicine."
 ---
 
 <p align="center"><strong><i>This is part 1 of a 3-part series</i></strong></p>
@@ -65,48 +64,32 @@ Third-generation long-read technologies, such as Oxford Nanopore Technologies an
 
 PSeq is intended to combine two advantages: the scale and installed base of short-read NGS with molecule-level RNA resolution.
 
-<table style="border-collapse: collapse; width: 100%; margin: 1.25rem 0; font-size: 0.95rem;">
-  <thead>
-    <tr>
-      <th style="border-bottom: 1px solid #d1d5db; padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; font-weight: 700;">Question</th>
-      <th style="border-bottom: 1px solid #d1d5db; padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; font-weight: 700;">Conventional RNA-Seq</th>
-      <th style="border-bottom: 1px solid #d1d5db; padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; font-weight: 700;">Third-generation long-read sequencing</th>
-      <th style="border-bottom: 1px solid #d1d5db; padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; font-weight: 700;">PSeq</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Does it run on existing short-read NGS instruments?</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Yes</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">No</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Yes</td>
-    </tr>
-    <tr>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Does it preserve molecule identity?</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Usually no</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Yes, through physical separation</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Yes, through molecular tagging</td>
-    </tr>
-    <tr>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Does it measure full-length transcript structure?</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Inferred statistically</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Directly sampled</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Directly assembled molecule by molecule</td>
-    </tr>
-    <tr>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Main limitation</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Fragmented, inference-heavy data</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">Cost, throughput, and sampling depth</td>
-      <td style="border-bottom: 1px solid #e5e7eb; padding: 0.65rem 0.75rem; vertical-align: top;">New platform requiring validation and adoption</td>
-    </tr>
-    <tr>
-      <td style="padding: 0.65rem 0.75rem; vertical-align: top;">Best use</td>
-      <td style="padding: 0.65rem 0.75rem; vertical-align: top;">Gene expression and broad transcriptomic surveys</td>
-      <td style="padding: 0.65rem 0.75rem; vertical-align: top;">Long-read discovery and reference building</td>
-      <td style="padding: 0.65rem 0.75rem; vertical-align: top;">High-scale, molecule-resolved transcriptomics</td>
-    </tr>
-  </tbody>
-</table>
+#### At a glance: RNA-Seq, long-read sequencing, and PSeq
+
+<figure class="pseq-table-figure">
+  <div class="pseq-table-image">
+    <img src="/images/media/blog/intro-to-phased-seq-comparison.png" alt="Predicted folding of whole molecule RNA" loading="lazy" />
+  </div>
+</figure>
+
+<style>
+  .pseq-table-figure {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  .pseq-table-image {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .pseq-table-image img {
+    display: block;
+    width: 100%;    
+    height: auto;
+    max-width: 50rem;
+  }
+</style>
 
 ### PSeq vs. RNA-Seq
 

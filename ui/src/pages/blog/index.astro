@@ -37,6 +37,7 @@ const blog = await getCollection('blog')
           searchString={`${paper.data.title} ${paper.data.authors.join(' ')}`.toLowerCase()}        
           title={paper.data.title} 
           image={paper.data.image} 
+          summary={paper.data.summary}
           link={`/blog/${paper.slug}`}
         >
           <div>{paper.data.authors.join(', ')}</div>

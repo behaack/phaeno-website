@@ -1,10 +1,9 @@
 ---
 title: "An introduction to Phased Sequencing: Part 1 (Original)"
-tagline: "Why full-length, molecule-resolved RNA measurement brings transcriptomics closer to biological function and phenotype"
+summary: "Why full-length, molecule-resolved RNA sequencing matters for biology, machine learning, and precision medicine."
 image: "/images/media/blog/an-introduction-to-phased-sequencing.png"
 authors: ["William Agnew"]
 date: '2026-04-28'
-summary: "Phaeno PSeq technology opens the door to aspects of RNA biology that have been largely overlooked, in part because the information has been challenging to access with available methods. Phaeno phased sequencing (Pseq) allows whole molecule resolution of individual RNAs on high-throughput, high accuracy, short-read NGS instruments.  The articles in this series will explore how this capability can prove useful."
 ---
 <p align="center"><strong><i>This is part 1 of a 3 part series</i></strong></p>
 

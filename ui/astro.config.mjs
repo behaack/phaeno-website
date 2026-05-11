@@ -3,11 +3,16 @@ import { fileURLToPath } from 'url';
 import tailwind from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import rehypePhaenoHeadingSearch from './src/lib/rehypePhaenoHeadingSearch.js';
 
 export default defineConfig({
   site: 'https://www.phaenobiotech.com',
   trailingSlash: 'never',
   output: 'static',
+
+  markdown: {
+    rehypePlugins: [rehypePhaenoHeadingSearch],
+  },
 
   redirects: {
     // About consolidation

@@ -5,10 +5,11 @@ import { FaArrowRight } from 'react-icons/fa6';
 interface IProps {
   title: string
   image?: string
+  summary?: string
   link: string
   searchString: string
 }
-const { title, image="", link, searchString } = Astro.props as IProps
+const { title, image="", link, searchString, summary } = Astro.props as IProps
 ---
 
 <li 
@@ -26,7 +27,10 @@ const { title, image="", link, searchString } = Astro.props as IProps
   <div class="text-frame">
     <div class="title-frame">
       <h2>{title}</h2>
-    </div>    
+    </div>
+    <div class="summary-frame">
+      {summary}
+    </div>
     <div class="details-frame">
       <slot />
     </div>
@@ -74,6 +78,10 @@ const { title, image="", link, searchString } = Astro.props as IProps
 
 .title-frame {
   overflow: hidden;
+}
+
+.summary-frame {
+  font-size: .75rem;
 }
 
 .details-frame {

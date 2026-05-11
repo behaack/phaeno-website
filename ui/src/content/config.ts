@@ -12,18 +12,17 @@ const jobs = defineCollection({
     country: z.string().nullable().optional(),
     employmentType: z.enum(['Full-time','Part-time','Contract', 'Temporary', 'Intern', 'Other']),
     date: z.coerce.date(),
-    summary:  z.string().max(150, 'Maximum length is 150 characters'),
+    summary:  z.string().max(200, 'Maximum length is 150 characters'),
   })
 });
 
 const blog = defineCollection({
   schema: z.object({
     title: z.string(),
-    tagline: z.string(),
+    summary:  z.string().max(200, 'Maximum length is 200 characters'),
     image: z.string(),
     authors: z.array(z.string()),
     date: z.coerce.date(),
-    summary:  z.string(),
   })
 });
 
@@ -44,7 +43,7 @@ const news = defineCollection({
     title: z.string(),
     image: z.string(),
     date: z.coerce.date(),
-    summary: z.string(),
+    summary: z.string().max(200, 'Maximum length is 200 characters'),
   })
 });
 
@@ -65,7 +64,7 @@ const scientific_papers = defineCollection({
     journal: z.string(),
     date: z.coerce.date(),
     link: z.string(),
-    summary: z.string(),
+    summary: z.string().max(200, 'Maximum length is 200 characters'),
   })
 });
 
@@ -75,7 +74,7 @@ const white_papers = defineCollection({
     image: z.string(),
     authors: z.array(z.string()),
     date: z.coerce.date(),
-    summary: z.string(),
+    summary: z.string().max(200, 'Maximum length is 200 characters'),
   })
 });
 

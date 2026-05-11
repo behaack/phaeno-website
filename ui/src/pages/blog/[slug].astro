@@ -42,6 +42,7 @@ const { Content } = await blog.render();
           <span>{blogSlugLabel}</span>
         </nav>
         <h1 id={`${title.replace(/\s+/g, '-').toLowerCase()}`}>{title}</h1>
+        <div>{summary}</div>
         <div class="blog-post-meta">
           <span>{authors.join(', ')}</span>
           <span aria-hidden="true">|</span>
