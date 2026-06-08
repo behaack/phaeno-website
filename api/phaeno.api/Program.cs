@@ -116,13 +116,9 @@ builder.Services.Configure<EmailServiceSettings>(
 builder.Services.Configure<ChronJobScheduleOptions>(
     builder.Configuration.GetSection("ChronJobs"));
 
-#if DEBUG
-const string connectionStringSource = "Development";
-#else
-var connectionStringSource = builder.Environment.IsDevelopment() ? "Development" : "Production";
-#endif
-
-var connectionString = builder.Configuration.GetConnectionString(connectionStringSource);
+const string connectionStringName = "phaeno-website";
+var connectionString = builder.Configuration.GetConnectionString(connectionStringName)
+    ?? throw new InvalidOperationException($"Connection string '{connectionStringName}' is missing.");
 
 builder.Services.AddDbContext<PseqDatabase>(options =>
 {

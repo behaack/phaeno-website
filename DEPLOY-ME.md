@@ -3,15 +3,14 @@
 This project can be hosted on a Hetzner Cloud server as a small Docker Compose stack:
 
 - `api`: the .NET API
-- `db`: PostgreSQL
 - `caddy`: optional reverse proxy with automatic HTTPS
 
 ## Important Notes
 
 - The API targets `.NET 10`.
 - The app uses PostgreSQL through `Npgsql.EntityFrameworkCore.PostgreSQL`.
-- In production, `Program.cs` reads `ConnectionStrings:Production`, so the server must provide `ConnectionStrings__Production`.
-- Do not expose PostgreSQL port `5432` publicly.
+- `Program.cs` reads `ConnectionStrings:phaeno-website`. `appsettings.Development.json` overrides this value locally.
+- Do not set `ConnectionStrings__phaeno-website` in Docker Compose unless you intentionally want to override the value from `appsettings.json`.
 - Rotate any secrets that have been committed to `appsettings.json` before going live. Use environment variables for production secrets.
 - Because the app calls `UseHttpsRedirection()`, hosting behind a reverse proxy should include forwarded header support in the API to avoid HTTPS redirect issues.
 
@@ -39,11 +38,15 @@ The current Hetzner server uses Nginx on the host rather than the optional Caddy
 - Public hostname: `webops.phaenobiotech.com`
 - Server IP: `178.156.175.151`
 - API container binding: `127.0.0.1:8081`
+- Production database: PostgreSQL project `phaeno-website`
 - File manager binding: `127.0.0.1:8082`
 - Active Nginx site: `/etc/nginx/sites-enabled/phaeno-website-api.conf`
 - HTTPS certificate: `/etc/letsencrypt/live/webops.phaenobiotech.com/fullchain.pem`
 - Public file directory: `/opt/phaeno.website-api/documents/public`
 - File manager URL: `https://webops.phaenobiotech.com/manage-pseq-assets-7f3c9/`
+
+The server no longer runs a Hetzner PostgreSQL container. Production data lives
+in PostgreSQL.
 
 DNS for `webops.phaenobiotech.com` must point to `178.156.175.151`.
 
@@ -117,24 +120,10 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
-      ConnectionStrings__Production: Host=db;Port=5432;Database=website;Username=website;Password=${POSTGRES_PASSWORD}
       GoogleAuthSettings__RecaptchaSecretKey: ${RECAPTCHA_SECRET}
       EmailServiceSettings__ApiKey: ${MAILGUN_API_KEY}
     volumes:
       - ./documents:/app/__DOCUMENTS
-    depends_on:
-      - db
-
-  db:
-    image: postgres:17
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: website
-      POSTGRES_USER: website
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
   filebrowser:
     image: filebrowser/filebrowser:v2
     restart: unless-stopped
@@ -171,7 +160,6 @@ services:
       - api
 
 volumes:
-  postgres_data:
   filebrowser_data:
   caddy_data:
   caddy_config:
@@ -197,7 +185,6 @@ Create a `.env` file on the server:
 
 ```env
 SITE_HOST=:80
-POSTGRES_PASSWORD=use-a-long-random-password
 RECAPTCHA_SECRET=rotated-recaptcha-secret
 MAILGUN_API_KEY=rotated-mailgun-key
 ```
@@ -214,10 +201,10 @@ cd phaeno.website-api
 docker compose up -d --build
 ```
 
-If the server already has Nginx on ports `80` and `443`, start only the API and database:
+If the server already has Nginx on ports `80` and `443`, start only the API:
 
 ```bash
-docker compose up -d --build api db
+docker compose up -d --build api
 ```
 
 To use the included Caddy reverse proxy on a server where ports `80` and `443` are available:
@@ -230,7 +217,6 @@ Check logs:
 
 ```bash
 docker compose logs -f api
-docker compose logs -f db
 docker compose logs -f caddy
 ```
 
@@ -247,30 +233,21 @@ dotnet ef migrations bundle --project phaeno.api -o migrate
 Then run it against the production database connection string:
 
 ```bash
-./migrate --connection "Host=localhost;Port=5432;Database=website;Username=website;Password=..."
+./migrate --connection "PostgreSQL_NPGSQL_CONNECTION_STRING"
 ```
 
-If running migrations from inside the Docker network, use `Host=db` instead of `Host=localhost`.
+Use the PostgreSQL Npgsql connection string from `ConnectionStrings:phaeno-website`
+or a secret manager. Do not run migrations against a Hetzner-local database.
 
 ## Backups
 
-At minimum:
-
-- Enable Hetzner Cloud server backups.
-- Add a PostgreSQL dump job with `pg_dump`.
-- Store database backups outside the VM, such as Hetzner Storage Box, S3-compatible storage, or another off-server backup target.
-
-Example manual dump from the server:
-
-```bash
-docker compose exec db pg_dump -U website -d website > website-backup.sql
-```
+At minimum, use PostgreSQL backups or manual `pg_dump` exports before risky schema
+or data changes. The Hetzner server no longer stores production database data.
 
 ## Security Checklist
 
 - Rotate all secrets before production.
 - Keep `.env` out of git.
-- Do not expose PostgreSQL publicly.
 - Restrict SSH to known IPs.
 - Keep Docker and the OS updated.
 - Use strong unique passwords.
@@ -280,12 +257,3 @@ docker compose exec db pg_dump -U website -d website > website-backup.sql
 ## Follow-Up Code Change
 
 Before production, add forwarded header support in the API before `UseHttpsRedirection()` so the app correctly detects HTTPS when behind Caddy.
-
-
-## Connect to Database
-Database type: PostgreSQL
-Host: localhost
-Port: 5433
-Database: website
-Username: website
-Password: Em8/EUid6Gjv6qNZo5HFpXIjpkjD8Ssx

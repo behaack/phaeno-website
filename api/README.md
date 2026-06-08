@@ -56,20 +56,18 @@ Production values should come from environment variables, not committed files.
 Required production variables:
 
 ```env
-POSTGRES_PASSWORD=...
 RECAPTCHA_SECRET=...
 RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH=/app/__DOCUMENTS/private/secrets/recaptcha-enterprise-service-account.json
 MAILGUN_API_KEY=...
 ```
 
-The Docker Compose production connection string is assembled from
-`POSTGRES_PASSWORD`:
+`Program.cs` reads the `ConnectionStrings:phaeno-website` key. The production
+value comes from `appsettings.json`, and `appsettings.Development.json`
+overrides that value locally.
 
-```text
-ConnectionStrings__Production=Host=db;Port=5432;Database=website;Username=website;Password=${POSTGRES_PASSWORD}
-```
-
-Do not commit production `.env` files.
+Only set `ConnectionStrings__phaeno-website` in the environment when you want
+to override the checked-in configuration value. Do not commit production `.env`
+files.
 
 Production reCAPTCHA Enterprise validation also requires the Google service
 account JSON at the configured `RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH`. With the
@@ -97,7 +95,7 @@ dotnet run --project .\phaeno.api\phaeno.api.csproj
 Run with Docker Compose:
 
 ```powershell
-docker compose up -d --build api db
+docker compose up -d --build api
 ```
 
 View logs:
@@ -138,7 +136,7 @@ tar -czf phaeno.website-api.tar.gz `
 
 scp phaeno.website-api.tar.gz root@178.156.175.151:/tmp/phaeno.website-api.tar.gz
 
-ssh root@178.156.175.151 "cd /opt/phaeno.website-api && tar -xzf /tmp/phaeno.website-api.tar.gz && docker compose up -d --build api db"
+ssh root@178.156.175.151 "cd /opt/phaeno.website-api && tar -xzf /tmp/phaeno.website-api.tar.gz && docker compose up -d --build api"
 ```
 
 ## Deploying With GitHub Actions
@@ -147,8 +145,8 @@ The repository includes `.github/workflows/deploy.yml`. It runs manually through
 `workflow_dispatch` from the GitHub Actions UI.
 
 The workflow builds the API, creates a deployment archive, uploads it to the
-server, extracts it into `/opt/phaeno.website-api`, rebuilds `api` and `db` with
-Docker Compose, and runs public smoke checks.
+server, extracts it into `/opt/phaeno.website-api`, rebuilds `api` with Docker
+Compose, and runs public smoke checks.
 
 Recommended repository secrets:
 

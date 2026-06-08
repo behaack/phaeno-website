@@ -14,10 +14,16 @@ Phaeno website API on the current Hetzner server.
 - File manager local binding on server: `127.0.0.1:8082`
 - File manager URL: `https://webops.phaenobiotech.com/manage-pseq-assets-7f3c9/`
 - Public documents directory: `/opt/phaeno.website-api/documents/public`
+- Production database: PostgreSQL project `phaeno-website` through
+  `ConnectionStrings:phaeno-website` in `phaeno.api/appsettings.json`
 
 The current server uses host-level Nginx for ports `80` and `443`. Do not start
 the `caddy` Compose profile on this server unless Nginx is intentionally removed
 or reconfigured.
+
+The API no longer runs a Hetzner PostgreSQL container. Production data lives in
+PostgreSQL, and the server keeps only API, file manager, and optional Caddy
+services.
 
 ## Before Deploying
 
@@ -60,7 +66,7 @@ scp phaeno.website-api.tar.gz root@178.156.175.151:/tmp/phaeno.website-api.tar.g
 Extract and rebuild the API stack on the server:
 
 ```powershell
-ssh root@178.156.175.151 "cd /opt/phaeno.website-api && tar -xzf /tmp/phaeno.website-api.tar.gz && docker compose up -d --build api db"
+ssh root@178.156.175.151 "cd /opt/phaeno.website-api && tar -xzf /tmp/phaeno.website-api.tar.gz && docker compose up -d --build api"
 ```
 
 This preserves the production `.env`, `documents` directory, and Docker volumes.
@@ -72,7 +78,7 @@ If you only want committed files from `HEAD`, create the archive with Git:
 ```powershell
 git archive --format=tar.gz -o phaeno.website-api.tar.gz HEAD
 scp phaeno.website-api.tar.gz root@178.156.175.151:/tmp/phaeno.website-api.tar.gz
-ssh root@178.156.175.151 "cd /opt/phaeno.website-api && tar -xzf /tmp/phaeno.website-api.tar.gz && docker compose up -d --build api db"
+ssh root@178.156.175.151 "cd /opt/phaeno.website-api && tar -xzf /tmp/phaeno.website-api.tar.gz && docker compose up -d --build api"
 ```
 
 Use this only when uncommitted local changes should not be deployed.
@@ -119,10 +125,10 @@ List Compose services:
 docker compose ps
 ```
 
-Rebuild and restart the API and database services:
+Rebuild and restart the API service:
 
 ```bash
-docker compose up -d --build api db
+docker compose up -d --build api
 ```
 
 Restart only the API container:
@@ -155,12 +161,6 @@ Show recent API logs:
 docker compose logs --tail=100 api
 ```
 
-Follow database logs:
-
-```bash
-docker compose logs -f db
-```
-
 Check disk usage:
 
 ```bash
@@ -175,7 +175,7 @@ docker system prune
 ```
 
 Do not use `docker system prune --volumes` unless you intend to remove unused
-volumes. Database data is stored in Docker volumes.
+volumes.
 
 ## Environment Variables
 
@@ -189,7 +189,6 @@ The required variables are:
 
 ```env
 SITE_HOST=:80
-POSTGRES_PASSWORD=...
 RECAPTCHA_SECRET=...
 RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH=/app/__DOCUMENTS/private/secrets/recaptcha-enterprise-service-account.json
 MAILGUN_API_KEY=...
@@ -262,11 +261,11 @@ Upload and run the bundle against production:
 
 ```powershell
 scp migrate root@178.156.175.151:/tmp/migrate
-ssh root@178.156.175.151 "chmod +x /tmp/migrate && /tmp/migrate --connection 'Host=localhost;Port=5432;Database=website;Username=website;Password=YOUR_PASSWORD'"
+ssh root@178.156.175.151 "chmod +x /tmp/migrate && /tmp/migrate --connection 'PostgreSQL_NPGSQL_CONNECTION_STRING'"
 ```
 
-If running from inside the Docker network, use `Host=db` instead of
-`Host=localhost`.
+Use the PostgreSQL Npgsql connection string from `ConnectionStrings:phaeno-website`
+or a secret manager. Do not run migrations against a Hetzner-local database.
 
 ## Rollback Notes
 
