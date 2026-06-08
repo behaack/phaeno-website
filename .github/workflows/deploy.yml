@@ -95,7 +95,7 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
           ssh -i ~/.ssh/deploy_key "$DEPLOY_USER@$DEPLOY_HOST" \
-            "mkdir -p '$DEPLOY_PATH' && cd '$DEPLOY_PATH' && tar -xzf '/tmp/$DEPLOY_ARCHIVE' && docker compose up -d --build api db"
+            "mkdir -p '$DEPLOY_PATH' && cd '$DEPLOY_PATH' && tar -xzf '/tmp/$DEPLOY_ARCHIVE' && docker compose up -d --build api"
 
       - name: Smoke test root page
         run: |

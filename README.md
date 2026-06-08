@@ -32,7 +32,7 @@ See [ui/README.md](ui/README.md) for the full UI project guide.
 
 ## API
 
-The API is the backend service layer for the public website. It exposes versioned routes under `/api/v1` for site search, contact form submissions, and order inquiries. It also supports crawler/indexing jobs, PostgreSQL persistence, Mailgun notifications, Google reCAPTCHA Enterprise validation, and public document hosting.
+The API is the backend service layer for the public website. It exposes versioned routes under `/api/v1` for site search, contact form submissions, and order inquiries. It also supports crawler/indexing jobs, Supabase PostgreSQL persistence, Mailgun notifications, Google reCAPTCHA Enterprise validation, and public document hosting.
 
 Common commands:
 
@@ -47,7 +47,7 @@ Docker Compose local run:
 
 ```powershell
 cd api
-docker compose up -d --build api db
+docker compose up -d --build api
 docker compose logs -f api
 ```
 
@@ -67,7 +67,6 @@ Keep production secrets out of git. The UI and API both use local environment fi
 Important API production variables:
 
 ```env
-POSTGRES_PASSWORD=...
 RECAPTCHA_SECRET=...
 RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH=/app/__DOCUMENTS/private/secrets/recaptcha-enterprise-service-account.json
 MAILGUN_API_KEY=...
