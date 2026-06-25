@@ -6,6 +6,7 @@ import Footer from './footer/Footer.astro';
 import ScrollBehavior from '@/components/script-components/ScrollBehavior.astro';
 import MenuBehavior from '@/components/script-components/MenuBehavior.astro';
 import BodyMinHeightBehavior from '@/components/script-components/BodyMinHeightBehavior.astro';
+import DatabasePingBehavior from '@/components/script-components/DatabasePingBehavior.astro';
 
 /** Canonical URL (per-page, so we keep it) */
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -76,6 +77,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <ScrollBehavior />
     <MenuBehavior />
     <BodyMinHeightBehavior />
+    <DatabasePingBehavior />
   </body>
 </html>
 
