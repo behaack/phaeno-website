@@ -8,6 +8,11 @@ namespace phaeno.api.Features.WebOps.Services
 {
     public class WebOpsService(WebOpsCommands commands, WebOpsQueries queries, RecaptchaService recaptchaService, INotificationService notificationService)
     {
+        public async Task PingDatabaseAsync(CancellationToken ct = default)
+        {
+            await queries.PingDatabaseAsync(ct);
+        }
+
         public async Task CreateOrder(WebOrderRequestDto dto, CancellationToken ct = default)
         {
             var isValid = await recaptchaService.ValidReCaptchaCodeAsync(dto.RecaptchaCode, dto.RecaptchaAction, ct);

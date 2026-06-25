@@ -122,3 +122,16 @@ jobs:
           done
 
           curl -fsS --max-time 20 "$PUBLIC_URL/api/v1/web-ops/search-pages?search=technology" > /dev/null
+
+      - name: Smoke test database ping API
+        run: |
+          for attempt in {1..12}; do
+            if curl -fsS --max-time 20 "$PUBLIC_URL/api/v1/web-ops/database-ping" > /dev/null; then
+              exit 0
+            fi
+
+            echo "Database ping API smoke test failed on attempt $attempt; retrying in 5 seconds."
+            sleep 5
+          done
+
+          curl -fsS --max-time 20 "$PUBLIC_URL/api/v1/web-ops/database-ping" > /dev/null

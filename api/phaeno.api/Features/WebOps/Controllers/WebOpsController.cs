@@ -25,6 +25,23 @@ public class WebOpsController(
 ) : ControllerBase
 {
     /// <summary>
+    /// Runs a lightweight database connectivity query.
+    /// </summary>
+    /// <remarks>
+    /// Intended for public smoke checks and scheduled keepalive pings.
+    /// The endpoint performs a harmless SELECT query and returns no content.
+    /// </remarks>
+    /// <response code="204">Database ping completed successfully.</response>
+    [HttpGet("database-ping")]
+    [AllowAnonymous]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DatabasePing(CancellationToken ct)
+    {
+        await webOpsService.PingDatabaseAsync(ct);
+        return NoContent();
+    }
+
+    /// <summary>
     /// Q public website pages.
     /// </summary>
     /// <remarks>
