@@ -62,12 +62,7 @@ const organizationStructuredData = {
   <Tagline />
   <main class="main-fix" id="main" tabindex="-1">
     <section class="mb-5 mt-10">
-      <h2
-        id="pseq-intro"
-        data-phaeno-search="Phaeno PSeq phased sequencing platform"
-        data-phaeno-search-summary="Overview of PSeq as Phaeno's full-length, isoform-resolved RNA sequencing platform for molecule-level transcriptomics."
-        data-phaeno-search-keywords="phased sequencing PSeq full-length RNA isoform-resolved RNA short-read NGS molecular phenotype"
-      >Phaeno's PSeq™ — The Phased Sequencing Platform</h2>
+      <h2 id="pseq-intro">Phaeno's PSeq™ — The Phased Sequencing Platform</h2>
       <div class="rounded-3xl border border-slate-200 bg-white/60 p-3 pt-4 shadow-sm sm:p-6">
         <p class="mt-2 text-md text-slate-600">
           Gene-level counts compress biology. Isoforms capture splicing, promoter usage, UTR variation, and
@@ -136,9 +131,6 @@ const organizationStructuredData = {
 
             <h3
               id={s.id}
-              data-phaeno-search={s.v}
-              data-phaeno-search-summary={s.sub}
-              data-phaeno-search-keywords={`${s.k} PSeq isoform resolved RNA molecule level transcriptomics ML`}
               class="mt-1 text-base font-semibold leading-snug text-slate-800"
             >
               {s.v}

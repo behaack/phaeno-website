@@ -51,9 +51,6 @@ const { Content } = await render(blog);
         </nav>
         <h1
           id={`${title.replace(/\s+/g, '-').toLowerCase()}`}
-          data-phaeno-search={title}
-          data-phaeno-search-summary={summary}
-          data-phaeno-search-keywords={articleSearchKeywords}
         >{title}</h1>
         <div>{summary}</div>
         <div class="blog-post-meta">
