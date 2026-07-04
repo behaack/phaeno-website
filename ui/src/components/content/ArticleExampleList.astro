@@ -1,0 +1,60 @@
+---
+interface ArticleExample {
+  title: string;
+  points: string[];
+}
+
+interface Props {
+  items: ArticleExample[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="article-example-list">
+  {items.map((item, index) => (
+    <section class="article-example" aria-labelledby={`article-example-${index + 1}`}>
+      <div class="article-example-title" id={`article-example-${index + 1}`}>
+        {index + 1}. {item.title}
+      </div>
+      <ul>
+        {item.points.map((point) => (
+          <li>{point}</li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>
+
+<style>
+.article-example-list {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.article-example {
+  border-left: 4px solid #789946;
+  padding: 0.1rem 0 0.1rem 1rem;
+}
+
+.article-example-title {
+  margin: 0 0 0.45rem;
+  padding: 0;
+  color: #111827;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.article-example ul {
+  gap: 0.35rem;
+  margin: 0 0 0 1.1rem;
+  padding: 0;
+}
+
+.article-example li {
+  line-height: 1.5;
+}
+</style>

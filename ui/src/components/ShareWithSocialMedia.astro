@@ -8,9 +8,46 @@ interface IProps {
 }
 
 const {title, link, summary} = Astro.props;
-const path = decodeURIComponent(link).toLowerCase();
-const fullPath = new URL(path, Astro.site?.href).href;
+const fullPath = new URL(link, Astro.site ?? Astro.url.origin).href;
+const shareText = summary ? `${title}: ${summary}` : title;
 const iconSize: number = 25;
+
+function getShareUrl(baseUrl: string, params: Record<string, string>) {
+  const url = new URL(baseUrl);
+  for (const [key, value] of Object.entries(params)) {
+    url.searchParams.set(key, value);
+  }
+  return url.href;
+}
+
+const linkedInShareUrl = getShareUrl('https://www.linkedin.com/shareArticle', {
+  mini: 'true',
+  url: fullPath,
+  title,
+  summary,
+});
+const xShareUrl = getShareUrl('https://x.com/intent/post', {
+  text: title,
+  url: fullPath,
+});
+const redditShareUrl = getShareUrl('https://reddit.com/submit', {
+  url: fullPath,
+  title,
+});
+const facebookShareUrl = getShareUrl('https://www.facebook.com/sharer.php', {
+  u: fullPath,
+});
+const whatsappShareUrl = getShareUrl('https://api.whatsapp.com/send', {
+  text: fullPath,
+});
+const telegramShareUrl = getShareUrl('https://t.me/share/url', {
+  url: fullPath,
+  text: shareText,
+});
+const emailShareUrl = `mailto:?${new URLSearchParams({
+  subject: title,
+  body: fullPath,
+}).toString()}`;
 ---
 
 <div class="flex flex-col">
@@ -22,7 +59,7 @@ const iconSize: number = 25;
       rel="noopener noreferrer"
       title="LinkedIn"
       aria-label="Share this article on LinkedIn – opens in a new tab"
-      href=`https://www.linkedin.com/shareArticle?mini=true&url=${fullPath}&title=${title}&summary=${summary}`
+      href={linkedInShareUrl}
     >
       <FaLinkedin 
         size={iconSize} 
@@ -35,7 +72,7 @@ const iconSize: number = 25;
       rel="noopener noreferrer"
       title="X"
       aria-label="Share this article on X – opens in a new tab"
-      href=`https://x.com/intent/post?text=${title}&url=${fullPath}`
+      href={xShareUrl}
     >
       <FaSquareXTwitter 
         size={iconSize} 
@@ -47,7 +84,7 @@ const iconSize: number = 25;
       rel="noopener noreferrer"
       title="Reddit"
       aria-label="Share this article on Reddit – opens in a new tab"
-      href=`https://reddit.com/submit?url=${fullPath}&title=${title}`
+      href={redditShareUrl}
     >
       <FaReddit 
         size={iconSize} 
@@ -60,7 +97,7 @@ const iconSize: number = 25;
       rel="noopener noreferrer"
       title="Facebook"
       aria-label="Share this article on Facebook – opens in a new tab"
-      href=`https://www.facebook.com/sharer.php?u=${fullPath}&t=${title}`
+      href={facebookShareUrl}
     >
       <FaFacebook 
         size={iconSize} 
@@ -73,7 +110,7 @@ const iconSize: number = 25;
       rel="noopener noreferrer"
       title="WhatsApp"
       aria-label="Share this article on WhatsApp – opens in a new tab"
-      href=`https://api.whatsapp.com/send?text=${fullPath}`
+      href={whatsappShareUrl}
     >
       <FaWhatsapp size={iconSize} />
     </a>
@@ -84,17 +121,16 @@ const iconSize: number = 25;
       rel="noopener noreferrer"
       title="Telegram"
       aria-label="Share this article on Telegram – opens in a new tab"
-      href=`https://t.me/share/url?${fullPath}&text=${title}: ${summary}`
+      href={telegramShareUrl}
     >
       <FaTelegram size={iconSize} />
     </a>
 
     <a 
-      target="_blank" 
-      rel="noopener noreferrer"
       title="Email"
       aria-label="Share this article by email – opens your default email application"
-      href=`mailto:?subject=${title}&body=${fullPath}` rel="nofollow"
+      href={emailShareUrl}
+      rel="nofollow"
     >
       <FaEnvelope 
         size={iconSize} 

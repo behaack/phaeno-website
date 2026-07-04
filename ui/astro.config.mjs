@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import { fileURLToPath } from 'url';
 import tailwind from '@tailwindcss/vite';
+import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import rehypePhaenoHeadingSearch from './src/lib/rehypePhaenoHeadingSearch.js';
@@ -29,6 +30,7 @@ export default defineConfig({
   },
 
   integrations: [
+    mdx(),
     react(),
     sitemap(),
     (await import('astro-compress')).default(),

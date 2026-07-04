@@ -3,14 +3,60 @@ import Layout from '@/layouts/Layout.astro';
 import Tagline from '@/components/home-page-sections/Tagline.astro';
 import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
 import PerformanceMetrics from '@/components/PerformanceMetrics.astro';
+
+const homeTitle = 'Phaeno | Full-Length RNA Sequencing with Short-Read NGS';
+const homeDescription = 'Phaeno delivers full-length, isoform-resolved RNA sequencing with short-read NGS instruments for molecule-level transcriptomics and ML-ready biology.';
+const siteUrl = new URL('/', Astro.site).href;
+const organizationStructuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}#organization`,
+      name: 'Phaeno',
+      legalName: 'Phaeno Inc.',
+      url: siteUrl,
+      logo: new URL('/images/phaeno-socialmedia-splash.webp', Astro.site).href,
+      image: new URL('/images/phaeno-socialmedia-splash.webp', Astro.site).href,
+      description: homeDescription,
+      email: 'info@phaenobiotech.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '5270 California Avenue, Suite 300',
+        addressLocality: 'Irvine',
+        addressRegion: 'CA',
+        postalCode: '92617',
+        addressCountry: 'US',
+      },
+      sameAs: [
+        'https://www.linkedin.com/company/phaeno-biotech/',
+        'https://www.youtube.com/@phaenobiotech',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}#website`,
+      name: 'Phaeno',
+      url: siteUrl,
+      publisher: {
+        '@id': `${siteUrl}#organization`,
+      },
+    },
+  ],
+};
 ---
 <Layout>
   <SEOMeta 
     slot="head"
-    title="Home | Phaeno"
-    description="Phaeno is revolutionizing RNA sequencing with full-length, isoform-resolved sequencing using short-read NGS instruments."
+    title={homeTitle}
+    description={homeDescription}
     documentType="Web Page"
   />  
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(organizationStructuredData)}
+  />
   <Tagline />
   <main class="main-fix" id="main" tabindex="-1">
     <section class="mb-5 mt-10">
