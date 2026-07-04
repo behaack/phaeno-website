@@ -393,7 +393,7 @@ button:focus {
   background-color: var(--botton-hover-color);
 }
 
-.grecaptcha-badge { visibility: hidden; } */
+.grecaptcha-badge { visibility: hidden; }
 
 @media (max-width: 80rem) {
 	section {

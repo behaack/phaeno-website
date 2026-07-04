@@ -36,7 +36,9 @@ export default defineConfig({
     mdx(),
     react(),
     sitemap(),
-    (await import('astro-compress')).default(),
+    (await import('astro-compress')).default({
+      CSS: false,
+    }),
   ],
 
   vite: {
