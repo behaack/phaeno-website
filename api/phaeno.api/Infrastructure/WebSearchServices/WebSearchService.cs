@@ -104,10 +104,13 @@ public class WebSearchService : IWebSearchService
         {
             var doc = searcher.Doc(hit.Doc);
             string fullText = doc.Get("text") ?? "";
+            string pageTitle = doc.Get("pageTitle") ?? "";
+            string pageDisplayTitle = doc.Get("pageDisplayTitle") ?? pageTitle;
             string description = doc.Get("description") ?? "";
             string metadataText = string.Join(" ", new[]
             {
-                doc.Get("pageTitle"),
+                pageTitle,
+                pageDisplayTitle,
                 doc.Get("anchorTitle"),
                 description,
                 doc.Get("searchKeywords")
@@ -124,7 +127,8 @@ public class WebSearchService : IWebSearchService
             {
                 Id = doc.Get("id"),
                 Url = doc.Get("url"),
-                PageTitle = doc.Get("pageTitle"),
+                PageTitle = pageTitle,
+                PageDisplayTitle = pageDisplayTitle,
                 Anchor = doc.Get("anchor"),
                 AnchorTitle = doc.Get("anchorTitle"),
                 Text = fullText,
@@ -139,7 +143,7 @@ public class WebSearchService : IWebSearchService
 
         results = results
             .Where(w => w.Count > 0)
-            .GroupBy(r => r.PageTitle)
+            .GroupBy(r => string.IsNullOrWhiteSpace(r.PageDisplayTitle) ? r.PageTitle : r.PageDisplayTitle)
             .OrderByDescending(g => g.Sum(r => r.Count ?? 0))
             .ThenByDescending(g => g.Max(r => r.Score ?? 0))
             .ThenBy(g => g.Key)
@@ -159,6 +163,7 @@ public class WebSearchService : IWebSearchService
         var searchableText = string.Join(" ", new[]
         {
             page.PageTitle,
+            page.PageDisplayTitle,
             page.AnchorTitle,
             page.Description,
             page.SearchKeywords,
@@ -176,6 +181,7 @@ public class WebSearchService : IWebSearchService
         doc.Add(new StringField("id", page.Id ?? "", Field.Store.YES));
         doc.Add(new StringField("url", page.Url ?? "", Field.Store.YES));
         doc.Add(new TextField("pageTitle", page.PageTitle ?? "", Field.Store.YES));
+        doc.Add(new TextField("pageDisplayTitle", page.PageDisplayTitle ?? page.PageTitle ?? "", Field.Store.YES));
         doc.Add(new TextField("text", page.Text ?? "", Field.Store.YES));
         doc.Add(new TextField("anchor", page.Anchor ?? "", Field.Store.YES));
         doc.Add(new TextField("anchorTitle", page.AnchorTitle ?? "", Field.Store.YES));

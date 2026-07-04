@@ -149,6 +149,7 @@ public sealed class WebcrawlerService : IWebcrawlerService
         var doc = await browsingContext.OpenAsync(req => req.Content(html), ct);
 
         var title = doc.QuerySelector("title")?.TextContent?.Trim() ?? "(No Page Title)";
+        var pageDisplayTitle = doc.QuerySelector("meta[name='phaeno:search-title']")?.GetAttribute("content")?.Trim() ?? title;
         var description = doc.QuerySelector("meta[name='description']")?.GetAttribute("content")?.Trim() ?? "";
         var documentType = doc.QuerySelector("meta[name='phaeno:document-type']")?.GetAttribute("content")?.Trim() ?? "page";
         var pageKeywords = doc.QuerySelector("meta[name='phaeno:search-keywords']")?.GetAttribute("content")?.Trim() ?? "";
@@ -188,6 +189,7 @@ public sealed class WebcrawlerService : IWebcrawlerService
                 {
                     Url = normalizedUrl + "#" + id,
                     PageTitle = title,
+                    PageDisplayTitle = pageDisplayTitle,
                     Anchor = id,
                     AnchorTitle = anchorTitle,
                     Description = string.IsNullOrWhiteSpace(sectionSummary) ? description : sectionSummary,
@@ -204,6 +206,7 @@ public sealed class WebcrawlerService : IWebcrawlerService
             {
                 Url = normalizedUrl,
                 PageTitle = title,
+                PageDisplayTitle = pageDisplayTitle,
                 Description = description,
                 DocumentType = documentType,
                 SearchKeywords = pageKeywords,

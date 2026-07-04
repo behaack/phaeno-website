@@ -24,6 +24,8 @@ interface Props {
   twitterCard?: 'summary_large_image' | 'summary';
   /** Internal site-search terms, not external SEO keywords */
   searchKeywords?: string;
+  /** Internal site-search page label, separate from the SEO title */
+  searchTitle?: string;
 }
 
 const {
@@ -35,6 +37,7 @@ const {
   schema,
   twitterCard = 'summary_large_image',
   searchKeywords = '',
+  searchTitle = '',
 } = Astro.props as Props;
 
 const isoDate = typeof datePosted === 'string' ? datePosted : datePosted.toISOString();
@@ -43,6 +46,7 @@ const isoDate = typeof datePosted === 'string' ? datePosted : datePosted.toISOSt
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="phaeno:document-type" content="job" />
+{searchTitle ? <meta name="phaeno:search-title" content={searchTitle} /> : null}
 {searchKeywords ? <meta name="phaeno:search-keywords" content={searchKeywords} /> : null}
 <link rel="canonical" href={url} />
 <meta name="author" content="Phaeno Inc.">
