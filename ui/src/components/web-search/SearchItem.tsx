@@ -54,6 +54,44 @@ function getPageDisplayTitle(item: Pick<ISearchItem, 'pageTitle' | 'pageDisplayT
   return item.pageDisplayTitle?.trim() || item.pageTitle;
 }
 
+function getSamePageHashTarget(url: string) {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    const parsed = new URL(url, window.location.href);
+    const current = new URL(window.location.href);
+    if (
+      parsed.origin !== current.origin ||
+      parsed.pathname !== current.pathname ||
+      parsed.search !== current.search ||
+      !parsed.hash
+    ) {
+      return null;
+    }
+
+    return parsed.hash;
+  } catch {
+    return null;
+  }
+}
+
+function scrollToHashTarget(hash: string) {
+  const target = document.getElementById(decodeURIComponent(hash.slice(1)));
+  if (!target) {
+    window.location.hash = hash;
+    return;
+  }
+
+  const header = document.getElementById('site-header') as HTMLElement | null;
+  const offset = header?.offsetHeight ?? 80;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+  history.pushState(null, '', hash);
+  header?.classList.remove('hidden');
+  header?.classList.add('visible');
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
 export default function SearchItem({ 
   list, 
   index, 
@@ -111,8 +149,16 @@ export default function SearchItem({
         onFocus={() => onFocusOption(index)}
         onClick={(e) => { 
           e.preventDefault();
+          const samePageHash = getSamePageHashTarget(targetUrl);
           onSelect();
-          window.location.href = targetUrl;
+          if (!samePageHash) {
+            window.location.href = targetUrl;
+            return;
+          }
+
+          window.setTimeout(() => {
+            scrollToHashTarget(samePageHash);
+          }, 0);
         }}
       >
         <div className="web-search-result">
