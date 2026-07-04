@@ -41,8 +41,18 @@ const bannerUrl = '/images/home-page-banner.webp'
   </div>
   
   <div class="tag-holder">
-    <h1>Turning RNA into full-length, isoform-resolved insight—at scale</h1>
-    <h2>Phaeno produces fully quantitative, ML-ready outputs from short-read sequencing</h2>
+    <h1
+      id="home-hero"
+      data-phaeno-search="Full-length isoform-resolved RNA insight at scale"
+      data-phaeno-search-summary="Phaeno turns RNA into full-length, isoform-resolved insight for molecule-level transcriptomics and machine learning workflows."
+      data-phaeno-search-keywords="Phaeno PSeq full-length RNA sequencing isoform-resolved transcriptomics ML-ready RNA insight"
+    >Turning RNA into full-length, isoform-resolved insight—at scale</h1>
+    <h2
+      id="home-output"
+      data-phaeno-search="Quantitative ML-ready RNA outputs from short-read sequencing"
+      data-phaeno-search-summary="Phaeno produces fully quantitative, machine-learning-ready RNA outputs from short-read sequencing instruments."
+      data-phaeno-search-keywords="short-read sequencing quantitative RNA ML-ready outputs PSeq"
+    >Phaeno produces fully quantitative, ML-ready outputs from short-read sequencing</h2>
   </div>
 </div>
 
@@ -61,7 +71,7 @@ const bannerUrl = '/images/home-page-banner.webp'
   overflow: hidden;
   margin-top: 14px;
   width: 100%;
-  height: calc(100vh - 14px);
+  height: clamp(34rem, 82vh, 46rem);
   color: #fff;
   display: flex;
   align-items: center;
@@ -144,8 +154,10 @@ h2 {
 @media (max-width: 850px) { h1 { font-size: 2.75rem;} h2 { font-size: 1.8rem; } }
 @media (max-width: 750px) { h1 { font-size: 2.5rem; }  h2 { font-size: 1.7rem; } }
 @media (max-width: 600px) { h1 { font-size: 2.1rem; }  h2 { font-size: 1.3rem; } }
+@media (max-width: 725px) { .image-div { height: clamp(30rem, 76vh, 38rem); } }
 @media screen and (max-height: 500px) { 
   .tag-holder { padding-top: 1.5rem; } 
+  .image-div { height: 28rem; }
   h1 { font-size: 2rem; }  
   h2 { font-size: 1.7rem; }
 }

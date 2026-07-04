@@ -17,40 +17,40 @@
   --heading-height: 5.1rem;
   --section-padding-y: 1rem;
   --section-padding-x: 0.5rem;
-  --p-padding-y: 10px;
+  --p-padding-y: 0.35rem;
   --h-font-weight: 500;
-  --h-letter-spacing: -0.01em;
+  --h-letter-spacing: 0;
   --h-line-height: 1.15;
   --h-font-color: var(--primary-text-color);
 
   --h1-font-size-desktop: 3rem;
   --h1-font-size-mobile: 2.25rem;
-  --h1-padding-desktop: .5rem 0 1.5rem 0;
+  --h1-padding-desktop: .5rem 0 1rem 0;
   --h1-padding-mobile: .5rem 0 .75rem 0;
   
   --h2-font-size-desktop: 1.875rem;
   --h2-font-size-mobile: 1.65rem;
-  --h2-padding-desktop: 1.5rem 0 1.5rem 0;
+  --h2-padding-desktop: 1rem 0 .75rem 0;
   --h2-padding-mobile: .5rem 0 .75rem 0;  
   
   --h3-font-size-desktop: 1.5rem;
   --h3-font-size-mobile: 1.25rem;
-  --h3-padding-desktop: 1.5rem 0 1.5rem 0;
+  --h3-padding-desktop: .75rem 0 .5rem 0;
   --h3-padding-mobile: .5rem 0 .75rem 0;    
 
   --h4-font-size-desktop: 1.25rem;
   --h4-font-size-mobile: 1.2rem;
-  --h4-padding-desktop: 1.5rem 0 1.5rem 0;
+  --h4-padding-desktop: .75rem 0 .5rem 0;
   --h4-padding-mobile: .5rem 0 .75rem 0;     
 
   --h5-font-size-desktop: 1.15rem;
   --h5-font-size-mobile: 1.1rem;
-  --h5-padding-desktop: 1.5rem 0 1.5rem 0;
+  --h5-padding-desktop: .75rem 0 .5rem 0;
   --h5-padding-mobile: .5rem 0 .75rem 0;   
   
   --h6-font-size-desktop: 1.05rem;
   --h6-font-size-mobile: 1.05rem;
-  --h6-padding-desktop: 1.5rem 0 1.5rem 0;
+  --h6-padding-desktop: .75rem 0 .5rem 0;
   --h6-padding-mobile: .5rem 0 .75rem 0;     
 
   /* --------------------- */
@@ -178,7 +178,7 @@ h6 {
 
 p {
   font-size: var(--font-size);
-  line-height: var(--line-hright);
+  line-height: var(--line-height);
   padding: var(--p-padding-y) 0;
 	color: var(--primary-text-color);
 }

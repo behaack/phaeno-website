@@ -12,8 +12,8 @@ import type {
 const PHANEO_ORG: Organization = {
   '@type': 'Organization',
   name: 'Phaeno',
-  url: 'https://www.phenobiotech.com',
-  sameAs: 'https://www.phenobiotech.com',
+  url: 'https://www.phaenobiotech.com',
+  sameAs: 'https://www.phaenobiotech.com',
   logo: 'https://7579-52288.el-alt.com/public/phaeno180x58.png',
 };
 

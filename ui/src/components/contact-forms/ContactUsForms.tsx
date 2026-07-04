@@ -12,12 +12,24 @@ export default function ContactUsForms() {
       reCaptchaKey={CAPTCHA_SITE_KEY}
       scriptProps={{ async: true, defer: true }}
     >
-      <h2 id="sign-up" className="mt-4 pb-2">Stay Updated on Phaeno</h2>
-      <p>Product releases, validation updates, and technical insights. No spam.</p>
-      <ContactForm />
-      <h2 id="request-demo" className="mt-4 pb-2">See PSeq in Action</h2>
+      <h2
+        id="request-demo"
+        className="mt-4 pb-2"
+        data-phaeno-search="Request a PSeq demo"
+        data-phaeno-search-summary="Request a PSeq demo to walk through isoform-resolved RNA data with the Phaeno team."
+        data-phaeno-search-keywords="PSeq demo request isoform-resolved RNA data sample project"
+      >See PSeq in Action</h2>
       <p>Walk through isoform-resolved RNA data with our team using your sample.</p>
       <OrderForm />
+      <h2
+        id="sign-up"
+        className="mt-4 pb-2"
+        data-phaeno-search="Get Phaeno updates and the PSeq technical brief"
+        data-phaeno-search-summary="Sign up for Phaeno product releases, validation updates, technical insights, and the PSeq technical brief."
+        data-phaeno-search-keywords="Phaeno updates PSeq technical brief validation updates product releases"
+      >Stay Updated on Phaeno</h2>
+      <p>Product releases, validation updates, and technical insights. No spam.</p>
+      <ContactForm />
     </GoogleReCaptchaProvider>
   );
 }

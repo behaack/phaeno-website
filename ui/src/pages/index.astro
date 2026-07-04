@@ -59,10 +59,15 @@ const organizationStructuredData = {
     type="application/ld+json"
     set:html={JSON.stringify(organizationStructuredData)}
   />
-  <Tagline />
-  <main class="main-fix" id="main" tabindex="-1">
-    <section class="mb-5 mt-10">
-      <h2 id="pseq-intro">Phaeno's PSeq™ — The Phased Sequencing Platform</h2>
+  <main class="home-main" id="main" tabindex="-1">
+    <Tagline />
+    <section class="home-content mb-5">
+      <h2
+        id="pseq-intro"
+        data-phaeno-search="PSeq phased sequencing platform overview"
+        data-phaeno-search-summary="PSeq exposes molecular phenotype by resolving isoforms and transcript-specific regulation that gene-level summaries miss."
+        data-phaeno-search-keywords="PSeq phased sequencing platform isoform regulation molecular phenotype gene counts"
+      >Phaeno's PSeq™ — The Phased Sequencing Platform</h2>
       <div class="rounded-3xl border border-slate-200 bg-white/60 p-3 pt-4 shadow-sm sm:p-6">
         <p class="mt-2 text-md text-slate-600">
           Gene-level counts compress biology. Isoforms capture splicing, promoter usage, UTR variation, and
@@ -101,24 +106,28 @@ const organizationStructuredData = {
         {[
           {
             id: "clear-signal-architecture",
+            search: "PSeq Clear-Signal Architecture signal-first RNA data",
             k: "High-quality output",
             v: "PSeq Clear-Signal Architecture™ — signal-first RNA data",
             sub: "Full-length 5′–3′ RNA sequencing, including UTRs, without dependence on prior annotations. Uncompressed measurement of what is present, not what is expected.",
           },
           {
             id: "individual-molecules",
+            search: "Individual RNA molecules directly measured by PSeq",
             k: "Individual molecules",
             v: "Individual molecules, directly measured",
             sub: "True molecule-level counting of every RNA, including rare and low-frequency isoforms. No inferred abundance. No statistical reconstruction.",
           },
           {
             id: "automated-pipeline",
+            search: "Automated annotation-independent PSeq pipeline",
             k: "Automated pipeline",
             v: "Fully automated, annotation-independent pipeline",
             sub: "End-to-end isoform assembly from raw reads with no manual intervention and no reference bias.",
           },
           {
             id: "ai-ready-data",
+            search: "AI-ready molecule-level RNA data",
             k: "AI-ready data",
             v: "Built for machine learning from first principles",
             sub: "Structured, molecule-level features derived from real measurements—not averaged signals or approximations.",
@@ -132,6 +141,8 @@ const organizationStructuredData = {
             <h3
               id={s.id}
               class="feature-card__title text-base font-semibold text-slate-800"
+              data-phaeno-search={s.search}
+              data-phaeno-search-summary={s.sub}
             >
               {s.v}
             </h3>
@@ -169,8 +180,12 @@ const organizationStructuredData = {
 </Layout> 
 
 <style>
-  .main-fix {
-    margin-top: -6.5rem;
+  .home-main {
+    padding-top: 0;
+  }
+
+  .home-content {
+    margin-top: 2rem;
   }
 
   ul {
@@ -203,8 +218,8 @@ const organizationStructuredData = {
   }
 
   @media (max-width:  725px) {
-    .main-fix {
-      margin-top: -3.5rem;
+    .home-content {
+      margin-top: 1.5rem;
     }    
   }  
 </style>
