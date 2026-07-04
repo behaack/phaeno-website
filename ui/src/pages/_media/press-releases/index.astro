@@ -40,7 +40,7 @@ const press = await getCollection('press')
             <div class="flex items-center gap-4 -ml-4">
               <div style="color: #7F943A;"><FaCaretRight size={50}/></div>
               <div>
-                <a href={`/media/press-releases/${item.slug}`}><h2 class="text-xl m-0 p-0">{item.data.title}</h2></a>
+                <a href={`/media/press-releases/${item.id}`}><h2 class="text-xl m-0 p-0">{item.data.title}</h2></a>
                 <div>{new Date(item.data.date).toLocaleDateString('en-US')}</div>
               </div>
             </div>       

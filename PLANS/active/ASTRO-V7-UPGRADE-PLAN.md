@@ -1,8 +1,9 @@
 # Astro v7 Upgrade Plan
 
-Status: Draft, planning only
+Status: Implemented locally; browser click-smoke blocked by unavailable browser backend
 Owner: UI
 Created: 2026-07-04
+Updated: 2026-07-04
 
 ## Goal
 
@@ -57,105 +58,114 @@ Out of scope:
 
 ## Slice 0: Baseline
 
-- [ ] Confirm current branch intentionally includes the MDX experiment and route movement from `_blog` to `blog`.
-- [ ] Run `pnpm build` from `ui/` and record the current warnings.
+- [x] Confirm current branch intentionally includes the MDX experiment and route movement from `_blog` to `blog`.
+- [x] Run `pnpm build` from `ui/` and record the current warnings.
 - [ ] Smoke the MDX article locally:
-  - [ ] `/blog`
-  - [ ] `/blog/an-introduction-to-phased-sequencing-part-1`
-  - [ ] `/blog.xml`
-  - [ ] `/sitemap-index.xml`
-- [ ] Note any pre-existing warnings that should not block the Astro upgrade.
+  - [x] `/blog`
+  - [x] `/blog/an-introduction-to-phased-sequencing-part-1`
+  - [x] `/blog.xml`
+  - [x] `/sitemap-index.xml` in built output
+- [x] Note any pre-existing warnings that should not block the Astro upgrade.
+
+Notes:
+
+- Baseline Astro v5 build passed before upgrade.
+- Pre-existing warnings: empty/missing `jobs` collection and global CSS optimizer warning around `@media`.
 
 ## Slice 1: Dependency Upgrade
 
-- [ ] Upgrade Astro and official Astro integrations together.
-- [ ] Target current v7-compatible package lines:
-  - [ ] `astro`
-  - [ ] `@astrojs/mdx`
-  - [ ] `@astrojs/react`
-  - [ ] `@astrojs/sitemap`
-- [ ] Add `@astrojs/markdown-remark` as a direct dependency if needed to preserve the unified markdown pipeline.
-- [ ] Review whether these packages are obsolete or incompatible after the upgrade:
-  - [ ] `@astrojs/image`
-  - [ ] `@astrojs/tailwind`
-  - [ ] `astro-robots-txt`
-  - [ ] `astro-compress`
-- [ ] Keep `@tailwindcss/vite` unless the upgraded build indicates a better Astro-native path.
+- [x] Upgrade Astro and official Astro integrations together.
+- [x] Target current v7-compatible package lines:
+  - [x] `astro`
+  - [x] `@astrojs/mdx`
+  - [x] `@astrojs/react`
+  - [x] `@astrojs/rss`
+  - [x] `@astrojs/sitemap`
+- [x] Add `@astrojs/markdown-remark` as a direct dependency if needed to preserve the unified markdown pipeline.
+- [x] Review whether these packages are obsolete or incompatible after the upgrade:
+  - [x] `@astrojs/image`
+  - [x] `@astrojs/tailwind`
+  - [x] `astro-robots-txt`
+  - [x] `astro-compress`
+- [x] Keep `@tailwindcss/vite` unless the upgraded build indicates a better Astro-native path.
 
 ## Slice 2: Content Layer Migration
 
-- [ ] Move collection configuration from `ui/src/content/config.ts` to the current `ui/src/content.config.ts` shape.
-- [ ] Use `z` from `astro/zod`.
-- [ ] Define explicit loaders with `glob()` or `file()` from `astro/loaders`.
-- [ ] Ensure Markdown and MDX blog entries are included with a pattern such as `**/[^_]*.{md,mdx}`.
-- [ ] Preserve all existing collections:
-  - [ ] `blog`
-  - [ ] `events`
-  - [ ] `jobs`
-  - [ ] `news`
-  - [ ] `press`
-  - [ ] `scientific_papers`
-  - [ ] `white_papers`
-- [ ] Decide how to handle empty `jobs` content without producing noisy build warnings.
+- [x] Move collection configuration from `ui/src/content/config.ts` to the current `ui/src/content.config.ts` shape.
+- [x] Use `z` from `astro/zod`.
+- [x] Define explicit loaders with `glob()` or `file()` from `astro/loaders`.
+- [x] Ensure Markdown and MDX blog entries are included with a pattern such as `**/[^_]*.{md,mdx}`.
+- [x] Preserve all existing collections:
+  - [x] `blog`
+  - [x] `events`
+  - [x] `jobs`
+  - [x] `news`
+  - [x] `press`
+  - [x] `scientific_papers`
+  - [x] `white_papers`
+- [x] Decide how to handle empty `jobs` content during the upgrade.
+
+Note: `ui/src/content/jobs/.gitkeep` preserves the expected folder, but Astro still warns when no matching job entries exist. This warning is non-blocking and matches the current empty jobs state.
 
 ## Slice 3: Route API Migration
 
-- [ ] Replace legacy `entry.slug` usage with the current collection entry id behavior.
-- [ ] Replace `entry.render()` with `render(entry)` from `astro:content`.
-- [ ] Update dynamic routes that read collections:
-  - [ ] `ui/src/pages/blog/[slug].astro`
-  - [ ] `ui/src/pages/blog/index.astro`
-  - [ ] `ui/src/pages/blog.xml.ts`
-  - [ ] `ui/src/pages/press.xml.ts`
-  - [ ] `ui/src/pages/about/job-openings/[slug].astro`
-  - [ ] `ui/src/pages/about/job-openings/index.astro`
-  - [ ] `ui/src/pages/_media/**`
-- [ ] Confirm helper functions such as `getBlogPostPath()` still produce the same public URLs.
+- [x] Replace legacy `entry.slug` usage with the current collection entry id behavior.
+- [x] Replace `entry.render()` with `render(entry)` from `astro:content`.
+- [x] Update dynamic routes that read collections:
+  - [x] `ui/src/pages/blog/[slug].astro`
+  - [x] `ui/src/pages/blog/index.astro`
+  - [x] `ui/src/pages/blog.xml.ts`
+  - [x] `ui/src/pages/press.xml.ts`
+  - [x] `ui/src/pages/about/job-openings/[slug].astro`
+  - [x] `ui/src/pages/about/job-openings/index.astro`
+  - [x] `ui/src/pages/_media/**`
+- [x] Confirm helper functions such as `getBlogPostPath()` still produce the same public URLs.
 
 ## Slice 4: Markdown and MDX Behavior
 
-- [ ] Preserve `rehypePhaenoHeadingSearch`.
-- [ ] Configure the Markdown processor to keep unified/remark/rehype support if the v7 default processor does not run the existing plugin.
-- [ ] Confirm `.md` and `.mdx` content both render.
-- [ ] Confirm MDX can import local Astro components.
-- [ ] Confirm generated heading ids and `data-phaeno-search` attributes remain present in rendered HTML.
-- [ ] Consider setting `compressHTML: true` during migration if inline spacing changes are found.
+- [x] Preserve `rehypePhaenoHeadingSearch`.
+- [x] Configure the Markdown processor to keep unified/remark/rehype support if the v7 default processor does not run the existing plugin.
+- [x] Confirm `.md` and `.mdx` content both render.
+- [x] Confirm MDX can import local Astro components.
+- [x] Confirm generated heading ids and `data-phaeno-search` attributes remain present in rendered HTML.
+- [x] Consider setting `compressHTML: true` during migration if inline spacing changes are found.
 
 ## Slice 5: Deprecated Package Cleanup
 
-- [ ] Remove `@astrojs/image` if all current image usage is through `astro:assets` and the package is not needed.
-- [ ] Remove `@astrojs/tailwind` if Tailwind is fully handled by `@tailwindcss/vite`.
-- [ ] Remove `@types/react-icons` if it remains unnecessary because `react-icons` ships its own types.
-- [ ] Keep cleanup scoped to packages directly affected by the Astro upgrade.
+- [x] Remove `@astrojs/image` if all current image usage is through `astro:assets` and the package is not needed.
+- [x] Remove `@astrojs/tailwind` if Tailwind is fully handled by `@tailwindcss/vite`.
+- [x] Remove `@types/react-icons` if it remains unnecessary because `react-icons` ships its own types.
+- [x] Keep cleanup scoped to packages directly affected by the Astro upgrade.
 
 ## Slice 6: Verification
 
-- [ ] Run `pnpm build` from `ui/`.
-- [ ] Confirm static routes are generated for:
-  - [ ] `/`
-  - [ ] `/blog`
-  - [ ] `/blog/an-introduction-to-phased-sequencing-part-1`
-  - [ ] `/privacy`
-  - [ ] `/data-policies`
-  - [ ] `/technology`
-  - [ ] `/about/about-us`
-  - [ ] `/contact`
-- [ ] Confirm generated feeds:
-  - [ ] `/blog.xml`
-  - [ ] `/press.xml`
-  - [ ] `/sitemap-index.xml`
+- [x] Run `pnpm build` from `ui/`.
+- [x] Confirm static routes are generated for:
+  - [x] `/`
+  - [x] `/blog`
+  - [x] `/blog/an-introduction-to-phased-sequencing-part-1`
+  - [x] `/privacy`
+  - [x] `/data-policies`
+  - [x] `/technology`
+  - [x] `/about/about-us`
+  - [x] `/contact`
+- [x] Confirm generated feeds:
+  - [x] `/blog.xml`
+  - [x] `/press.xml`
+  - [x] `/sitemap-index.xml`
 - [ ] Start the local dev server and browser-smoke:
-  - [ ] home page
-  - [ ] blog index
-  - [ ] MDX article
-  - [ ] search modal
-  - [ ] contact forms render
-  - [ ] mobile menu
-- [ ] Inspect the generated MDX article HTML for:
-  - [ ] imported component markup
-  - [ ] heading ids
-  - [ ] `data-phaeno-search`
-  - [ ] no broken image paths
+  - [x] home page HTTP smoke
+  - [x] blog index HTTP smoke
+  - [x] MDX article HTTP smoke
+  - [x] search modal SSR trigger markup
+  - [x] contact forms render
+  - [x] mobile menu SSR trigger markup
+  - [ ] click/tap browser smoke blocked because no in-app browser backend was available in this Codex session
+- [x] Inspect the generated MDX article HTML for:
+  - [x] imported component markup
+  - [x] heading ids
+  - [x] `data-phaeno-search`
+  - [x] no broken image paths
 
 ## Rollback Plan
 
@@ -165,10 +175,10 @@ Out of scope:
 
 ## Completion Criteria
 
-- [ ] Astro v7 build passes locally.
-- [ ] MDX article renders through the public blog route.
-- [ ] Existing public route shape is preserved.
-- [ ] RSS and sitemap outputs are present.
-- [ ] Custom heading search metadata remains present.
-- [ ] No new unrelated dependencies or architecture changes were introduced.
+- [x] Astro v7 build passes locally.
+- [x] MDX article renders through the public blog route.
+- [x] Existing public route shape is preserved.
+- [x] RSS and sitemap outputs are present.
+- [x] Custom heading search metadata remains present.
+- [x] No new unrelated dependencies or architecture changes were introduced.
 - [ ] Plan is moved from `PLANS/active` to `PLANS/complete`.

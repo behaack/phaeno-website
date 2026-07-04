@@ -4,7 +4,7 @@ import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro';
 import Layout from '@/layouts/Layout.astro';
 import TopPageBanner from '@/components/TopPageBanner.astro';
 import { getJobPostingSchema } from '@/lib/getJobPostSchema';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 
 const path  = decodeURIComponent(Astro.url.pathname).toLowerCase();
 const host  = Astro.site?.href;
@@ -21,7 +21,7 @@ const {
   summary,
 } = job.data;
 
-const { Content } = await job.render();
+const { Content } = await render(job);
 
 const metaTitle       = `Phaeno Job Opening: ${id} – ${title}`;
 const metaDescription = `${title} | ${employmentType} · ${locationType}: ${locationDescription} – ${summary}`;
@@ -32,8 +32,8 @@ const schema = getJobPostingSchema(job);
 export async function getStaticPaths() {
   const jobs = await getCollection('jobs');
   return jobs.map((job) => ({
-    params: { slug: job.slug },
-    props:  { job },
+    params: { slug: job.id },
+    props: { job },
   }));
 }
 ---
@@ -58,7 +58,7 @@ export async function getStaticPaths() {
           title="Return to job openings list"
           aria-label="Return to job openings list"
         >Job Openings</a>
-        &nbsp;|&nbsp;{job.slug}
+        &nbsp;|&nbsp;{job.id}
       </p>
 
       <h1 id={`${job.data.id}-${job.data.title.replace(/\s+/g, '-').toLowerCase()}`} class="alternative">{id} – {title}</h1>

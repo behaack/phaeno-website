@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro';
 import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro';
@@ -8,8 +8,8 @@ import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro'
 export async function getStaticPaths() {
   const news = await getCollection('news');
   return news.map((newsItem) => ({
-    params: { slug: newsItem.slug },   // use the built-in slug
-    props:  { newsItem }               // pass the entry
+    params: { slug: newsItem.id },
+    props: { newsItem },
   }));
 }
 
@@ -17,7 +17,7 @@ const path = decodeURIComponent(Astro.url.pathname).toLowerCase();
 const host = Astro.url.host;
 const { newsItem } = Astro.props as { newsItem: CollectionEntry<'news'> };
 const { title, date, summary, image } = newsItem.data;
-const { Content } = await newsItem.render();   // returns an Astro component
+const { Content } = await render(newsItem);
 ---
 
 <title>News & Events | Phaeno</title>
@@ -34,7 +34,7 @@ const { Content } = await newsItem.render();   // returns an Astro component
   />    
   <main id="main">
     <section>
-      <p>Media | <a href="/media/news-and-events">News & Events</a> | {newsItem.slug}</p>
+      <p>Media | <a href="/media/news-and-events">News & Events</a> | {newsItem.id}</p>
       <h1 id={`${title.replace(/\s+/g, '-').toLowerCase()}`} class="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">{title}</h1>
       <p class="text-sm text-gray-500">Posted {new Date(date).toLocaleDateString('en-US')}</p>
 

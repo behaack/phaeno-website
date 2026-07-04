@@ -55,7 +55,7 @@ const news = await getCollection('news')
             searchString={`${item.data.title}`.toLowerCase()}
             title={item.data.title} 
             image={item.data.image} 
-            link={`/media/news-and-events/${item.slug}`}
+            link={`/media/news-and-events/${item.id}`}
           >
             <div>{new Date(item.data.date).toLocaleDateString('en-US')}</div>
           </MediaCard>

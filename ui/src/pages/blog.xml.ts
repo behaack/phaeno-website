@@ -12,7 +12,7 @@ export async function GET(context: any) {
       title: post.data.title,
       description: post.data.summary,
       pubDate: post.data.date,
-      link: getBlogPostFeedPath(post.slug),
+      link: getBlogPostFeedPath(post.id),
     })),
     customData: `<language>en-us</language>`,
   });
