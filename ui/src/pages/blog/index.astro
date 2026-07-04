@@ -39,7 +39,7 @@ const blog = await getCollection('blog')
           title={paper.data.title} 
           image={paper.data.image} 
           summary={paper.data.summary}
-          link={getBlogPostPath(paper.slug)}
+          link={getBlogPostPath(paper.id)}
         >
           <div>{paper.data.authors.join(', ')}</div>
           <div>{new Date(paper.data.date).toLocaleDateString('en-US')}</div>

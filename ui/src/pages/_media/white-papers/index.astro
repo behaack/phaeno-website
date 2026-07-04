@@ -31,7 +31,7 @@ const papers = await getCollection('white_papers')
             searchString={`${paper.data.title} ${paper.data.authors.join(' ')}`.toLowerCase()}
             title={paper.data.title} 
             image={paper.data.image} 
-            link={`/media/white-papers/${paper.slug}`}
+            link={`/media/white-papers/${paper.id}`}
           >
             <div>By {paper.data.authors.join(', ')}</div>
             <div>{new Date(paper.data.date).toLocaleDateString('en-US')}</div>

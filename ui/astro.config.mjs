@@ -4,6 +4,7 @@ import tailwind from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import { unified } from '@astrojs/markdown-remark';
 import rehypePhaenoHeadingSearch from './src/lib/rehypePhaenoHeadingSearch.js';
 
 export default defineConfig({
@@ -12,7 +13,9 @@ export default defineConfig({
   output: 'static',
 
   markdown: {
-    rehypePlugins: [rehypePhaenoHeadingSearch],
+    processor: unified({
+      rehypePlugins: [rehypePhaenoHeadingSearch],
+    }),
   },
 
   redirects: {

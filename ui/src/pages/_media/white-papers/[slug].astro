@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro';
 import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro';
@@ -8,14 +8,14 @@ import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro'
 export async function getStaticPaths() {
   const papers = await getCollection('white_papers');
   return papers.map((paper) => ({
-    params: { slug: paper.slug },   // use the built-in slug
-    props:  { paper }               // pass the entry
+    params: { slug: paper.id },
+    props: { paper },
   }));
 }
 
 const { paper } = Astro.props as { paper: CollectionEntry<'white_papers'> };
 const { title, authors, date, summary, image } = paper.data;
-const { Content } = await paper.render();   // returns an Astro component
+const { Content } = await render(paper);
 ---
 
 <title>White Papers | Phaeno</title>
@@ -33,7 +33,7 @@ const { Content } = await paper.render();   // returns an Astro component
   />     
   <main id="main">
     <section>
-      <p>Media | <a href="/media/white-papers">White Papers</a> | {paper.slug}</p>
+      <p>Media | <a href="/media/white-papers">White Papers</a> | {paper.id}</p>
       <h1 id={`${title.replace(/\s+/g, '-').toLowerCase()}`} class="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">{title}</h1>
       <p class="text-sm text-gray-600">{authors.join(', ')}</p>
       <p class="text-sm text-gray-500">Published {new Date(paper.data.date).toLocaleDateString('en-US')}</p>

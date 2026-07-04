@@ -104,7 +104,7 @@ const isJobs = (jobs.length > 0)
             <div class="flex items-center gap-4 -ml-4">
               <div style="color: #7F943A;"><FaCaretRight size={50}/></div>
               <div>                
-                <a class="list-alternative" href={`/about/job-openings/${job.slug}`}>
+                <a class="list-alternative" href={`/about/job-openings/${job.id}`}>
                   <h2 id={`${job.data.id}-${job.data.title.replace(/\s+/g, '-').toLowerCase()}`}>
                     {job.data.id} - {job.data.title}
                   </h2>                

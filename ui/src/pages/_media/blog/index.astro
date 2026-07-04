@@ -37,7 +37,7 @@ const blog = await getCollection('blog')
           searchString={`${paper.data.title} ${paper.data.authors.join(' ')}`.toLowerCase()}        
           title={paper.data.title} 
           image={paper.data.image} 
-          link={`/media/blog/${paper.slug}`}
+          link={`/media/blog/${paper.id}`}
         >
           <div>{paper.data.authors.join(', ')}</div>
           <div>{new Date(paper.data.date).toLocaleDateString('en-US')}</div>

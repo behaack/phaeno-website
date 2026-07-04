@@ -31,7 +31,7 @@ const papers = await getCollection('scientific_papers')
             searchString={`${paper.data.title} ${paper.data.journal} ${paper.data.authors.join(' ')}`.toLowerCase()}
             title={paper.data.title} 
             image={paper.data.image} 
-            link={`/media/scientific-publications/${paper.slug}`}
+            link={`/media/scientific-publications/${paper.id}`}
           >
             <div>{paper.data.authors.join(', ')}</div>
             <div><i>{paper.data.journal}</i></div>

@@ -3,23 +3,23 @@ import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro'
 import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro';
 import Layout from '@/layouts/Layout.astro';
 import TopPageBanner from '@/components/TopPageBanner.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 
 
 export async function getStaticPaths() {
   const blogs = await getCollection('blog');
   return blogs.map((job) => ({
-    params: { slug: job.slug },   // use the built-in slug
-    props:  { job }               // pass the entry
+    params: { slug: job.id },
+    props: { job },
   }));
 }
 
 const path = decodeURIComponent(Astro.url.pathname).toLowerCase();
 const { job: blog } = Astro.props as { job: CollectionEntry<'blog'> };
 const { title, image, authors, date, summary } = blog.data;
-const slugLabel = blog.slug.replace(/-/g, ' ');
+const slugLabel = blog.id.replace(/-/g, ' ');
 const blogSlugLabel = slugLabel.charAt(0).toUpperCase() + slugLabel.slice(1);
-const { Content } = await blog.render();
+const { Content } = await render(blog);
 ---
 
 <Layout>
