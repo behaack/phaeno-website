@@ -5,14 +5,13 @@ interface IProps {
 }
 
 const { title, image } = Astro.props as IProps
-const id = title.toLocaleLowerCase().replace(" ", "_")
 ---
 <div class="top-banner">
   <div class=`${image} background-layer`>
     <div class=`dark-overlay ${image}-overlay`></div>
     <div class="title-holder">
       <div class="inner-title-holder" >
-        <h1 id={id} class="text-white">{ title }</h1>
+        <h1 class="text-white">{ title }</h1>
       </div>
     </div>
   </div>  
