@@ -15,6 +15,8 @@ interface Props {
   image?: string;
   /** Twitter card type */
   twitterCard?: 'summary' | 'summary_large_image';
+  /** Internal site-search terms, not external SEO keywords */
+  searchKeywords?: string;
 }
 
 const {
@@ -24,12 +26,14 @@ const {
   url = new URL(Astro.url.pathname, Astro.site).href,
   image = new URL('/images/phaeno-socialmedia-splash.webp', Astro.site).href,
   twitterCard = 'summary_large_image',
+  searchKeywords = '',
 } = Astro.props as Props;
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="phaeno:document-type" content={documentType} />
+{searchKeywords ? <meta name="phaeno:search-keywords" content={searchKeywords} /> : null}
 <link rel="canonical" href={url} />
 
 <!-- Open Graph -->

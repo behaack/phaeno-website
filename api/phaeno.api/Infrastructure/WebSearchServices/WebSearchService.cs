@@ -104,8 +104,21 @@ public class WebSearchService : IWebSearchService
         {
             var doc = searcher.Doc(hit.Doc);
             string fullText = doc.Get("text") ?? "";
-            int matchCount = CountStemmedMatches(fullText, stemmedTerms);
+            string description = doc.Get("description") ?? "";
+            string metadataText = string.Join(" ", new[]
+            {
+                doc.Get("pageTitle"),
+                doc.Get("anchorTitle"),
+                description,
+                doc.Get("searchKeywords")
+            }.Where(value => !string.IsNullOrWhiteSpace(value)));
+
+            int matchCount = CountStemmedMatches($"{fullText} {metadataText}", stemmedTerms);
             string snippet = ExtractSnippet(fullText, stemmedTerms);
+            if (string.IsNullOrWhiteSpace(snippet))
+                snippet = ExtractSnippet(description, stemmedTerms);
+            if (string.IsNullOrWhiteSpace(snippet))
+                snippet = TruncateSnippet(description, 200);
 
             return new IndexedPage
             {
@@ -115,7 +128,7 @@ public class WebSearchService : IWebSearchService
                 Anchor = doc.Get("anchor"),
                 AnchorTitle = doc.Get("anchorTitle"),
                 Text = fullText,
-                Description = doc.Get("description"),
+                Description = description,
                 DocumentType = doc.Get("documentType"),
                 Snippet = snippet,
                 Score = hit.Score,
@@ -148,6 +161,7 @@ public class WebSearchService : IWebSearchService
             page.PageTitle,
             page.AnchorTitle,
             page.Description,
+            page.SearchKeywords,
             page.Text
         }.Where(value => !string.IsNullOrWhiteSpace(value)));
 
@@ -168,6 +182,7 @@ public class WebSearchService : IWebSearchService
         doc.Add(new TextField("stemmedText", stemmedText ?? "", Field.Store.NO));
         doc.Add(new StoredField("description", page.Description ?? ""));
         doc.Add(new StoredField("documentType", page.DocumentType ?? ""));
+        doc.Add(new StoredField("searchKeywords", page.SearchKeywords ?? ""));
         doc.Add(new StoredField("indexedAt", page.IndexedAt.Ticks.ToString()));
 
         return doc;

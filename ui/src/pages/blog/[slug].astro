@@ -19,6 +19,12 @@ const { job: blog } = Astro.props as { job: CollectionEntry<'blog'> };
 const { title, image, authors, date, summary } = blog.data;
 const slugLabel = blog.id.replace(/-/g, ' ');
 const blogSlugLabel = slugLabel.charAt(0).toUpperCase() + slugLabel.slice(1);
+const articleSearchKeywords = [
+  title,
+  summary,
+  authors.join(' '),
+  'PSeq phased sequencing full-length RNA whole-molecule RNA isoform-resolved RNA transcriptomics short-read NGS RNA-Seq long-read sequencing machine learning',
+].join(' ');
 const { Content } = await render(blog);
 ---
 
@@ -31,6 +37,7 @@ const { Content } = await render(blog);
     datePosted={date}
     image={image}
     documentType="Web Page"
+    searchKeywords={articleSearchKeywords}
   />  
   <main id="main">
     <TopPageBanner title="Blog Post" image="image-2"/>
@@ -41,7 +48,12 @@ const { Content } = await render(blog);
           <span aria-hidden="true">/</span>
           <span>{blogSlugLabel}</span>
         </nav>
-        <h1 id={`${title.replace(/\s+/g, '-').toLowerCase()}`}>{title}</h1>
+        <h1
+          id={`${title.replace(/\s+/g, '-').toLowerCase()}`}
+          data-phaeno-search={title}
+          data-phaeno-search-summary={summary}
+          data-phaeno-search-keywords={articleSearchKeywords}
+        >{title}</h1>
         <div>{summary}</div>
         <div class="blog-post-meta">
           <span>{authors.join(', ')}</span>

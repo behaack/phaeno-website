@@ -151,6 +151,7 @@ public sealed class WebcrawlerService : IWebcrawlerService
         var title = doc.QuerySelector("title")?.TextContent?.Trim() ?? "(No Page Title)";
         var description = doc.QuerySelector("meta[name='description']")?.GetAttribute("content")?.Trim() ?? "";
         var documentType = doc.QuerySelector("meta[name='phaeno:document-type']")?.GetAttribute("content")?.Trim() ?? "page";
+        var pageKeywords = doc.QuerySelector("meta[name='phaeno:search-keywords']")?.GetAttribute("content")?.Trim() ?? "";
 
         var main = doc.QuerySelector("main") ?? doc.Body;
         if (main is null)
@@ -176,6 +177,11 @@ public sealed class WebcrawlerService : IWebcrawlerService
                     heading.GetAttribute("data-phaeno-search")?.Trim()
                     ?? headingText;
 
+                var sectionSummary = heading.GetAttribute("data-phaeno-search-summary")?.Trim();
+                var sectionKeywords = MergeKeywords(
+                    pageKeywords,
+                    heading.GetAttribute("data-phaeno-search-keywords")?.Trim());
+
                 var sectionText = HtmlTextExtractor.ExtractSectionText(heading, anchorTitle);
 
                 results.Add(new IndexedPage
@@ -184,8 +190,9 @@ public sealed class WebcrawlerService : IWebcrawlerService
                     PageTitle = title,
                     Anchor = id,
                     AnchorTitle = anchorTitle,
-                    Description = description,
+                    Description = string.IsNullOrWhiteSpace(sectionSummary) ? description : sectionSummary,
                     DocumentType = "section",
+                    SearchKeywords = sectionKeywords,
                     Text = sectionText,
                     IndexedAt = DateTime.UtcNow
                 });
@@ -199,6 +206,7 @@ public sealed class WebcrawlerService : IWebcrawlerService
                 PageTitle = title,
                 Description = description,
                 DocumentType = documentType,
+                SearchKeywords = pageKeywords,
                 Text = bodyText,
                 IndexedAt = DateTime.UtcNow
             });
@@ -214,4 +222,13 @@ public sealed class WebcrawlerService : IWebcrawlerService
 
     private static string NormalizeAbsoluteUrlNoQueryNoFragment(string url)
         => NormalizeAbsoluteUrlNoQueryNoFragment(new Uri(url));
+
+    private static string MergeKeywords(params string?[] keywordGroups)
+    {
+        return string.Join(
+            " ",
+            keywordGroups
+                .Where(group => !string.IsNullOrWhiteSpace(group))
+                .Select(group => group!.Trim()));
+    }
 }

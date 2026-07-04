@@ -11,6 +11,8 @@ namespace phaeno.api.Infrastructure.WebSearchServices.SupportingFiles
         public string AnchorTitle { get; set; } = "";
         public string Description { get; set; } = "";
         public string DocumentType { get; set; } = "";
+        [JsonIgnore]
+        public string SearchKeywords { get; set; } = "";
         public string? Snippet { get; set; } = "";
         public float? Score { get; set; }
         public int? Count { get; set; }
