@@ -179,9 +179,7 @@ public sealed class WebcrawlerService : IWebcrawlerService
                     ?? headingText;
 
                 var sectionSummary = heading.GetAttribute("data-phaeno-search-summary")?.Trim();
-                var sectionKeywords = MergeKeywords(
-                    pageKeywords,
-                    heading.GetAttribute("data-phaeno-search-keywords")?.Trim());
+                var sectionKeywords = heading.GetAttribute("data-phaeno-search-keywords")?.Trim() ?? "";
 
                 var sectionText = HtmlTextExtractor.ExtractSectionText(heading, anchorTitle);
 
@@ -192,7 +190,7 @@ public sealed class WebcrawlerService : IWebcrawlerService
                     PageDisplayTitle = pageDisplayTitle,
                     Anchor = id,
                     AnchorTitle = anchorTitle,
-                    Description = string.IsNullOrWhiteSpace(sectionSummary) ? description : sectionSummary,
+                    Description = sectionSummary ?? "",
                     DocumentType = "section",
                     SearchKeywords = sectionKeywords,
                     Text = sectionText,
@@ -226,12 +224,4 @@ public sealed class WebcrawlerService : IWebcrawlerService
     private static string NormalizeAbsoluteUrlNoQueryNoFragment(string url)
         => NormalizeAbsoluteUrlNoQueryNoFragment(new Uri(url));
 
-    private static string MergeKeywords(params string?[] keywordGroups)
-    {
-        return string.Join(
-            " ",
-            keywordGroups
-                .Where(group => !string.IsNullOrWhiteSpace(group))
-                .Select(group => group!.Trim()));
-    }
 }
