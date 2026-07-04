@@ -125,18 +125,18 @@ const organizationStructuredData = {
           },
         ].map((s) => (
           <div
-            class="rounded-2xl border border-slate-200 bg-white/50 p-4 text-left shadow-sm transition hover:shadow-md hover:-translate-y-px"
+            class="feature-card rounded-2xl border border-slate-200 bg-white/50 p-4 text-left shadow-sm transition hover:shadow-md hover:-translate-y-px"
           >
-            <div class="text-xs text-slate-500">{s.k}</div>
+            <div class="feature-card__eyebrow text-xs text-slate-500">{s.k}</div>
 
             <h3
               id={s.id}
-              class="mt-1 text-base font-semibold leading-snug text-slate-800"
+              class="feature-card__title text-base font-semibold text-slate-800"
             >
               {s.v}
             </h3>
 
-            <p class="mt-1 text-xs leading-relaxed text-slate-500">
+            <p class="feature-card__description text-xs text-slate-500">
               {s.sub}
             </p>
           </div>
@@ -181,6 +181,26 @@ const organizationStructuredData = {
     list-style-type: disc;
     font-size: 1.1rem;
   }    
+
+  :global(.feature-card) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  :global(.feature-card__eyebrow) {
+    margin: 0 0 0.5rem;
+  }
+
+  :global(.feature-card__title) {
+    margin: 0;
+    padding: 0;
+    line-height: 1.15;
+  }
+
+  :global(.feature-card__description) {
+    margin: 0.125rem 0 0;
+    line-height: 1.45;
+  }
 
   @media (max-width:  725px) {
     .main-fix {
