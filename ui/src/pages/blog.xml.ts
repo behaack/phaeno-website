@@ -1,5 +1,6 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
+import { getBlogPostFeedPath } from '@/lib/blogRoutes';
 
 export async function GET(context: any) {
   const posts = await getCollection('blog');
@@ -11,7 +12,7 @@ export async function GET(context: any) {
       title: post.data.title,
       description: post.data.summary,
       pubDate: post.data.date,
-      link: `/media/blog/${post.slug}/`,      // adjust route pattern if needed
+      link: getBlogPostFeedPath(post.slug),
     })),
     customData: `<language>en-us</language>`,
   });
