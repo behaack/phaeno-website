@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@astrojs/image": "^0.18.0",
+    "@astrojs/mdx": "4.3.14",
     "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.10",

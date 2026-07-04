@@ -1,0 +1,35 @@
+---
+interface Props {
+  align?: 'left' | 'center';
+}
+
+const { align = 'left' } = Astro.props;
+---
+
+<aside class={`article-callout article-callout-${align}`}>
+  <slot />
+</aside>
+
+<style>
+.article-callout {
+  margin: 1rem 0 1.25rem;
+  padding: 0.8rem 1rem;
+  border-left: 4px solid #789946;
+  background: #f6f8f2;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+.article-callout-center {
+  text-align: center;
+  border-left: 0;
+  border-top: 1px solid #d6e3c3;
+  border-bottom: 1px solid #d6e3c3;
+  background: transparent;
+}
+
+.article-callout :global(p) {
+  margin: 0;
+  padding: 0;
+}
+</style>
