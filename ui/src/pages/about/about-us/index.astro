@@ -21,12 +21,22 @@ const advisors = team.filter(item => item.type === ETeamMemberType.advisor)
   <main id="main" tabindex="-1">
     <TopPageBanner title="About us" image="image-1" />
     <section>
-      <h2 id="phaeno-mission">Our Mission</h2>
+      <h2
+        id="phaeno-mission"
+        data-phaeno-search="Phaeno mission"
+        data-phaeno-search-summary="Phaeno develops technology that helps scientists map the functional human genome and understand phenotype drivers."
+        data-phaeno-search-keywords="Phaeno mission functional human genome phenotype drivers PSeq"
+      >Our Mission</h2>
       <p>
         Phaeno's mission is to develop technology that empowers scientists to map the functional human genome and gain a
         comprehensive understanding of the underlying drivers of phenotypes.
       </p>
-      <h2 id="origin-story">Our Origin Story</h2>
+      <h2
+        id="origin-story"
+        data-phaeno-search="Phaeno origin story"
+        data-phaeno-search-summary="Phaeno was founded to address the gap between genotype and phenotype by profiling RNA comprehensively and accurately."
+        data-phaeno-search-keywords="Phaeno origin story genotype phenotype RNA profiling Central Dogma"
+      >Our Origin Story</h2>
       <p>
         Phaeno cofounders noted fundamental conflicts with the Central Dogma of Molecular Biology evident in molecular
         neurobiological studies as early as 1988. These conflicts became more explicit in a series of
@@ -47,14 +57,19 @@ const advisors = team.filter(item => item.type === ETeamMemberType.advisor)
         messenger and functional RNAs, by complex steps in RNA processing. Phaeno NGS phased RNA sequencing (PSeq) can
         now be used to mine the full transcriptome, with applications in both fundamental biology and genomic medicine.
       </p>
-      <h2 id="phaeno-team">Our Team</h2>
-      <h3 id="phaeno-executive-team">Executive Team</h3>
+      <h2
+        id="phaeno-team"
+        data-phaeno-search="Phaeno team"
+        data-phaeno-search-summary="Meet the Phaeno team building PSeq technology across executive, technical, business development, and advisory roles."
+        data-phaeno-search-keywords="Phaeno team executive technical business development advisors"
+      >Our Team</h2>
+      <h3 id="phaeno-executive-team" data-phaeno-search="Phaeno executive team">Executive Team</h3>
       <Team members={management} />
-      <h3 id="phaeno-technical-team">Technical Team</h3>
+      <h3 id="phaeno-technical-team" data-phaeno-search="Phaeno technical team">Technical Team</h3>
       <Team members={technical} />      
-      <h3 id="phaeno-bus-dev-team">Business Development Team</h3>
+      <h3 id="phaeno-bus-dev-team" data-phaeno-search="Phaeno business development team">Business Development Team</h3>
       <Team members={busdev} />
-      <h3 id="phaeno-advisors">Advisory Team</h3>
+      <h3 id="phaeno-advisors" data-phaeno-search="Phaeno advisory team">Advisory Team</h3>
       <Team members={advisors} />
       <br />
     </section>

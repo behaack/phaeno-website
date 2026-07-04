@@ -10,28 +10,88 @@ import Layout from '@/layouts/Layout.astro';
     description="Explore Phaeno's investment opportunity around PSeq, full-length RNA sequencing, and mapping the functional human genome."
     documentType="Web Page"
     searchTitle="Investors"
+    searchKeywords="Phaeno investors PSeq funding full-length RNA sequencing functional human genome short-read NGS transcriptomics"
   />    
   <main id="main" tabindex="-1">
     <TopPageBanner title="Investors" image="image-3" />
     <section>
-      <h2 id="investor-page">Welcome to our Investor Page</h2>
-      <p>
-        Phaeno has raised $1.4M in funding to date toward our mission to empower scientists to map the "functional" human genome. 
-        We strongly believe that our technology will help lead to cures for common diseases and improve the effectiveness and efficiency 
-        of the healthcare system around the globe. We are looking for qualified investors to help us in our mission.
+      <h2
+        id="investor-page"
+        data-phaeno-search="Phaeno investor opportunity"
+        data-phaeno-search-summary="Phaeno is building PSeq to map the functional human genome with full-length, isoform-resolved RNA sequencing on short-read instruments."
+        data-phaeno-search-keywords="Phaeno investor opportunity PSeq functional human genome isoform-resolved RNA sequencing"
+      >Investing in the Functional Human Genome</h2>
+      <p class="max-w-4xl text-lg leading-7 text-neutral-700">
+        Phaeno is developing PSeq to make full-length, isoform-resolved RNA measurement practical on short-read NGS
+        instruments already used at scale. The opportunity is to move transcriptomics beyond collapsed gene counts and
+        expose the RNA-level biology that drives phenotype, therapeutic response, and machine-learning-ready discovery.
       </p>
-      <div class="flex justify-start items-center gap-3">
-        <p><span>If you are a qualified investor and would like to participate in our mission,</span>
-        <a 
-          target="_blank" 
-          aria-label="Email us to make an investment inquiry, opens a new window using your default email client."
-          href="mailto:info@phaenobiotech.com?subject=Investor Inquiry" 
-          rel="noopener noreferrer nofollow"
-        >
-          <span>please email us</span>.
-        </a>
-      </p>
+
+      <div class="mt-5 grid gap-4 md:grid-cols-3">
+        <div class="investor-card">
+          <h3>Why now</h3>
+          <p>
+            Short-read sequencing infrastructure is mature, but biology increasingly demands molecule-level transcript
+            resolution. PSeq is designed to close that gap without requiring specialized long-read instruments.
+          </p>
+        </div>
+        <div class="investor-card">
+          <h3>What is different</h3>
+          <p>
+            PSeq combines chemistry and software to recover full-length RNA information, quantify individual molecules,
+            and produce structured feature matrices for downstream analysis and AI.
+          </p>
+        </div>
+        <div class="investor-card">
+          <h3>Current stage</h3>
+          <p>
+            Phaeno has raised $1.4M to date and is engaging qualified investors who can help accelerate validation,
+            commercialization, and platform adoption.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+        <h3
+          id="investor-contact"
+          data-phaeno-search="Contact Phaeno for investor inquiries"
+          data-phaeno-search-summary="Qualified investors can contact Phaeno to discuss the PSeq investment opportunity."
+          data-phaeno-search-keywords="Phaeno investor inquiry qualified investors PSeq funding"
+        >Investor inquiries</h3>
+        <p class="mb-0">
+          Qualified investors interested in Phaeno's mission can
+          <a
+            aria-label="Email Phaeno to make an investment inquiry."
+            href="mailto:info@phaenobiotech.com?subject=Investor Inquiry"
+            rel="nofollow"
+          >email us</a>
+          to start a conversation.
+        </p>
       </div>
     </section>
   </main>
 </Layout>
+
+<style>
+  .investor-card {
+    border: 1px solid rgb(226 232 240);
+    border-radius: 1rem;
+    background: white;
+    padding: 1.25rem;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+  }
+
+  .investor-card h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .investor-card p {
+    margin: 0.5rem 0 0;
+    font-size: 0.925rem;
+    line-height: 1.55;
+    color: rgb(51 65 85);
+  }
+</style>
