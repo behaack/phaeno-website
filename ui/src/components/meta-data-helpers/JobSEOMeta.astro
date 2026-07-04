@@ -22,6 +22,8 @@ interface Props {
   authorUrl?: string;
   schema: object;
   twitterCard?: 'summary_large_image' | 'summary';
+  /** Internal site-search terms, not external SEO keywords */
+  searchKeywords?: string;
 }
 
 const {
@@ -32,6 +34,7 @@ const {
   image = new URL('/images/phaeno-socialmedia-splash.webp', Astro.site).href,
   schema,
   twitterCard = 'summary_large_image',
+  searchKeywords = '',
 } = Astro.props as Props;
 
 const isoDate = typeof datePosted === 'string' ? datePosted : datePosted.toISOString();
@@ -40,6 +43,7 @@ const isoDate = typeof datePosted === 'string' ? datePosted : datePosted.toISOSt
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="phaeno:document-type" content="job" />
+{searchKeywords ? <meta name="phaeno:search-keywords" content={searchKeywords} /> : null}
 <link rel="canonical" href={url} />
 <meta name="author" content="Phaeno Inc.">
 
