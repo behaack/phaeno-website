@@ -6,6 +6,7 @@ export interface ISearchItem {
   id: string;
   url: string;
   pageTitle: string;
+  pageDisplayTitle?: string;
   anchor: string;
   anchorTitle: string;
   description: string;
@@ -49,6 +50,10 @@ function resolveSearchResultUrl(url: string) {
   }
 }
 
+function getPageDisplayTitle(item: Pick<ISearchItem, 'pageTitle' | 'pageDisplayTitle'>) {
+  return item.pageDisplayTitle?.trim() || item.pageTitle;
+}
+
 export default function SearchItem({ 
   list, 
   index, 
@@ -61,33 +66,34 @@ export default function SearchItem({
   onFocusOption
 }: IProps ) {
   const targetUrl = useMemo(() => resolveSearchResultUrl(item.url), [item.url]);
+  const pageDisplayTitle = useMemo(() => getPageDisplayTitle(item), [item.pageDisplayTitle, item.pageTitle]);
 
   const isHeader = useMemo(() => {
     if (index === 0) return true;
-    return list[index - 1].pageTitle !== list[index].pageTitle;
+    return getPageDisplayTitle(list[index - 1]) !== getPageDisplayTitle(list[index]);
   }, [index, list]);
 
   const pageSummary = useMemo(() => {
-    const pageItems = list.filter((result) => result.pageTitle === item.pageTitle);
+    const pageItems = list.filter((result) => getPageDisplayTitle(result) === pageDisplayTitle);
     const matches = pageItems.reduce((total, result) => total + result.count, 0);
     return {
       results: pageItems.length,
       matches,
     };
-  }, [item.pageTitle, list]);
+  }, [pageDisplayTitle, list]);
 
   const header = useMemo(() => (
     <li role="presentation" aria-hidden="true" className="web-search-group">
       <div className="web-search-group-content">
         <div className="web-search-group-heading">
-          <h3 className="web-search-group-title">{item.pageTitle}</h3>
+          <h3 className="web-search-group-title">{pageDisplayTitle}</h3>
         </div>
         <span className="web-search-group-meta">
           {pageSummary.results} {pageSummary.results === 1 ? 'result' : 'results'}, {pageSummary.matches} {pageSummary.matches === 1 ? 'match' : 'matches'}
         </span>
       </div>
     </li>
-  ), [item.pageTitle, pageSummary]);
+  ), [pageDisplayTitle, pageSummary]);
 
   const link = useMemo(() => (
     <li

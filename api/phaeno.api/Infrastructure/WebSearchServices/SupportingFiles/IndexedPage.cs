@@ -7,6 +7,7 @@ namespace phaeno.api.Infrastructure.WebSearchServices.SupportingFiles
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Url { get; set; } = "";
         public string PageTitle { get; set; } = "";
+        public string PageDisplayTitle { get; set; } = "";
         public string Anchor { get; set; } = "";
         public string AnchorTitle { get; set; } = "";
         public string Description { get; set; } = "";

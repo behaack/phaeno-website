@@ -7,6 +7,7 @@ export interface ISearchResult {
   id: string
   url: string
   pageTitle: string
+  pageDisplayTitle?: string
   anchor: string
   anchorTitle: string
   description: string
