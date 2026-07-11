@@ -183,13 +183,15 @@ const benefits = [
       </section>
 
       <section class="closing-panel" data-phaeno-search-ignore>
-        <div>
-          <p class="eyebrow">Build on resolved biology</p>
-          <h2>Give every downstream layer a stronger starting point.</h2>
-        </div>
-        <div class="closing-panel__actions">
-          <a class="button-primary" href="/contact#request-demo">Request a demo</a>
-          <a class="button-secondary" href="/technology">Explore PSeq technology</a>
+        <div class="closing-panel__inner">
+          <div>
+            <p class="eyebrow">Build on resolved biology</p>
+            <h2>Give every downstream layer a stronger starting point.</h2>
+          </div>
+          <div class="closing-panel__actions">
+            <a class="button-primary" href="/contact#request-demo">Request a demo</a>
+            <a class="button-secondary" href="/technology">Explore PSeq technology</a>
+          </div>
         </div>
       </section>
     </div>
@@ -463,14 +465,22 @@ const benefits = [
 }
 
 .closing-panel {
+  width: 100vw;
+  max-width: none;
+  margin: clamp(3rem, 5vw, 4.5rem) calc(50% - 50vw) 0;
+  padding: 0;
+  background: var(--phaeno-green-100);
+}
+
+.closing-panel__inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-8);
-  margin: clamp(3rem, 5vw, 4.5rem) 0;
-  padding: clamp(2rem, 4vw, 3.5rem);
-  border-radius: var(--radius-2xl);
-  background: var(--phaeno-green-100);
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5rem) var(--page-gutter);
 }
 
 .closing-panel h2 {
@@ -547,7 +557,7 @@ const benefits = [
     gap: var(--space-8);
   }
 
-  .closing-panel {
+  .closing-panel__inner {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -603,8 +613,11 @@ const benefits = [
   }
 
   .closing-panel {
-    margin: 2.5rem 0;
-    padding: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .closing-panel__inner {
+    padding: 2.5rem var(--page-gutter);
   }
 
   .closing-panel__actions {

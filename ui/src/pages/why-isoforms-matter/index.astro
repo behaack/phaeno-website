@@ -209,10 +209,12 @@ import Layout from '@/layouts/Layout.astro'
       </section>
 
       <section class="closing-panel" data-phaeno-search-ignore>
-        <p class="eyebrow">See biology in full resolution</p>
-        <div class="closing-panel__content">
-          <h2>Measure the molecules that drive phenotype.</h2>
-          <div class="closing-panel__actions"><a class="button-secondary" href="/technology">Explore PSeq technology</a><a class="button-primary" href="/contact#request-demo">Request a demo</a></div>
+        <div class="closing-panel__inner">
+          <p class="eyebrow">See biology in full resolution</p>
+          <div class="closing-panel__content">
+            <h2>Measure the molecules that drive phenotype.</h2>
+            <div class="closing-panel__actions"><a class="button-secondary" href="/technology">Explore PSeq technology</a><a class="button-primary" href="/contact#request-demo">Request a demo</a></div>
+          </div>
         </div>
       </section>
     </div>
@@ -300,7 +302,8 @@ import Layout from '@/layouts/Layout.astro'
 .reference-list--columns { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
 .reference-list--columns div { padding: var(--space-5); border-radius: var(--radius-lg); background: var(--phaeno-neutral-50); }
 .reference-list--columns p:first-child { margin-top: 0; color: var(--phaeno-rna-900); }
-.closing-panel { margin-bottom: clamp(2.5rem, 4vw, 3.5rem); padding: clamp(1.75rem, 3.5vw, 3rem); border-radius: var(--radius-2xl); background: var(--phaeno-green-100); }
+.closing-panel { width: 100vw; max-width: none; margin: 0 calc(50% - 50vw); padding: 0; background: var(--phaeno-green-100); }
+.closing-panel__inner { width: 100%; max-width: var(--content-max-width); margin: 0 auto; padding: clamp(3rem, 6vw, 5rem) var(--page-gutter); }
 .closing-panel__content { display: flex; justify-content: space-between; gap: var(--space-7); align-items: center; }
 .closing-panel h2 { max-width: 17ch; font-size: clamp(2rem, 3.5vw, 3.2rem); }
 .closing-panel__actions { display: flex; gap: var(--space-3); flex-shrink: 0; }

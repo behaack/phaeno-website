@@ -34,7 +34,9 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
         </p>
       </div>
       <div class="category-timeline-wrap">
-        <NewSeqCategory />
+        <div class="category-timeline-inner">
+          <NewSeqCategory />
+        </div>
       </div>
       <h2
         id="new-insights-in-chemistry"
@@ -236,7 +238,25 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
 }
 
 .category-timeline-wrap {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
   margin-bottom: var(--space-8);
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  background: var(--phaeno-green-50);
+}
+
+.category-timeline-inner {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
+}
+
+.category-timeline-inner :global(.sequencing-timeline) {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .mechanism-intro {
