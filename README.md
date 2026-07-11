@@ -29,6 +29,7 @@ pnpm preview
 The Vercel deployment uses the configuration in `ui/vercel.json`.
 
 See [ui/README.md](ui/README.md) for the full UI project guide.
+See [PHAENO-DESIGN-SYSTEM.md](PHAENO-DESIGN-SYSTEM.md) for the brand foundations, design tokens, component guidance, accessibility rules, and implementation conventions.
 
 ## API
 

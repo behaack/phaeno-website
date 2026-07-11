@@ -1,3 +1,4 @@
+@import "./design-system.css";
 @import "tailwindcss/preflight";
 @import "tailwindcss/utilities";
 @import "tailwindcss";
@@ -7,14 +8,15 @@
   /* --------------------- */
   /*      GLOBALLY USED    */
   /* --------------------- */
-  --primary-text-color: oklch(20.5% 0 0);
-  --font-main: 'Inter', sans-serif;
-  --button-color: #545458;
-  --botton-hover-color: #627430;
-  --focus-ring-color: #B35D0C;
+  --primary-text-color: var(--color-text);
+  --font-main: var(--font-family-sans);
+  --button-color: var(--phaeno-neutral-600);
+  --button-hover-color: var(--color-action-primary);
+  --botton-hover-color: var(--button-hover-color); /* legacy typo */
+  --focus-ring-color: var(--color-focus);
   --font-size: 16px;  /* 1rem = 16px */
   --line-height: 1.4;
-  --heading-height: 5.1rem;
+  --heading-height: var(--header-height);
   --section-padding-y: 1rem;
   --section-padding-x: 0.5rem;
   --p-padding-y: 0.35rem;
@@ -60,8 +62,8 @@
   --menu-bgcolor: inherit;
   --menu-color: black;
   
-  --menu-selected-bgcolor: #789946;
-  --menu-selected-color: white;
+  --menu-selected-bgcolor: var(--color-brand);
+  --menu-selected-color: var(--color-text-on-dark);
 
   --menu-child-selected-bgcolor: var(--menu-bgcolor);
   --menu-child-selected-color: var(--menu-selected-bgcolor);
@@ -76,13 +78,13 @@
   --menu-active-color: black;
 
     /*    Sub-Menu   */  
-  --submenu-bgcolor: #E9EFEA;
+  --submenu-bgcolor: var(--phaeno-green-100);
   --submenu-color: black;
   --submenu-border: 1px solid #ccc;
   --submenu-divider: 1px solid #ccc;
 
-  --submenu-selected-bgcolor: #789946;
-  --submenu-selected-color: white;
+  --submenu-selected-bgcolor: var(--color-brand);
+  --submenu-selected-color: var(--color-text-on-dark);
     
   --submenu-focus-bgcolor: #f0f4ff;
   --submenu-focus-color: black;
@@ -96,7 +98,7 @@
   /* --------------------- */
   /* MOBILE Menu Settings */
   /* --------------------- */
-  --mobile-menu-bgcolor: #E9EFEA;
+  --mobile-menu-bgcolor: var(--phaeno-green-100);
   --mobile-menu-border: 1px solid #ccc;
   --mobile-menu-divider: 1px solid #ccc;
 }
@@ -113,7 +115,7 @@ html, body {
 	margin: 0;
 	width: 100%;
 	height: 100%;
-	background-color: white;
+	background-color: var(--color-canvas);
 	display: flex;
 	flex-direction: column;
 	overflow: auto;
@@ -185,7 +187,7 @@ p {
 
 a {
   text-decoration: none;
-  color: #B35D0C;
+	color: var(--color-link);
   transition: color .3s ease;
 }
 
@@ -381,7 +383,7 @@ label > input[type="checkbox"]:focus-visible + span::before {
 } */
 
 button:hover {
-  background-color: var(--botton-hover-color);
+  background-color: var(--button-hover-color);
   transform: scale(1.02);
   cursor: pointer;
 }
@@ -390,7 +392,7 @@ button:focus {
   outline: 1px solid #f97316; 
   outline-offset: 2px;
   border-radius: .5rem;
-  background-color: var(--botton-hover-color);
+  background-color: var(--button-hover-color);
 }
 
 .grecaptcha-badge { visibility: hidden; }
