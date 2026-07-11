@@ -7,12 +7,12 @@ const { size } = Astro.props as IProps
 ---
 
 <a
-  href="/contact/#sign-up"
+  href="/contact#request-demo"
   role="button"
-  aria-label="Sign-up for updates"
+  aria-label="Request a demo"
 >
   <span>
-    Get {(size==='narrow') && <br />}Updates!
+    Request a {(size==='narrow') && <br />}demo
   </span>
 </a>
 
@@ -21,22 +21,25 @@ const { size } = Astro.props as IProps
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #545458;
-    color: white;
-    padding: 7px 9px;
-    border-radius: 7px;
+    min-height: 2.75rem;
+    background: var(--phaeno-orange-500);
+    color: var(--color-text-on-dark);
+    padding: .65rem 1rem;
+    border: 1px solid var(--phaeno-orange-500);
+    border-radius: var(--radius-pill);
     text-decoration: none;
-    margin: 0 5px;
-    font-size: .75rem;
-    transition: transform 0.3s ease;
-    max-height: 2.75rem;  
+    margin: 0;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    transition: transform var(--duration-fast) var(--ease-standard), background var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard);
   }
 
   a:hover {
-    background-color: #000000;
-    box-shadow: 0 4px 9px rgba(0, 0, 0, 0.2); /* Drop shadow */
-    transform: scale(1.02);
-    background-color: black;
+    color: var(--color-text-on-dark);
+    background: var(--phaeno-orange-600);
+    border-color: var(--phaeno-orange-600);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
   }
 
   a:active {
@@ -46,6 +49,6 @@ const { size } = Astro.props as IProps
 
   a > span {
     text-align: center;
-    text-transform: uppercase;
+    letter-spacing: .01em;
   }
 </style>

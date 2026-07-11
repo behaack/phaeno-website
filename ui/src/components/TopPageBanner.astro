@@ -2,16 +2,22 @@
 interface IProps {
   title: string
   image: "image-1" | "image-2" | "image-3"
+  trademark?: boolean
 }
 
-const { title, image } = Astro.props as IProps
+const { title, image, trademark = false } = Astro.props as IProps
+const [trademarkTerm, ...remainingTitleParts] = title.split(' ')
+const remainingTitle = remainingTitleParts.join(' ')
 ---
 <div class="top-banner">
   <div class=`${image} background-layer`>
     <div class=`dark-overlay ${image}-overlay`></div>
     <div class="title-holder">
       <div class="inner-title-holder" >
-        <h1 class="text-white">{ title }</h1>
+        <div class="banner-kicker" data-phaeno-search-ignore>Phaeno / Science in full resolution</div>
+        <h1 class="text-white">
+          {trademark ? <>{trademarkTerm}<sup>™</sup>{remainingTitle && ` ${remainingTitle}`}</> : title}
+        </h1>
       </div>
     </div>
   </div>  
@@ -22,7 +28,7 @@ const { title, image } = Astro.props as IProps
   position: relative;
   overflow: hidden;
   width: 100%;
-  min-height: 10rem;
+  min-height: clamp(13rem, 25vw, 19rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,15 +54,33 @@ const { title, image } = Astro.props as IProps
       z-index: 1;
       max-width: 80rem;
       width: 100%;
-      padding: 1rem .5rem;	
+      padding: var(--space-8) var(--page-gutter);
       height: fit-content;  
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       color: white;
 
       .inner-title-holder {
         width: 100%;
-        padding-top: 0.5rem;
+        padding-top: var(--space-6);
+
+        h1 {
+          max-width: 13ch;
+          margin: 0;
+          padding: var(--space-2) 0 0;
+          font-size: clamp(2.5rem, 6vw, 4.75rem);
+          font-weight: var(--font-weight-medium);
+          letter-spacing: -.045em;
+          line-height: .98;
+          text-transform: none;
+
+          sup {
+            margin-left: .05em;
+            font-size: .32em;
+            letter-spacing: 0;
+            vertical-align: super;
+          }
+        }
       }
     }
   }
@@ -75,20 +99,28 @@ const { title, image } = Astro.props as IProps
 } 
 
 .image-1-overlay {
-  background-color: rgba(17, 17, 17, 0.432);
+  background: linear-gradient(90deg, rgb(14 40 65 / .92) 0%, rgb(14 40 65 / .58) 58%, rgb(14 40 65 / .28) 100%);
 }
 
 .image-2-overlay {
-  background-color: rgba(17, 17, 17, 0.185);
+  background: linear-gradient(90deg, rgb(14 40 65 / .94) 0%, rgb(21 96 130 / .58) 60%, rgb(14 40 65 / .22) 100%);
 }
 
 .image-3-overlay {
-  background-color: rgba(17, 17, 17, 0.596);
+  background: linear-gradient(90deg, rgb(14 40 65 / .94) 0%, rgb(14 40 65 / .62) 62%, rgb(60 83 32 / .34) 100%);
+}
+
+.banner-kicker {
+  color: var(--phaeno-green-300);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: .16em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 725px) {
   .top-banner {
-    min-height: 6rem;
+    min-height: 11rem;
   }
 }
 </style>

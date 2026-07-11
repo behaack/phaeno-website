@@ -397,6 +397,51 @@ button:focus {
 
 .grecaptcha-badge { visibility: hidden; }
 
+.science-page > section,
+.company-page > section,
+.contact-page > section {
+  display: flow-root;
+}
+
+.science-page > section > h2,
+.company-page > section > h2,
+.contact-page > section > h2 {
+  margin-top: clamp(2.5rem, 7vw, 5rem);
+}
+
+.science-page > section > h2:first-child,
+.company-page > section > h2:first-child,
+.contact-page > section > h2:first-child {
+  margin-top: 0;
+}
+
+.science-page div.rounded-2xl,
+.science-page aside.rounded-2xl {
+  border-color: var(--phaeno-green-200);
+  background: linear-gradient(155deg, var(--color-surface), var(--phaeno-green-50));
+  box-shadow: var(--shadow-sm);
+}
+
+.science-page .mechanism-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 16rem;
+  padding: var(--space-6);
+}
+
+.science-page .mechanism-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--color-brand);
+}
+
+.company-page > section > p {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+}
+
 @media (max-width: 80rem) {
 	section {
 		padding-right: .5rem;
@@ -438,4 +483,107 @@ button:focus {
     font-size: var(--h6-font-size-mobile);
     padding: var(--h6-padding-mobile);
   }    
+}
+
+/* --------------------------------------------------------- */
+/* Phaeno editorial system                                   */
+/* --------------------------------------------------------- */
+
+::selection {
+  color: var(--color-text);
+  background: var(--phaeno-amber-400);
+}
+
+body {
+  color: var(--color-text);
+  background:
+    linear-gradient(180deg, var(--color-canvas) 0%, var(--phaeno-green-50) 100%);
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  background: var(--color-canvas);
+}
+
+main > section {
+  padding: var(--space-10) var(--page-gutter) var(--section-space);
+}
+
+main > section > :where(p, ul, ol):not(.data-table) {
+  max-width: var(--copy-max-width);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+h1 {
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -.035em;
+}
+
+h2 {
+  color: var(--phaeno-rna-900);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -.025em;
+}
+
+h3 {
+  color: var(--phaeno-rna-800);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -.015em;
+}
+
+p {
+  color: var(--color-text-muted);
+}
+
+a {
+  text-underline-offset: .18em;
+  text-decoration-thickness: .08em;
+}
+
+a:hover {
+  color: var(--color-brand-strong);
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+blockquote {
+  padding: var(--space-6) var(--space-8);
+  border-left: 4px solid var(--color-brand);
+  background: var(--phaeno-green-50);
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  color: var(--phaeno-rna-900);
+  box-shadow: var(--shadow-sm);
+}
+
+input,
+textarea,
+select {
+  min-height: 2.75rem;
+  border-color: var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-action-primary);
+  box-shadow: 0 0 0 3px rgb(98 116 48 / .18);
+}
+
+@media (max-width: 725px) {
+  main > section {
+    padding: var(--space-8) var(--space-4) var(--space-12);
+  }
 }

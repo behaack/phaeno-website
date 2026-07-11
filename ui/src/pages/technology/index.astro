@@ -1,9 +1,7 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '@/layouts/Layout.astro';
 import TopPageBanner from '@/components/TopPageBanner.astro';
 import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
-import Workflow from '@/components/workflow/Workflow.astro';
 import NewSeqCategory from '@/components/NewSeqCategory.astro';
 ---
 <Layout>
@@ -15,8 +13,8 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
     searchTitle="Technology"
     searchKeywords="PSeq technology phased sequencing chemistry single-molecule tagging molecular barcodes intramolecular library construction isothermal amplification UMI redistribution automated pipeline NGS instruments"
   />  
-  <main id="main" tabindex="-1">
-    <TopPageBanner title="PSeq Technology" image="image-2"/>
+  <main id="main" class="science-page" tabindex="-1">
+    <TopPageBanner title="PSeq Technology" image="image-2" trademark />
     <section>
       <h2
         id="pseq-technology"
@@ -24,7 +22,18 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
         data-phaeno-search-summary="Visual overview of PSeq as a phased sequencing category built on NGS, chemistry, applied information theory, and software."
         data-phaeno-search-keywords="PSeq phased sequencing NGS chemistry applied information theory software"
       >PSeq — A New Category of Sequencing Technology</h2>
-      <div class="flex justify-center my-5">
+      <div class="category-context">
+        <p>
+          Each generation of sequencing advanced what scientists could observe—first through direct reads, then scale,
+          and then read length. PSeq marks a different kind of advance: it combines molecular chemistry, applied
+          information theory, and automated software on the NGS instruments already in use.
+        </p>
+        <p class="category-context__claim">
+          <strong>Not another sequencer.</strong>
+          <span>A new architecture for full-length, isoform-resolved RNA data.</span>
+        </p>
+      </div>
+      <div class="category-timeline-wrap">
         <NewSeqCategory />
       </div>
       <h2
@@ -33,177 +42,642 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
         data-phaeno-search-summary="PSeq uses single-molecule tagging, intramolecular library construction, and automated data processing to produce full-length RNA insight."
         data-phaeno-search-keywords="PSeq technology single-molecule tagging intramolecular library construction automated data processing"
       >How PSeq Technology Works</h2>
-      <div class="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
-          <h3 class="text-[1.2rem] py-2">
-            Single-molecule tagging
-          </h3>
-          <p class="text-sm leading-6 text-neutral-700">
+      <p class="mechanism-intro">
+        Three connected stages transform individual RNA molecules into complete, analysis-ready sequence data.
+      </p>
+      <div class="mechanism-flow">
+        <article class="mechanism-card mechanism-card--featured">
+          <div class="mechanism-card__step">
+            <span>01</span>
+            <span>Identify</span>
+          </div>
+          <h3>Tag every molecule</h3>
+          <p>
             Each RNA molecule is reverse-transcribed using one of 4.3 trillion multifunctional tagging reagents,
             uniquely labeling individual molecules.
           </p>
-        </div>
+          <div class="mechanism-card__result">4.3 trillion-tag molecular identity space</div>
+        </article>
 
-        <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
-          <h3 class="text-[1.2rem] py-2">
-            Intramolecular library construction
-          </h3>
-          <p class="text-sm leading-6 text-neutral-700">
+        <article class="mechanism-card">
+          <div class="mechanism-card__step">
+            <span>02</span>
+            <span>Construct</span>
+          </div>
+          <h3>Build within each molecule</h3>
+          <p>
             Tagged molecules are converted into sequencing-ready DNA libraries using reactions confined to
             intramolecular rearrangements.
           </p>
-        </div>
+          <div class="mechanism-card__result">Sequencing-ready DNA libraries</div>
+        </article>
 
-        <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
-          <h3 class="text-[1.2rem] py-2">
-            Automated data processing
-          </h3>
-          <p class="text-sm leading-6 text-neutral-700">
+        <article class="mechanism-card">
+          <div class="mechanism-card__step">
+            <span>03</span>
+            <span>Resolve</span>
+          </div>
+          <h3>Process data end to end</h3>
+          <p>
             Standard FASTA files from the sequencer are processed end-to-end by the automated PSeq data pipeline.
           </p>
+          <div class="mechanism-card__result">Complete, analysis-ready output</div>
+        </article>
+      </div>
+      <aside class="ngs-compatibility" aria-label="PSeq NGS compatibility">
+        <div class="ngs-compatibility__message">
+          <span class="ngs-compatibility__eyebrow">Built for the lab you already run</span>
+          <h3>Standard NGS in. Isoform-resolved data out.</h3>
         </div>
-      </div>
-      <p>
-        PSeq long-read sequencing runs on unmodified NGS sequencers now widely in service, eliminating the need to purchase 
-        specialized Third Generation instruments and robotics, or hire highly specialized staff training.
-      </p>
-      <div class="mt-8 flex items-center justify-center gap-3 flex-row">
-        <a
-          href="/contact/#sign-up"
-          class="dark inline-flex items-center justify-center rounded-2xl
-           bg-slate-900 px-4 py-3 text-sm font-medium text-white 
-           shadow-sm hover:opacity-85"
-        >
-          Request Technical Brief →
-        </a>
-      </div>
+        <div class="ngs-compatibility__details">
+          <p>
+            PSeq runs on unmodified NGS sequencers already in service—without specialized Third Generation instruments,
+            dedicated robotics, or highly specialized staff training.
+          </p>
+          <ul aria-label="PSeq compatibility benefits">
+            <li>Existing NGS instruments</li>
+            <li>No dedicated robotics</li>
+            <li>Automated FASTA processing</li>
+          </ul>
+          <a href="/contact#sign-up" class="ngs-compatibility__cta">
+            Request Technical Brief <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </aside>
       <h2
         id="pseq-workflow"
-        data-phaeno-search="PSeq workflow from chemistry to isoform-resolved insights"
-        data-phaeno-search-summary="PSeq workflow steps covering molecular tagging, isothermal amplification, UMI redistribution, software assembly, and isoform-resolved output."
+        data-phaeno-search="From sample to isoform-resolved PSeq data"
+        data-phaeno-search-summary="Detailed PSeq stages covering molecular tagging, isothermal amplification, UMI redistribution, automated software assembly, and isoform-resolved output."
         data-phaeno-search-keywords="PSeq workflow molecular tagging isothermal amplification UMI redistribution software stack isoform resolved insights"
-      >PSeq Workflow</h2>
-      <p>
-        Phaeno PSeq phased long-read technology is easy to use and easily fits into existing workflows.
+      >From Sample to Isoform-Resolved Data</h2>
+      <p class="workflow-detail-intro">
+        PSeq moves from molecular preparation through automated processing to structured, molecule-level output—within
+        the NGS workflow already in use.
       </p>
-      <br />
-      <Workflow /> 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-1 mt-4">
-        <div style="background-color: #D6E3C3" class="work-flow-description">
-          <h4><i>apply</i>: <span class="uppercase font-bold">PSEQ Chemistry</span></h4>
-          <p>
-            Our sample preparation protocol consists of five steps.
-          </p>          
-          <ul class="ul-no-bullets text-[.9rem]">
+      <div class="workflow-detail-grid">
+        <article class="work-flow-description workflow-card--apply">
+          <header class="workflow-card__header">
+            <span class="workflow-card__stage">Apply</span>
+            <h3>PSeq Chemistry</h3>
+            <p>Four molecular preparation steps preserve the identity and structure of each RNA molecule.</p>
+          </header>
+          <ol class="workflow-card__list workflow-card__list--numbered">
             <li>
-              <Image alt="step 1" height={35} width={35} src="/images/step-1.webp" />
-              <span><b>Molecular tagging</b>: reverse transcription molecular tagging with individual barcodes and strand discriminators.</span>
+              <span class="workflow-card__marker" aria-hidden="true">01</span>
+              <div><strong>Molecular tagging</strong><span>Reverse transcription with individual barcodes and strand discriminators.</span></div>
             </li>
             <li>
-              <Image alt="step 3" height={35} width={35} src="/images/step-2.webp" />
-              <span><b>Isothermal amplification</b>: PCR-free amplification.</span>
+              <span class="workflow-card__marker" aria-hidden="true">02</span>
+              <div><strong>Isothermal amplification</strong><span>PCR-free amplification.</span></div>
             </li>
             <li>
-              <Image alt="step 4" height={35} width={35} src="/images/step-3.webp" />
-              <span><b>Intermolecular UMI (tag) redistribution</b>: SMIDs are relocated intramolecularly to the start of Read 1 in standard paired-end NGS libraries.</span>
+              <span class="workflow-card__marker" aria-hidden="true">03</span>
+              <div><strong>Intermolecular UMI redistribution</strong><span>SMIDs are relocated to the start of Read 1 in standard paired-end NGS libraries.</span></div>
             </li>
             <li>
-              <Image alt="step 5" height={35} width={35} src="/images/step-4.webp" />
-              <span><b>Companion tools</b>: retrieval of individual, barcode identified molecules, discovered by sequencing.</span>
+              <span class="workflow-card__marker" aria-hidden="true">04</span>
+              <div><strong>Companion tools</strong><span>Retrieve individual, barcode-identified molecules discovered by sequencing.</span></div>
+            </li>
+          </ol>
+        </article>
+        <article class="work-flow-description workflow-card--execute">
+          <header class="workflow-card__header">
+            <span class="workflow-card__stage">Execute</span>
+            <h3>PSeq Software</h3>
+            <p>A fully automated pipeline enables direct, rapid data assembly.</p>
+          </header>
+          <ul class="workflow-card__list">
+            <li>
+              <span class="workflow-card__marker" aria-hidden="true">→</span>
+              <div><strong>Automated compute</strong><span>Data polishing is unnecessary.</span></div>
+            </li>
+            <li>
+              <span class="workflow-card__marker" aria-hidden="true">→</span>
+              <div><strong>Measurement first</strong><span>No priors or statistical reconstruction algorithms.</span></div>
+            </li>
+            <li>
+              <span class="workflow-card__marker" aria-hidden="true">→</span>
+              <div><strong>AI/ML ready</strong><span><i>In silico</i> tools generate structured training sets.</span></div>
             </li>
           </ul>
-        </div>
-        <div style="background-color: #cedde4" class="work-flow-description">
-          <h4><i>execute</i>: <span class="uppercase font-bold">PSeq Software Stack</span></h4>
-          <p>
-            Phaeno's fully-automated pipeline enables direct, rapid data assembly.
-          </p>
-          <ul class="ul-no-bullets text-[.9rem]">
+        </article>
+        <article class="work-flow-description workflow-card--deliver">
+          <header class="workflow-card__header">
+            <span class="workflow-card__stage">Deliver</span>
+            <h3>Isoform-Resolved Insights</h3>
+            <p>Individual-molecule data, structured for analysis and discovery.</p>
+          </header>
+          <ul class="workflow-card__list">
             <li>
-              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
-              <span>Fully automated compute; data polishing unnecessary.</span>
+              <span class="workflow-card__marker" aria-hidden="true">→</span>
+              <div><strong>Consolidated data</strong><span>Low-cost transmission and ML-optimized output.</span></div>
             </li>
             <li>
-              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
-              <span>No use of priors or statistical algorithms.</span>
+              <span class="workflow-card__marker" aria-hidden="true">→</span>
+              <div><strong>Protein-coding structure</strong><span>ORF-constitutive and alternative exons.</span></div>
             </li>
             <li>
-              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
-              <span>Includes <i>in silico</i> tools for generating AI/ML training sets.</span>
+              <span class="workflow-card__marker" aria-hidden="true">→</span>
+              <div><strong>Translation initiation</strong><span>Alternative initiation sites.</span></div>
+            </li>
+            <li>
+              <span class="workflow-card__marker" aria-hidden="true">→</span>
+              <div><strong>Polyadenylation</strong><span>Alternative chain-termination sites.</span></div>
+            </li>
+            <li>
+              <span class="workflow-card__marker" aria-hidden="true">→</span>
+              <div><strong>RNA trafficking</strong><span>Transcript-specific “zip” codes.</span></div>
+            </li>
+            <li>
+              <span class="workflow-card__marker" aria-hidden="true">+</span>
+              <div><strong>And more</strong><span>Additional molecule-level features.</span></div>
             </li>
           </ul>
-        </div>
-        <div style="background-color: #F2F2F2" class="work-flow-description">
-          <h4><i>deliver</i>: <span class="uppercase font-bold">Isoform Resolved Insights</span></h4>
-          <p>
-            Detailed data at the individual molecule level. How you want it.
-          </p>
-          <ul class="ul-no-bullets text-[.9rem]">
-            <li>            
-              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
-              <span>Data consolidation for low-cost transmission, and optimized for ML.</span>
-            </li>
-            <li>
-              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
-              <span>ORF-constitutive and alternative protein-coding exons</span>
-            </li>
-            <li>              
-              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
-              <span>Alternative translation initiation sites</span>
-            </li>
-            <li>              
-              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
-              <span>Alternative polyadenylation (chain termination) sites</span>
-            </li>
-            <li>
-              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
-              <span>RNA trafficking “zip” codes</span>
-            </li>
-            <li>
-              <Image alt="bullet point" height={35} width={35} src="/images/blue-right-arrow.webp" />
-              <span>And much more...</span>
-            </li>
-          </ul>
-        </div>        
+        </article>
       </div>
     </section>
   </main>
 </Layout>
 
 <style lang="scss">
-.work-flow-description {
-  padding: 1.5rem;
-  border: 1px solid black;
-  border-radius: 9px;
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+.category-context {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(18rem, .65fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+  margin: var(--space-3) 0 var(--space-6);
 }
 
-.ul-no-bullets {
-  list-style: none;
-  margin-left: 0;
-  margin-top: 20px;
+.category-context > p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+  line-height: 1.65;
 }
 
-ul.ul-no-bullets > li {
+.category-context__claim {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-left: var(--space-5);
+  border-left: 3px solid var(--color-brand);
+}
+
+.category-context__claim strong {
+  color: var(--phaeno-rna-900);
+  font-size: var(--font-size-xl);
+  line-height: 1.2;
+}
+
+.category-context__claim span {
+  font-size: var(--font-size-md);
+}
+
+.category-timeline-wrap {
+  margin-bottom: var(--space-8);
+}
+
+.mechanism-intro {
+  max-width: 48rem;
+  margin: var(--space-3) 0 var(--space-7);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+}
+
+.mechanism-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.mechanism-flow::before {
+  content: '';
+  position: absolute;
+  top: 3.15rem;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: var(--phaeno-green-200);
+}
+
+.mechanism-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 20rem;
+  flex-direction: column;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  border: 1px solid var(--phaeno-green-200);
+  border-radius: var(--radius-xl);
+  background: var(--phaeno-neutral-50);
+  box-shadow: var(--shadow-sm);
+}
+
+.mechanism-card--featured {
+  color: var(--color-text-on-dark);
+  border-color: var(--phaeno-rna-800);
+  background: var(--phaeno-rna-900);
+}
+
+.mechanism-card__step {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-3);
+  color: var(--color-brand-strong);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: .14em;
+  text-transform: uppercase;
 }
 
-.phased-sequencing-large {
-  display: block;
+.mechanism-card__step span:first-child {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: var(--color-surface);
 }
 
-.phased-sequencing-compact {
-  display: none;
+.mechanism-card--featured .mechanism-card__step {
+  color: var(--phaeno-green-200);
+}
+
+.mechanism-card--featured .mechanism-card__step span:first-child {
+  background: var(--phaeno-rna-900);
+}
+
+.mechanism-card h3 {
+  margin: var(--space-7) 0 var(--space-4);
+  font-size: clamp(1.55rem, 2.25vw, 2rem);
+  line-height: 1.08;
+}
+
+.mechanism-card--featured h3 {
+  color: var(--color-text-on-dark);
+}
+
+.mechanism-card p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.mechanism-card--featured p {
+  color: var(--phaeno-neutral-200);
+}
+
+.mechanism-card__result {
+  margin-top: auto;
+  padding-top: var(--space-6);
+  color: var(--color-brand-strong);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.mechanism-card--featured .mechanism-card__result {
+  color: var(--phaeno-green-200);
+}
+
+.ngs-compatibility {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(18rem, .8fr) minmax(24rem, 1.2fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+  margin-top: var(--space-4);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-on-dark);
+  background:
+    radial-gradient(circle at 100% 0%, rgb(28 127 152 / 28%), transparent 36%),
+    var(--phaeno-rna-900);
+}
+
+.ngs-compatibility::after {
+  content: '';
+  position: absolute;
+  right: -4rem;
+  bottom: -6rem;
+  width: 15rem;
+  height: 15rem;
+  border: 1px solid rgb(214 227 195 / 24%);
+  border-radius: 50%;
+}
+
+.ngs-compatibility__eyebrow {
+  color: var(--phaeno-green-200);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.ngs-compatibility h3 {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-on-dark);
+  font-size: clamp(1.4rem, 2.25vw, 1.85rem);
+  line-height: 1.15;
+}
+
+.ngs-compatibility p {
+  margin: 0;
+  color: var(--phaeno-neutral-200);
+  line-height: 1.65;
+}
+
+.ngs-compatibility__details {
+  position: relative;
+  z-index: 1;
+}
+
+.ngs-compatibility ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-5) 0 var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.ngs-compatibility li {
+  display: inline-flex;
+  width: auto !important;
+  align-items: center;
+  gap: var(--space-2);
+  padding: .45rem .75rem;
+  border: 1px solid rgb(214 227 195 / 32%);
+  border-radius: var(--radius-pill);
+  color: var(--phaeno-green-200);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: .03em;
+}
+
+.ngs-compatibility li::before {
+  content: '';
+  width: .4rem;
+  height: .4rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--phaeno-green-300);
+}
+
+.ngs-compatibility__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: .8rem 1.15rem;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-on-dark);
+  background: var(--phaeno-orange-500);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--shadow-sm);
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.ngs-compatibility__cta:hover {
+  color: var(--color-text-on-dark);
+  background: var(--phaeno-orange-600);
+  transform: translateY(-1px);
+}
+
+.ngs-compatibility__cta span {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.ngs-compatibility__cta:hover span {
+  transform: translateX(2px);
+}
+
+.work-flow-description {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(16rem, .72fr) minmax(0, 1.8fr);
+  border: 1px solid var(--phaeno-green-200);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.workflow-detail-intro {
+  max-width: 52rem;
+  margin: var(--space-3) 0 var(--space-6);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+  line-height: 1.65;
+}
+
+.workflow-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.workflow-card__header {
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  border-right: 1px solid var(--color-border);
+  background: var(--phaeno-green-50);
+}
+
+.workflow-card__stage {
+  display: inline-flex;
+  align-items: center;
+  padding: .4rem .7rem;
+  border: 1px solid var(--phaeno-green-200);
+  border-radius: var(--radius-pill);
+  color: var(--color-brand-strong);
+  background: var(--phaeno-green-100);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.workflow-card__header h3 {
+  margin: var(--space-6) 0 var(--space-3);
+  color: var(--phaeno-rna-900);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  line-height: 1.08;
+}
+
+.workflow-card__header p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+.workflow-card__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: stretch;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  background: var(--color-surface);
+}
+
+.workflow-card__list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 0;
+  height: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--phaeno-neutral-50);
+}
+
+.workflow-card__marker {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 2rem;
+  place-items: center;
+  border: 1px solid var(--phaeno-green-200);
+  border-radius: 50%;
+  color: var(--color-brand-strong);
+  background: var(--phaeno-green-50);
+  font-family: var(--font-family-data);
+  font-size: .68rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.workflow-card__list li > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.workflow-card__list strong {
+  color: var(--phaeno-rna-900);
+  font-size: var(--font-size-sm);
+  line-height: 1.3;
+}
+
+.workflow-card__list li > div > span {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
+}
+
+.workflow-card--execute .workflow-card__header {
+  color: var(--color-text-on-dark);
+  border-color: rgb(255 255 255 / 14%);
+  background:
+    radial-gradient(circle at 100% 0%, rgb(28 127 152 / 30%), transparent 46%),
+    var(--phaeno-rna-900);
+}
+
+.workflow-card--execute .workflow-card__stage {
+  border-color: rgb(255 255 255 / 24%);
+  color: var(--phaeno-green-100);
+  background: rgb(255 255 255 / 14%);
+}
+
+.workflow-card--execute .workflow-card__header h3 {
+  color: var(--color-text-on-dark);
+}
+
+.workflow-card--execute .workflow-card__header p {
+  color: var(--phaeno-neutral-200);
+}
+
+.workflow-card--execute .workflow-card__marker {
+  color: var(--phaeno-rna-600);
+  border-color: var(--phaeno-rna-200);
+  background: var(--phaeno-rna-50);
+}
+
+.workflow-card--execute .workflow-card__list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--color-surface);
+}
+
+.workflow-card--execute .workflow-card__list li {
+  background: var(--phaeno-neutral-50);
+}
+
+.workflow-card--deliver .workflow-card__header {
+  background: var(--phaeno-neutral-100);
+}
+
+.workflow-card--deliver .workflow-card__stage {
+  border-color: var(--phaeno-neutral-200);
+  color: var(--phaeno-rna-800);
+  background: var(--phaeno-white);
+}
+
+.workflow-card--deliver .workflow-card__marker {
+  color: var(--phaeno-rna-600);
+  border-color: var(--phaeno-rna-200);
+  background: var(--phaeno-rna-50);
+}
+
+.workflow-card--deliver .workflow-card__list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 950px) {
+  .work-flow-description {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-card__header {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .workflow-card__list,
+  .workflow-card--execute .workflow-card__list,
+  .workflow-card--deliver .workflow-card__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width:  725px) {
-  .phased-sequencing-large {
+  .category-context {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .mechanism-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .mechanism-flow::before {
     display: none;
   }
-  .phased-sequencing-compact {
-    display: block;
+
+  .mechanism-card {
+    min-height: 0;
+  }
+
+  .mechanism-card__result {
+    margin-top: var(--space-6);
+  }
+
+  .ngs-compatibility {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .workflow-card__list,
+  .workflow-card--execute .workflow-card__list,
+  .workflow-card--deliver .workflow-card__list {
+    grid-template-columns: 1fr;
   }
 }
 </style>

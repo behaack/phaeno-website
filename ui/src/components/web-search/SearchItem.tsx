@@ -84,7 +84,7 @@ function scrollToHashTarget(hash: string) {
 
   const header = document.getElementById('site-header') as HTMLElement | null;
   const offset = header?.offsetHeight ?? 80;
-  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset - 24;
 
   history.pushState(null, '', hash);
   header?.classList.remove('hidden');

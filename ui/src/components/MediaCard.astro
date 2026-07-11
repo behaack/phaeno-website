@@ -44,20 +44,26 @@ const { title, image="", link, searchString, summary } = Astro.props as IProps
 
 <style>
 .media-card-item {
-  border-radius: 0.5rem;
-  background: #eeeee8c5;
-  border: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--phaeno-green-200);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
   overflow: hidden;
+  transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard);
+}
+
+.media-card-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .photo-frame {
   aspect-ratio: 16 / 9;
-  background: #f5f6f2;
+  background: var(--phaeno-green-50);
   overflow: hidden;
 }
 
@@ -72,8 +78,8 @@ const { title, image="", link, searchString, summary } = Astro.props as IProps
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1rem;
+  gap: var(--space-3);
+  padding: var(--space-5);
 }
 
 .title-frame {
@@ -81,7 +87,9 @@ const { title, image="", link, searchString, summary } = Astro.props as IProps
 }
 
 .summary-frame {
-  font-size: .75rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
 }
 
 .details-frame {
@@ -102,24 +110,28 @@ const { title, image="", link, searchString, summary } = Astro.props as IProps
   text-align: center;
   display: inline-flex;
   justify-content: center;
-  background-color: #545458;
-  color: white;
+  background: var(--color-action-primary);
+  color: var(--color-text-on-dark);
   font-weight: 600;
-  padding: 10px;
-  border-radius: 100px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border-radius: var(--radius-pill);
   text-decoration: none;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .btn:hover {
-  background-color: black;
+  color: var(--color-text-on-dark);
+  background: var(--color-action-primary-hover);
   cursor: pointer;
   transform: scale(1.05);
 }
 
 h2 {
-  font-size: 1.05rem;
-  font-weight: 600;
+  color: var(--phaeno-rna-900);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
   line-height: 1.2;
   padding: 0 0 5px 0;
   overflow: hidden;

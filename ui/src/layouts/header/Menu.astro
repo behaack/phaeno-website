@@ -108,7 +108,7 @@ switch (rootParts.length) {
   list-style: none;
   display: flex;
   flex-direction: row;
-  gap: 0;
+  gap: var(--space-1);
 }
 
 .menu-item {
@@ -117,8 +117,8 @@ switch (rootParts.length) {
 }
 
 .menu-item > a {  
-  display: block;                                 /* expands to <li> width */
-  padding: 1.85rem .1rem;
+  display: block;
+  padding: 1.45rem .15rem;
   text-decoration: none;                          /* no underlines */
   background-color: var(--menu-bgcolor);
   color: var(--menu-color);
@@ -130,14 +130,21 @@ switch (rootParts.length) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0.5rem;
-  border-radius: 4px;
+  padding: .45rem .7rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   width: 100%;
 }
 
 .menu-item > a.active {
-  background: var(--menu-selected-bgcolor); 
-  color: var(--menu-selected-color);
+  background: transparent;
+  color: var(--color-brand-strong);
+}
+
+.menu-item > a.active .main-menu-label {
+  background: var(--phaeno-green-100);
+  box-shadow: inset 0 0 0 1px var(--phaeno-green-200);
 }
 
 .menu-item > a.active-parent {
@@ -150,11 +157,12 @@ switch (rootParts.length) {
   outline-offset: 2px;
 }
 
-.menu-item:focus-within { color: var(--menu-focus-color); background-color: var(--menu-focus-bgcolor); }
-.menu-item > a:hover { color: var(--menu-hover-color); background-color: var(--menu-hover-bgcolor); }
-.menu-item > a:active { color: var(--menu-active-color); background-color: var(--menu-active-bgcolor); }
-.menu-item > a.active:hover { color: var(--menu-selected-color); background-color: var(--menu-selected-bgcolor); }
-.menu-item > a.active:active { color: var(--menu-selected-color); background-color: var(--menu-selected-bgcolor); }
+.menu-item:focus-within { color: var(--color-brand-strong); }
+.menu-item > a:hover { color: var(--color-brand-strong); background-color: transparent; }
+.menu-item > a:hover .main-menu-label { background: var(--phaeno-green-50); }
+.menu-item > a:active { color: var(--color-brand-strong); background-color: transparent; }
+.menu-item > a.active:hover { color: var(--color-brand-strong); background-color: transparent; }
+.menu-item > a.active:active { color: var(--color-brand-strong); background-color: transparent; }
 .menu-item > a.active-parent:hover { color: var(--menu-child-selected-color); background-color: var(--menu-hover-bgcolor); }
 .menu-item > a.active-parent:active { color: var(--menu-child-selected-color); background-color: var(--menu-active-bgcolor); }
 
@@ -179,15 +187,17 @@ switch (rootParts.length) {
   position: absolute;
   top: calc(100%);
   left: 0;
-  background: var(--submenu-bgcolor);
+  background: rgb(255 255 255 / 0.98);
   color: var(--submenu-color);
-  border: var(--submenu-border);
+  border: 1px solid var(--phaeno-green-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   /* border-top: none; */
   list-style: none;
   padding: 0;
   margin: 0;
   z-index: 999;
-  min-width: 11.5rem;
+  min-width: 12.5rem;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
@@ -204,7 +214,7 @@ switch (rootParts.length) {
   padding: 0.75rem 1rem;
   color: black;
   text-decoration: none;
-  border-top: var(--submenu-divider); 
+  border-top: 1px solid var(--phaeno-green-100);
   outline: none; /* suppress default ring  */  
   border-radius: 0;
 }
@@ -223,8 +233,8 @@ switch (rootParts.length) {
 }
 
 .sub-menu > li a.active {
-  background: var(--submenu-selected-bgcolor); 
-  color: var(--submenu-selected-color);
+  background: var(--phaeno-green-100);
+  color: var(--color-brand-strong);
 }
 
 .sub-menu > li a:focus-visible .sub-menu-label {
@@ -264,9 +274,11 @@ switch (rootParts.length) {
     position: absolute;
     top: calc(100% + 1.68rem);
     right: 0;
-    background-color: var(--mobile-menu-bgcolor);
-    border: var(--mobile-menu-border);
-    min-width: 210px;
+    background: rgb(255 255 255 / 0.99);
+    border: 1px solid var(--phaeno-green-200);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-overlay);
+    min-width: min(20rem, calc(100vw - 2rem));
     margin: 0;
     padding: 0;
     z-index: 999;    
@@ -278,8 +290,8 @@ switch (rootParts.length) {
   }
 
   .menu-item > a {  
-    padding: 1rem .75rem;
-    border-bottom: var(--mobile-menu-divider);
+    padding: .45rem .65rem;
+    border-bottom: 1px solid var(--phaeno-green-100);
   }
   
   .sub-menu li:last-child > a {  

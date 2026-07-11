@@ -11,36 +11,18 @@ const bannerUrl = '/images/home-page-banner.webp'
   />
 </Fragment>
 
-<div class="image-div">
+<section class="hero" aria-labelledby="home-hero">
   <div
-    class="background-layer"
+    class="hero__image"
     style={`background-image: url('${bannerUrl}');`}
-  >
-    <div class="dark-overlay"></div>
+    aria-hidden="true"
+  ></div>
+  <div class="hero__wash" aria-hidden="true"></div>
+  <div class="hero__signal hero__signal--one" aria-hidden="true"></div>
+  <div class="hero__signal hero__signal--two" aria-hidden="true"></div>
 
-    <!-- Animated circles (unchanged) -->
-    <div class="circle small"></div>
-    <div class="circle medium"></div>
-    <div class="circle large"></div>
-    <div class="circle small"></div>
-    <div class="circle medium"></div>
-    <div class="circle large"></div>
-    <div class="circle medium"></div>
-    <div class="circle small"></div>
-    <div class="circle large"></div>
-
-    <div class="circle-2 small"></div>
-    <div class="circle-2 medium"></div>
-    <div class="circle-2 large"></div>
-    <div class="circle-2 small"></div>
-    <div class="circle-2 medium"></div>
-    <div class="circle-2 large"></div>
-    <div class="circle-2 medium"></div>
-    <div class="circle-2 small"></div>
-    <div class="circle-2 large"></div>
-  </div>
-  
-  <div class="tag-holder">
+  <div class="hero__content">
+    <p class="hero__kicker" data-phaeno-search-ignore>Phased sequencing / PSeq™</p>
     <h1
       id="home-hero"
       data-phaeno-search="Full-length isoform-resolved RNA insight at scale"
@@ -52,114 +34,240 @@ const bannerUrl = '/images/home-page-banner.webp'
       data-phaeno-search="Quantitative ML-ready RNA outputs from short-read sequencing"
       data-phaeno-search-summary="Phaeno produces fully quantitative, machine-learning-ready RNA outputs from short-read sequencing instruments."
       data-phaeno-search-keywords="short-read sequencing quantitative RNA ML-ready outputs PSeq"
-    >Phaeno produces fully quantitative, ML-ready outputs from short-read sequencing</h2>
+    >Fully quantitative, ML-ready outputs from the short-read instruments you already use.</h2>
+
+    <div class="hero__actions" data-phaeno-search-ignore>
+      <a class="hero__primary" href="/contact#request-demo">Request a demo <span aria-hidden="true">→</span></a>
+      <a class="hero__secondary" href="/technology">Explore the technology <span aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="hero__proof" data-phaeno-search-ignore>
+      <div><strong>5′–3′</strong><span>full-length RNA</span></div>
+      <div><strong>NGS</strong><span>instrument compatible</span></div>
+      <div><strong>ML</strong><span>molecule-level features</span></div>
+    </div>
   </div>
-</div>
+</section>
 
 <style>
-/* Animation keyframes */
-@keyframes float {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  25%      { transform: translateY(15px) translateX(-15px); }
-  50%      { transform: translateY(-30px) translateX(125px); }
-  75%      { transform: translateY(9px) translateX(-10px); }
-}
-
-/* Layout */
-.image-div {
+.hero {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
-  margin-top: 14px;
   width: 100%;
-  height: clamp(34rem, 82vh, 46rem);
-  color: #fff;
-  display: flex;
+  max-width: none;
+  min-height: 100svh;
+  padding: 0;
+  display: grid;
   align-items: center;
+  color: var(--color-text-on-dark);
+  background: var(--phaeno-rna-900);
 }
 
-.background-layer {
+.hero__image,
+.hero__wash {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-repeat: no-repeat;
+}
+
+.hero__image {
+  z-index: -3;
   background-position: center;
-  opacity: .9;
-  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: saturate(.76) contrast(1.08);
+  transform: scale(1.02);
 }
 
-.dark-overlay {
+.hero__wash {
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgb(7 24 37 / .96) 0%, rgb(14 40 65 / .87) 48%, rgb(14 40 65 / .32) 100%),
+    linear-gradient(0deg, rgb(7 24 37 / .48), transparent 45%);
+}
+
+.hero__signal {
   position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.466);
-  z-index: 1;
-}
-
-.tag-holder {
-  position: relative;
-  z-index: 2;
-  left: 10vw;
-  font-weight: 700;
-  max-width: 60vw;
-}
-
-/* Circle styling */
-.circle, .circle-2 {
-  position: absolute;
+  z-index: -1;
+  border: 1px solid rgb(183 200 164 / .28);
   border-radius: 50%;
-  animation: float ease-in-out infinite;
+  pointer-events: none;
 }
 
-.circle  { opacity: .6; background: linear-gradient(to right, rgba(127,143,145,.5) 30%, rgba(120,140,137,.8) 100%); animation-duration: 20s; }
-.circle-2{ opacity: .7; background: linear-gradient(to right, rgba(91,83,71,.4) 20%, rgba(95,80,74,.8) 100%);   animation-duration: 15s; }
+.hero__signal--one {
+  width: 30rem;
+  height: 30rem;
+  right: -9rem;
+  top: -10rem;
+}
 
-.circle.small  { width: 20px; height: 20px; }
-.circle.medium { width: 35px; height: 35px; }
-.circle.large  { width: 55px; height: 55px; }
+.hero__signal--two {
+  width: 18rem;
+  height: 18rem;
+  right: 11rem;
+  bottom: -11rem;
+}
 
-.circle-2.small  { width: 10px; height: 10px; }
-.circle-2.medium { width: 17px; height: 17px; }
-.circle-2.large  { width: 32px; height: 35px; }
+.hero__content {
+  width: min(100%, var(--content-max-width));
+  margin: 0 auto;
+  padding: clamp(6rem, 10vw, 9rem) var(--page-gutter) var(--space-8);
+}
 
-/* Circle positions (unchanged) */
-.circle:nth-child(3)  { top: 5%;  left: 15%; animation-delay: 0s;  }
-.circle:nth-child(4)  { top: 20%; left: 70%; animation-delay: 1s;  }
-.circle:nth-child(5)  { top: 40%; left: 25%; animation-delay: 1.4s;}
-.circle:nth-child(6)  { top: 60%; left: 80%; animation-delay: 1s;  }
-.circle:nth-child(7)  { top: 70%; left: 20%; animation-delay: .5s; }
-.circle:nth-child(8)  { top: 15%; left: 70%; animation-delay: 3s;  }
-.circle:nth-child(9)  { top: 90%; left: 5%;  animation-delay: .9s; }
-.circle:nth-child(10) { top: 35%; left: 65%; animation-delay: 1.2s;}
-.circle:nth-child(11) { top: 12%; left: 85%; animation-delay: 1.2s;}
-
-/* …circle-2 nth-child selectors remain untouched… */
-
-/* Typography */
-h1 {
-  font-size: 4rem;
+.hero__kicker {
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  color: var(--phaeno-green-300);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: white;
-  font-weight: 500;
 }
 
-h2 {
-  font-size: 2.5rem;
-  padding-top: 1rem;
-  color: rgb(212, 212, 212);
-  font-weight: 500;
+.hero h1 {
+  max-width: 13ch;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text-on-dark);
+  font-size: clamp(3rem, 7.2vw, 6.5rem);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -.055em;
+  line-height: .93;
+  text-transform: none;
 }
 
-/* Responsive tweaks */
-@media (max-width: 1050px) { h1 { font-size: 3.5rem; } h2 { font-size: 1.9rem; } }
-@media (max-width: 950px) { h1 { font-size: 3rem; } h2 { font-size: 1.85rem; } }
-@media (max-width: 850px) { h1 { font-size: 2.75rem;} h2 { font-size: 1.8rem; } }
-@media (max-width: 750px) { h1 { font-size: 2.5rem; }  h2 { font-size: 1.7rem; } }
-@media (max-width: 600px) { h1 { font-size: 2.1rem; }  h2 { font-size: 1.3rem; } }
-@media (max-width: 725px) { .image-div { height: clamp(30rem, 76vh, 38rem); } }
-@media screen and (max-height: 500px) { 
-  .tag-holder { padding-top: 1.5rem; } 
-  .image-div { height: 28rem; }
-  h1 { font-size: 2rem; }  
-  h2 { font-size: 1.7rem; }
+.hero h2 {
+  max-width: 38rem;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  color: rgb(255 255 255 / .78);
+  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: -.015em;
+  line-height: 1.45;
 }
 
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.hero__actions a {
+  min-height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: .8rem 1.15rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  transition: transform var(--duration-fast) var(--ease-standard), background var(--duration-base) var(--ease-standard);
+}
+
+.hero__primary {
+  color: var(--color-text-on-dark);
+  background: var(--color-action-primary);
+  border: 1px solid var(--phaeno-green-500);
+}
+
+.hero__primary:hover {
+  color: var(--color-text-on-dark);
+  background: var(--color-action-primary-hover);
+  transform: translateY(-1px);
+}
+
+.hero__secondary {
+  color: var(--color-text-on-dark);
+  background: rgb(255 255 255 / .08);
+  border: 1px solid rgb(255 255 255 / .3);
+}
+
+.hero__secondary:hover {
+  color: var(--color-text-on-dark);
+  background: rgb(255 255 255 / .14);
+  transform: translateY(-1px);
+}
+
+.hero__proof {
+  max-width: 42rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding-top: var(--space-5);
+  border-top: 1px solid rgb(255 255 255 / .2);
+}
+
+.hero__proof div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.hero__proof strong {
+  color: var(--phaeno-green-300);
+  font-size: var(--font-size-lg);
+}
+
+.hero__proof span {
+  color: rgb(255 255 255 / .62);
+  font-size: var(--font-size-xs);
+}
+
+@media (min-width: 726px) and (max-height: 800px) {
+  .hero__content {
+    padding-top: calc(var(--header-height) + clamp(1rem, 3vh, 1.5rem));
+    padding-bottom: var(--space-2);
+  }
+
+  .hero__kicker {
+    margin-bottom: var(--space-3);
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, min(7.2vw, 8.5vh), 6.5rem);
+  }
+
+  .hero h2 {
+    margin-top: var(--space-4);
+  }
+
+  .hero__actions {
+    margin-top: var(--space-5);
+  }
+
+  .hero__proof {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+  }
+}
+
+@media (max-width: 725px) {
+  .hero {
+    min-height: max(43rem, 100svh);
+  }
+
+  .hero__wash {
+    background: linear-gradient(90deg, rgb(7 24 37 / .95), rgb(14 40 65 / .78));
+  }
+
+  .hero__content {
+    padding: 6.5rem var(--space-4) var(--space-10);
+  }
+
+  .hero__actions a {
+    width: 100%;
+  }
+
+  .hero__proof {
+    gap: var(--space-2);
+  }
+
+  .hero__proof span {
+    font-size: .68rem;
+  }
+}
 </style>
