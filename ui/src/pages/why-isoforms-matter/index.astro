@@ -143,21 +143,23 @@ import Layout from '@/layouts/Layout.astro'
       </section>
 
       <section class="aso-section" aria-labelledby="protein-isoforms-example-antisense-oligonucleotide-therapies">
-        <p class="eyebrow">Therapeutic relevance</p>
-        <div class="aso-section__body">
-          <div class="aso-section__content">
-            <h2
-              id="protein-isoforms-example-antisense-oligonucleotide-therapies"
-              data-phaeno-search="ASO therapy examples for RNA isoforms"
-              data-phaeno-search-summary="Antisense oligonucleotide therapies show how modulating RNA splicing can address disease-linked isoforms that genomic methods miss."
-              data-phaeno-search-keywords="ASO therapies antisense oligonucleotide RNA splicing isoforms nusinersen eteplirsen"
-            >Isoforms are not just biomarkers. They are therapeutic targets.</h2>
-            <p>Antisense oligonucleotide therapies modulate RNA splicing to restore or suppress specific molecular forms—intervening at a layer gene-level methods cannot resolve.</p>
-            <p>Tools such as JunctionSeq and BIISQ have helped discover and quantify novel isoforms. By early 2025, 11 ASO drugs had been approved, while individualized cases such as Mila’s custom ASO demonstrated the potential of personalized RNA intervention.</p>
-          </div>
-          <div class="aso-examples">
-            <article><div><p>Spinal muscular atrophy</p><h3>Nusinersen</h3><p>Promotes SMN2 exon 7 inclusion to increase functional protein.</p></div></article>
-            <article><div><p>Duchenne muscular dystrophy</p><h3>Eteplirsen</h3><p>Induces exon 51 skipping to restore a functional reading frame.</p></div></article>
+        <div class="aso-section__inner">
+          <p class="eyebrow">Therapeutic relevance</p>
+          <div class="aso-section__body">
+            <div class="aso-section__content">
+              <h2
+                id="protein-isoforms-example-antisense-oligonucleotide-therapies"
+                data-phaeno-search="ASO therapy examples for RNA isoforms"
+                data-phaeno-search-summary="Antisense oligonucleotide therapies show how modulating RNA splicing can address disease-linked isoforms that genomic methods miss."
+                data-phaeno-search-keywords="ASO therapies antisense oligonucleotide RNA splicing isoforms nusinersen eteplirsen"
+              >Isoforms are not just biomarkers. They are therapeutic targets.</h2>
+              <p>Antisense oligonucleotide therapies modulate RNA splicing to restore or suppress specific molecular forms—intervening at a layer gene-level methods cannot resolve.</p>
+              <p>Tools such as JunctionSeq and BIISQ have helped discover and quantify novel isoforms. By early 2025, 11 ASO drugs had been approved, while individualized cases such as Mila’s custom ASO demonstrated the potential of personalized RNA intervention.</p>
+            </div>
+            <div class="aso-examples">
+              <article><div><p>Spinal muscular atrophy</p><h3>Nusinersen</h3><p>Promotes SMN2 exon 7 inclusion to increase functional protein.</p></div></article>
+              <article><div><p>Duchenne muscular dystrophy</p><h3>Eteplirsen</h3><p>Induces exon 51 skipping to restore a functional reading frame.</p></div></article>
+            </div>
           </div>
         </div>
       </section>
@@ -274,7 +276,8 @@ import Layout from '@/layouts/Layout.astro'
 .biomarker-row:nth-child(odd) { background: var(--phaeno-neutral-50); }
 .biomarker-name { color: var(--phaeno-rna-900); font-size: var(--font-size-base); font-weight: var(--font-weight-semibold); }
 .mobile-label { display: none; }
-.aso-section { margin: clamp(3rem, 5vw, 4.5rem) 0; padding: clamp(2.5rem, 4.5vw, 4.25rem); border-radius: var(--radius-2xl); background: var(--phaeno-rna-900); }
+.aso-section { width: 100vw; max-width: none; margin: clamp(3rem, 5vw, 4.5rem) calc(50% - 50vw); padding: 0; background: var(--phaeno-rna-900); }
+.aso-section__inner { width: 100%; max-width: var(--content-max-width); margin: 0 auto; padding: clamp(3rem, 6vw, 5rem) var(--page-gutter); }
 .aso-section .eyebrow { color: var(--phaeno-green-300); }
 .aso-section__body { display: grid; grid-template-columns: 1fr .8fr; gap: clamp(2rem, 7vw, 6rem); align-items: center; }
 .aso-section h2 { color: var(--color-text-on-dark); }
@@ -323,7 +326,7 @@ import Layout from '@/layouts/Layout.astro'
   .page-shell { width: min(100% - 2rem, 80rem); }
   .intro-section { gap: var(--space-7); padding: 2rem 0; }
   .intro-section h2 { font-size: clamp(2.5rem, 13vw, 4rem); }
-  .resolution-section, .biomarker-section, .aso-section { margin-right: -.25rem; margin-left: -.25rem; padding: 1.5rem; border-radius: var(--radius-xl); }
+  .resolution-section, .biomarker-section { margin-right: -.25rem; margin-left: -.25rem; padding: 1.5rem; border-radius: var(--radius-xl); }
   .outcome-grid, .quote-grid, .section-heading--split, .reference-list--columns { grid-template-columns: 1fr; }
   .evidence-quote { min-height: 22rem; }
   .biomarker-table { overflow: visible; border: 0; background: transparent; }
@@ -333,6 +336,7 @@ import Layout from '@/layouts/Layout.astro'
   .biomarker-name { padding-bottom: var(--space-3) !important; border-bottom: 1px solid var(--phaeno-neutral-200); font-size: 1.3rem; }
   .mobile-label { display: block; margin-bottom: .2rem; color: var(--color-brand-strong); font-size: .7rem; font-weight: var(--font-weight-semibold); letter-spacing: .1em; text-transform: uppercase; }
   .aso-section { margin-top: 3.5rem; margin-bottom: 3.5rem; }
+  .aso-section__inner { padding: 2.5rem var(--page-gutter); }
   .closing-panel__actions { width: 100%; flex-direction: column; }
   .closing-panel a { width: 100%; text-align: center; }
 }

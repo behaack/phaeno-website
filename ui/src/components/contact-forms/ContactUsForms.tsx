@@ -12,16 +12,20 @@ export default function ContactUsForms() {
       reCaptchaKey={CAPTCHA_SITE_KEY}
       scriptProps={{ async: true, defer: true }}
     >
-      <h2
-        id="request-demo"
-        className="mt-4 pb-2"
-        style={{ scrollMarginTop: "7rem" }}
-        data-phaeno-search="Request a PSeq demo"
-        data-phaeno-search-summary="Request a PSeq demo to walk through isoform-resolved RNA data with the Phaeno team."
-        data-phaeno-search-keywords="PSeq demo request isoform-resolved RNA data sample project"
-      >See PSeq in Action</h2>
-      <p>Walk through isoform-resolved RNA data with our team using your sample.</p>
-      <OrderForm />
+      <section className="demo-band" aria-labelledby="request-demo">
+        <div className="demo-band__inner">
+          <h2
+            id="request-demo"
+            className="pb-2"
+            style={{ scrollMarginTop: "7rem" }}
+            data-phaeno-search="Request a PSeq demo"
+            data-phaeno-search-summary="Request a PSeq demo to walk through isoform-resolved RNA data with the Phaeno team."
+            data-phaeno-search-keywords="PSeq demo request isoform-resolved RNA data sample project"
+          >See PSeq in Action</h2>
+          <p>Walk through isoform-resolved RNA data with our team using your sample.</p>
+          <OrderForm />
+        </div>
+      </section>
       <h2
         id="sign-up"
         className="mt-4 pb-2"

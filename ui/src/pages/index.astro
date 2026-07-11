@@ -129,11 +129,13 @@ const platformFeatures = [
       </div>
 
       <div class="platform-cta" data-phaeno-search-ignore>
-        <div>
-          <p class="section-kicker">From reads to resolved biology</p>
-          <p>See how PSeq chemistry and software recover complete RNA molecules on standard NGS platforms.</p>
+        <div class="platform-cta__inner">
+          <div>
+            <p class="section-kicker">From reads to resolved biology</p>
+            <p>See how PSeq chemistry and software recover complete RNA molecules on standard NGS platforms.</p>
+          </div>
+          <a href="/technology">Explore PSeq technology <span aria-hidden="true">→</span></a>
         </div>
-        <a href="/technology">Explore PSeq technology <span aria-hidden="true">→</span></a>
       </div>
 
       <div class="metrics-shell">
@@ -327,37 +329,57 @@ const platformFeatures = [
 }
 
 .platform-cta {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  margin-top: var(--space-4);
+  color: var(--color-text-on-dark);
+  background:
+    radial-gradient(circle at 78% 18%, rgb(28 127 152 / .28), transparent 38%),
+    var(--phaeno-rna-900);
+}
+
+.platform-cta__inner {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5rem) var(--page-gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-8);
-  margin-top: var(--space-4);
-  padding: var(--space-8);
-  border-radius: var(--radius-2xl);
-  background: var(--phaeno-green-100);
 }
 
-.platform-cta p {
+.platform-cta .section-kicker {
+  color: var(--phaeno-green-300);
+}
+
+.platform-cta__inner p {
   max-width: 42rem;
   margin: 0;
   padding: 0;
 }
 
-.platform-cta > a {
+.platform-cta__inner > div > p:last-child {
+  color: rgb(255 255 255 / .76);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+}
+
+.platform-cta__inner > a {
   flex: 0 0 auto;
   display: inline-flex;
   gap: var(--space-3);
   padding: .8rem 1.1rem;
   color: var(--color-text-on-dark);
-  background: var(--color-action-primary);
+  background: var(--phaeno-orange-500);
   border-radius: var(--radius-pill);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
 }
 
-.platform-cta > a:hover {
+.platform-cta__inner > a:hover {
   color: var(--color-text-on-dark);
-  background: var(--color-action-primary-hover);
+  background: var(--phaeno-orange-600);
 }
 
 .metrics-shell {
@@ -367,7 +389,7 @@ const platformFeatures = [
 .closing-cta {
   max-width: none;
   padding: 0;
-  background: #104c43;
+  background: var(--color-surface-rna);
 }
 
 .closing-cta__inner {
@@ -454,13 +476,12 @@ const platformFeatures = [
     justify-content: flex-start;
   }
 
-  .platform-cta {
+  .platform-cta__inner {
     align-items: stretch;
     flex-direction: column;
-    padding: var(--space-6);
   }
 
-  .platform-cta > a {
+  .platform-cta__inner > a {
     justify-content: center;
   }
 
