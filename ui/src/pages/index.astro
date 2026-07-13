@@ -73,6 +73,26 @@ const platformFeatures = [
     summary: 'Structured, molecule-level features derived from real measurements—not averaged signals or approximations.',
   },
 ];
+
+const performanceHighlights = [
+  {
+    value: '>87%',
+    label: 'Rare isoform sensitivity',
+    detail: 'at <0.01% abundance',
+  },
+  {
+    value: '>94%',
+    label: 'Full-length isoform recovery',
+  },
+  {
+    value: '<2 hrs',
+    label: 'Hands-on time per sample',
+  },
+  {
+    value: '<24 hrs',
+    label: 'Library-to-FASTA turnaround',
+  },
+];
 ---
 <Layout>
   <SEOMeta 
@@ -130,11 +150,25 @@ const platformFeatures = [
 
       <div class="platform-cta" data-phaeno-search-ignore>
         <div class="platform-cta__inner">
-          <div>
-            <p class="section-kicker">From reads to resolved biology</p>
-            <p>See how PSeq chemistry and software recover complete RNA molecules on standard NGS platforms.</p>
+          <div class="platform-cta__content">
+            <div>
+              <p class="section-kicker">From reads to resolved biology</p>
+              <p>See how PSeq chemistry and software recover complete RNA molecules on standard NGS platforms.</p>
+            </div>
+            <a href="/technology">Explore PSeq technology <span aria-hidden="true">→</span></a>
           </div>
-          <a href="/technology">Explore PSeq technology <span aria-hidden="true">→</span></a>
+
+          <dl class="platform-metrics" aria-label="PSeq performance highlights">
+            {performanceHighlights.map((metric) => (
+              <div class="platform-metric">
+                <dt>
+                  {metric.label}
+                  {metric.detail && <span>{metric.detail}</span>}
+                </dt>
+                <dd>{metric.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
 
@@ -343,6 +377,9 @@ const platformFeatures = [
   max-width: var(--content-max-width);
   margin: 0 auto;
   padding: clamp(3rem, 6vw, 5rem) var(--page-gutter);
+}
+
+.platform-cta__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -353,19 +390,19 @@ const platformFeatures = [
   color: var(--phaeno-green-300);
 }
 
-.platform-cta__inner p {
+.platform-cta__content p {
   max-width: 42rem;
   margin: 0;
   padding: 0;
 }
 
-.platform-cta__inner > div > p:last-child {
+.platform-cta__content > div > p:last-child {
   color: rgb(255 255 255 / .76);
   font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
 }
 
-.platform-cta__inner > a {
+.platform-cta__content > a {
   flex: 0 0 auto;
   display: inline-flex;
   gap: var(--space-3);
@@ -377,9 +414,54 @@ const platformFeatures = [
   font-weight: var(--font-weight-semibold);
 }
 
-.platform-cta__inner > a:hover {
+.platform-cta__content > a:hover {
   color: var(--color-text-on-dark);
   background: var(--phaeno-orange-600);
+}
+
+.platform-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  padding: clamp(1.75rem, 3vw, 2.5rem) 0 0;
+  border-top: 1px solid rgb(255 255 255 / .2);
+}
+
+.platform-metric {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 0 clamp(1rem, 2.5vw, 2rem);
+  border-left: 1px solid rgb(255 255 255 / .16);
+}
+
+.platform-metric:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.platform-metric:last-child {
+  padding-right: 0;
+}
+
+.platform-metric dt {
+  margin: var(--space-2) 0 0;
+  color: rgb(255 255 255 / .72);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.platform-metric dt span {
+  display: block;
+}
+
+.platform-metric dd {
+  order: -1;
+  margin: 0;
+  color: var(--color-text-on-dark);
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
 }
 
 .metrics-shell {
@@ -476,13 +558,36 @@ const platformFeatures = [
     justify-content: flex-start;
   }
 
-  .platform-cta__inner {
+  .platform-cta__content {
     align-items: stretch;
     flex-direction: column;
   }
 
-  .platform-cta__inner > a {
+  .platform-cta__content > a {
     justify-content: center;
+  }
+
+  .platform-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--space-6);
+  }
+
+  .platform-metric {
+    padding-inline: var(--space-4);
+  }
+
+  .platform-metric:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .platform-metric:nth-child(even) {
+    padding-right: 0;
+  }
+
+  .platform-metric:nth-child(n + 3) {
+    padding-top: var(--space-6);
+    border-top: 1px solid rgb(255 255 255 / .16);
   }
 
   .closing-cta__inner {
