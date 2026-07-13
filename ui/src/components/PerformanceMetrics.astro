@@ -7,7 +7,7 @@
       id="performance-metrics"
       data-phaeno-search="PSeq performance metrics and RNA sequencing comparison"
       data-phaeno-search-summary="Comparison of PSeq, short-read RNA-Seq, and long-read sequencing across molecule resolution, quantification, workflow, and ML readiness."
-      data-phaeno-search-keywords="PSeq performance RNA-Seq long-read sequencing short-read sequencing rare isoforms full-length recovery NGS compatible AI ML"
+      data-phaeno-search-keywords="PSeq performance RNA-Seq long-read sequencing short-read sequencing rare isoforms full-length recovery pri-miRNA pre-miRNA mature miRNA NGS compatible AI ML"
     >How PSeq compares</h2>
     <p>Preliminary performance data against standard short-read and long-read workflows.</p>
   </div>
@@ -34,19 +34,31 @@
           <th scope="row">Full UTR resolution</th>
           <td data-label="PSeq"><span class="status status--yes" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
           <td data-label="Short-Read NGS"><span class="status status--no" aria-hidden="true">✕</span><span class="sr-only">No</span></td>
-          <td data-label="Long-Read"><span class="status status--partial" aria-hidden="true">◐</span> partial only</td>
+          <td data-label="Long-Read"><span class="status-with-detail"><span class="status status--partial" aria-hidden="true">◐</span><span>partial only</span></span></td>
         </tr>
         <tr>
           <th scope="row">Fully assembled transcripts</th>
-          <td data-label="PSeq"><span class="status status--yes" aria-hidden="true">✓</span> every molecule 5′–3′</td>
-          <td data-label="Short-Read NGS"><span class="status status--no" aria-hidden="true">✕</span> needs statistical reconstruction</td>
+          <td data-label="PSeq"><span class="status-with-detail"><span class="status status--yes" aria-hidden="true">✓</span><span>every molecule 5′–3′</span></span></td>
+          <td data-label="Short-Read NGS"><span class="status-with-detail"><span class="status status--no" aria-hidden="true">✕</span><span>needs statistical reconstruction</span></span></td>
           <td data-label="Long-Read"><span class="status status--yes" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
         </tr>
         <tr>
+          <th scope="row">Pri-/pre-miRNA<sup>3</sup></th>
+          <td data-label="PSeq"><span class="status status--yes" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
+          <td data-label="Short-Read NGS"><span class="status-with-detail"><span class="status status--partial" aria-hidden="true">◐</span><span>fragmented/inferred</span></span></td>
+          <td data-label="Long-Read"><span class="status-with-detail"><span class="status status--partial" aria-hidden="true">◐</span><span>longer pri-/pre-miRNA only</span></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Mature miRNA</th>
+          <td data-label="PSeq"><span class="status-with-detail"><span class="status status--yes" aria-hidden="true">✓</span><span>validation pending</span></span></td>
+          <td data-label="Short-Read NGS"><span class="status-with-detail"><span class="status status--partial" aria-hidden="true">◐</span><span>requires small-RNA library</span></span></td>
+          <td data-label="Long-Read"><span class="status status--no" aria-hidden="true">✕</span><span class="sr-only">No</span></td>
+        </tr>
+        <tr>
           <th scope="row">Quantitative</th>
-          <td data-label="PSeq"><span class="status status--yes" aria-hidden="true">✓</span> molecule-counting</td>
-          <td data-label="Short-Read NGS"><span class="status status--no" aria-hidden="true">✕</span> semi-quantitative</td>
-          <td data-label="Long-Read"><span class="status status--no" aria-hidden="true">✕</span> semi-quantitative</td>
+          <td data-label="PSeq"><span class="status-with-detail"><span class="status status--yes" aria-hidden="true">✓</span><span>molecule-counting</span></span></td>
+          <td data-label="Short-Read NGS"><span class="status-with-detail"><span class="status status--no" aria-hidden="true">✕</span><span>semi-quantitative</span></span></td>
+          <td data-label="Long-Read"><span class="status-with-detail"><span class="status status--no" aria-hidden="true">✕</span><span>semi-quantitative</span></span></td>
         </tr>
         <tr>
           <th scope="row">Direct cloning</th>
@@ -57,7 +69,7 @@
         <tr>
           <th scope="row">Simple workflow</th>
           <td data-label="PSeq"><span class="status status--yes" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
-          <td data-label="Short-Read NGS"><span class="status status--partial" aria-hidden="true">◐</span> multi-step &amp; model-dependent</td>
+          <td data-label="Short-Read NGS"><span class="status-with-detail"><span class="status status--partial" aria-hidden="true">◐</span><span>multi-step &amp; model-dependent</span></span></td>
           <td data-label="Long-Read"><span class="status status--no" aria-hidden="true">✕</span><span class="sr-only">No</span></td>
         </tr>
         <tr>
@@ -73,7 +85,7 @@
           <td data-label="Long-Read"><span class="status status--no" aria-hidden="true">✕</span><span class="sr-only">No</span></td>
         </tr>
         <tr class="metrics-start">
-          <th scope="row">Rare isoform sensitivity<sup>3</sup></th>
+          <th scope="row">Rare isoform sensitivity<sup>4</sup></th>
           <td data-label="PSeq" class="pseq-value">&gt;87%</td>
           <td data-label="Short-Read NGS">&lt;5%</td>
           <td data-label="Long-Read">~45%</td>
@@ -101,7 +113,7 @@
   </div>
 
   <div class="comparison__notes">
-    <p><sup>1</sup> Illumina TruSeq Stranded mRNA, STAR + RSEM quantification (v2.7). <sup>2</sup> PacBio Iso-Seq3, SMRT-Link v11, consensus polishing. <sup>3</sup> Rare isoforms are &lt;0.01% abundance.</p>
+    <p><sup>1</sup> Illumina TruSeq Stranded mRNA, STAR + RSEM quantification (v2.7). <sup>2</sup> PacBio Iso-Seq3, SMRT-Link v11, consensus polishing. <sup>3</sup> miRNA precursors are long enough for standard transcript-oriented workflows, although short-read data may require reconstruction. Mature miRNAs are approximately 22 nt and require efficient small-RNA capture. <sup>4</sup> Rare isoforms are &lt;0.01% abundance.</p>
     <p>All data are for research use only (RUO); not validated for clinical diagnostics.</p>
   </div>
 </div>
@@ -228,6 +240,18 @@ tbody td:nth-child(2) {
   margin-right: .35rem;
   font-family: var(--font-family-data);
   font-weight: var(--font-weight-semibold);
+}
+
+.status-with-detail {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1.1em minmax(0, 1fr);
+  column-gap: .35rem;
+  align-items: start;
+}
+
+.status-with-detail .status {
+  margin-right: 0;
 }
 
 .status--yes {
