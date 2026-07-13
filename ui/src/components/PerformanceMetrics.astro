@@ -5,8 +5,8 @@
   <h2
     id="performance-metrics"
     data-phaeno-search="PSeq performance metrics and RNA sequencing comparison"
-    data-phaeno-search-summary="Comparison of PSeq, short-read RNA-Seq, and long-read sequencing across molecule resolution, quantification, workflow, and ML readiness."
-    data-phaeno-search-keywords="PSeq performance RNA-Seq long-read sequencing short-read sequencing rare isoforms full-length recovery NGS compatible AI ML"
+    data-phaeno-search-summary="Comparison of PSeq, short-read RNA-Seq, and long-read sequencing across molecule resolution, miRNA support, quantification, workflow, and ML readiness."
+    data-phaeno-search-keywords="PSeq performance RNA-Seq long-read sequencing short-read sequencing miRNA microRNA small RNA rare isoforms full-length recovery NGS compatible AI ML"
   >Performance Metrics</h2>
   <ul class="data-table">
     <li>
@@ -27,25 +27,25 @@
       <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
       <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><span style="color: red;">✖</span></div>
       <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><div><span style="color: red;">✖</span></div><div class="comment">Partial only</div></div>
-    </li>    
+    </li>
     <li>
       <div class="data-item metric">Fully assembled transcripts</div>
       <div class="data-item pseq"><div class="data-label">PSeq</div><div><span style="color: green;">✔</span></div><div class="comment">Every molecule is assembled (5’ to 3’).</div></div>
       <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><div><span style="color: red;">✖</span></div><div class="comment">Fragments require statistical reconstuction.</div></div>
       <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: green;">✔</span></div>
-    </li>    
+    </li>
     <li>
       <div class="data-item metric">Quantitative</div>
       <div class="data-item pseq"><div class="data-label">PSeq</div><div><span style="color: green;">✔</span></div><div class="comment">Fully quantitative. (Molecule-counting, no inference)</div></div>
       <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><div><span style="color: red;">✖</span></div><div class="comment">Semi-quantitative.</div></div>
       <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><div><span style="color: red;">✖</span></div><div class="comment">Semi-quantitative.</div></div>
-    </li>        
+    </li>
     <li>
       <div class="data-item metric">Direct cloning</div>
       <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
       <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><span style="color: red;">✖</span></div>
       <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: red;">✖</span></div>
-    </li>   
+    </li>
     <li>
       <div class="data-item metric">Simple workflow</div>
       <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
@@ -57,14 +57,20 @@
       <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
       <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><span style="color: green;">✔</span></div>
       <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: red;">✖</span></div>
-    </li>    
+    </li>
+    <li>
+      <div class="data-item metric">Mature miRNA sequencing<sup>5</sup></div>
+      <div class="data-item pseq"><div class="data-label">PSeq</div><div><span style="color: green;">✔</span></div><div class="comment">Mature miRNA and longer precursors.</div></div>
+      <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><div><span style="color: #b7791f;">◐</span></div><div class="comment">Requires a separate small-RNA library workflow.</div></div>
+      <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><div><span style="color: red;">✖</span></div><div class="comment">Not practical for ~22-nt mature miRNA.</div></div>
+    </li>
     <li>
       <div class="data-item metric">AI/ML optimized</div>
       <div class="data-item pseq"><div class="data-label">PSeq</div><span style="color: green;">✔</span></div>
       <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div><span style="color: red;">✖</span></div>
       <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div><span style="color: red;">✖</span></div>
-    </li>        
-    <li class="sub-title justify-center"><div>Performance Metrics<sup> 3</sup></div></li>            
+    </li>
+    <li class="sub-title justify-center"><div>Performance Metrics<sup> 3</sup></div></li>
     <li>
       <div class="data-item metric">Rare<sup>4</sup> isoform sensitivity</div>
       <div class="data-item pseq"><div class="data-label">PSeq</div><span style="font-weight: 900; font-size: larger">&gt;87%</span></div>
@@ -88,23 +94,24 @@
       <div class="data-item pseq"><div class="data-label">PSeq</div>&lt;24 hours</div>
       <div class="data-item short-read"><div class="data-label">Short Read<sup>1</sup></div>~26 hours</div>
       <div class="data-item long-read"><div class="data-label">Long Read<sup>2</sup></div>~72 hours</div>
-    </li>                
-  </ul>   
+    </li>
+  </ul>
   <div class="text-xs text-muted flex flex-col gap-2 mt-3">
     <div class="flex items-start gap-2"><div class="shrink-0"><sup>1</sup></div><div>Illumina TruSeq Stranded mRNA, STAR + RSEM quantification (v2.7).</div></div>
     <div class="flex items-start gap-2"><div class="shrink-0"><sup>2</sup></div><div>PacBio Iso-Seq3, SMRT-Link v11, consensus polishing.</div></div>
     <div class="flex items-start gap-2"><div class="shrink-0"><sup>3</sup></div><div>PSeq performance metrics are preliminary and may be refined as additional samples are evaluated under increasingly stringent validation conditions. Turnaround time reflects best-case performance at scale.</div></div>
     <div class="flex items-start gap-2"><div class="shrink-0"><sup>4</sup></div><div>&lt;0.01% abundance.</div></div>
+    <div class="flex items-start gap-2"><div class="shrink-0"><sup>5</sup></div><div>Standard mRNA and Iso-Seq workflows are not designed for ~22-nt mature miRNAs. Dedicated short-read small-RNA sequencing can measure mature miRNAs but requires a separate library preparation.</div></div>
     <div class="mt-3"><em>All data are for research use only (RUO). Not validated for clinical diagnostics.</em></div>
   </div>
-</div> 
+</div>
 
 <style lang="scss">
 ul.data-table {
   margin: 0;
   padding: 0;
   gap: 0;
-  border-right: 1px solid rgb(202, 202, 202);      
+  border-right: 1px solid rgb(202, 202, 202);
   border-left: 1px solid rgb(202, 202, 202);
   li {
     display: flex;
@@ -114,7 +121,7 @@ ul.data-table {
       border-right: 1px solid rgb(179, 179, 179);
       padding: 5px;
       overflow-wrap: break-word;
-      word-break: break-word;          
+      word-break: break-word;
     }
 
     div.data-item:last-of-type {
@@ -124,8 +131,8 @@ ul.data-table {
     div.data-label {
       display: none;
       font-weight: bolder;
-    }    
-    
+    }
+
     .metric {
       width: 40%;
     }
@@ -143,18 +150,18 @@ ul.data-table {
 
     &:nth-child(odd) {
       background-color: white;
-    }   
-    
-    &:first-child {      
+    }
+
+    &:first-child {
       display: flex;
       font-size: .85rem;
       font-weight: bold;
       background-color: rgb(201, 201, 201);
-      border-bottom: 1px solid rgb(202, 202, 202);      
-    }  
-    
-    &:last-child {      
-      border-bottom: 1px solid rgb(202, 202, 202);      
+      border-bottom: 1px solid rgb(202, 202, 202);
+    }
+
+    &:last-child {
+      border-bottom: 1px solid rgb(202, 202, 202);
     }
   }
 
@@ -163,7 +170,7 @@ ul.data-table {
   }
 
   li.sub-title {
-    display: flex;    
+    display: flex;
     background-color: black;
     color: white;
     display: flex;
@@ -171,7 +178,7 @@ ul.data-table {
     padding-top: 3px;
     padding-bottom: 3px;
     font-weight: 900;
-  }               
+  }
 }
 
 @media (max-width: 950px) {
@@ -180,14 +187,14 @@ ul.data-table {
     li {
       padding: 10px;
       display: block;
-      &:first-child {      
+      &:first-child {
         display: none;
-      }      
+      }
       div.data-item {
         border: none;
         padding: 0;
         display: flex;
-      } 
+      }
       div.data-label {
         display: block;
         width: 5.75rem;
@@ -206,18 +213,18 @@ ul.data-table {
       }
 
       .metric,
-      .pseq, 
+      .pseq,
       .short-read,
       .long-read {
         width: 100%;
         display: block;
         text-align: left;
-      }               
+      }
     }
     .comment {
       font-size: 12px;
       margin-left: 5px;
-    }    
+    }
   }
-}  
+}
 </style>
