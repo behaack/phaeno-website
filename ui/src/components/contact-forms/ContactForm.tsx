@@ -138,18 +138,14 @@ export function ContactForm() {
   };
 
   const inputBase =
-    "mt-px w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm " +
-    "shadow-sm outline-none placeholder:text-slate-400 " +
-    "focus:border-[#789946] focus:ring-2 focus:ring-[#789946]/25 " +
+    "contact-input mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm " +
+    "outline-none placeholder:text-slate-400 " +
     "disabled:bg-slate-50 disabled:text-slate-500";
 
   const labelBase = "block text-sm font-medium text-slate-800";
 
   return (
-    <section
-      aria-labelledby={`${formId}-title`}
-      className="rounded-2xl border border-slate-200 bg-gray-50 shadow-sm"
-    >
+    <div className="contact-form-panel contact-form-panel--updates">
       <div className="px-6 py-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* NAME ROW */}
@@ -257,7 +253,7 @@ export function ContactForm() {
             </div>
           )}
 
-          <div className="flex items-center justify-between gap-4 pt-2">
+          <div className="contact-form-actions flex items-center justify-between gap-4 pt-2">
             <p className="text-xs text-slate-700">
               We’ll never share your email.
             </p>
@@ -267,9 +263,8 @@ export function ContactForm() {
               disabled={isSubmitting}
               aria-busy={isSubmitting}
               className={[
-                "inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold",
-                "bg-[#789946] text-white shadow-sm",
-                "hover:bg-[#6c8a3f]",
+                "contact-submit inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold",
+                "shadow-sm",
                 "disabled:cursor-not-allowed disabled:opacity-60",
               ].join(" ")}
             >
@@ -278,6 +273,6 @@ export function ContactForm() {
           </div>
         </form>
       </div>
-    </section>
+    </div>
   );
 }

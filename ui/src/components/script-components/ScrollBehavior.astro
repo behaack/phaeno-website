@@ -44,6 +44,17 @@ if (isHeaderFocused() || isSkipLinkFocus()) return;
     }, TIMEOUT);
   }
 
+  function getAnchorScrollTop(target: HTMLElement): number {
+    const scrollMarginTop = Number.parseFloat(
+      window.getComputedStyle(target).scrollMarginTop,
+    );
+    const targetGap = Number.isFinite(scrollMarginTop) && scrollMarginTop > 0
+      ? scrollMarginTop
+      : anchorGap;
+
+    return target.getBoundingClientRect().top + window.scrollY - offset - targetGap;
+  }
+
   // === Header event handlers ===
   header?.addEventListener('focusin', () => {
     showHeader();
@@ -102,7 +113,7 @@ if (isHeaderFocused() || isSkipLinkFocus()) return;
       if (target) {
         e.preventDefault();
         history.pushState(null, '', href);
-        const y = target.getBoundingClientRect().top + window.scrollY - offset - anchorGap;
+        const y = getAnchorScrollTop(target);
 
         programmaticScroll = true;
         showHeader();
@@ -115,7 +126,7 @@ if (isHeaderFocused() || isSkipLinkFocus()) return;
   if (window.location.hash) {
     const target = document.querySelector(window.location.hash) as HTMLElement | null;
     if (target) {
-      const y = target.getBoundingClientRect().top + window.scrollY - offset - anchorGap;
+      const y = getAnchorScrollTop(target);
       programmaticScroll = true;
       showHeader();
       setTimeout(() => {

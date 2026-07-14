@@ -15,8 +15,8 @@ const { contentItem } = Astro.props as IProps
     target="_blank" 
     href={contentItem.value}
   >
+    <span>{contentItem.label}</span>
     <FaExternalLinkAlt size={12} />
-    <span>{contentItem.label}</span> 
   </a>  
 </div>
 
