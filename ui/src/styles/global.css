@@ -60,22 +60,22 @@
   /* --------------------- */
   /*   Main Menu           */
   --menu-bgcolor: inherit;
-  --menu-color: black;
+  --menu-color: var(--color-text);
   
-  --menu-selected-bgcolor: var(--color-brand);
-  --menu-selected-color: var(--color-text-on-dark);
+  --menu-selected-bgcolor: var(--phaeno-green-100);
+  --menu-selected-color: var(--color-brand-strong);
 
-  --menu-child-selected-bgcolor: var(--menu-bgcolor);
-  --menu-child-selected-color: var(--menu-selected-bgcolor);
+  --menu-child-selected-bgcolor: var(--phaeno-green-100);
+  --menu-child-selected-color: var(--color-brand-strong);
   
-  --menu-focus-bgcolor: #f0f4ff;
-  --menu-focus-color: black;
+  --menu-focus-bgcolor: var(--phaeno-green-50);
+  --menu-focus-color: var(--color-brand-strong);
   
-  --menu-hover-bgcolor: #f0f4ff;
-  --menu-hover-color: black;
+  --menu-hover-bgcolor: var(--phaeno-green-100);
+  --menu-hover-color: var(--color-brand-strong);
   
-  --menu-active-bgcolor: #f0f4ff;
-  --menu-active-color: black;
+  --menu-active-bgcolor: var(--phaeno-green-200);
+  --menu-active-color: var(--color-brand-strong);
 
     /*    Sub-Menu   */  
   --submenu-bgcolor: var(--phaeno-green-100);
@@ -83,17 +83,17 @@
   --submenu-border: 1px solid #ccc;
   --submenu-divider: 1px solid #ccc;
 
-  --submenu-selected-bgcolor: var(--color-brand);
-  --submenu-selected-color: var(--color-text-on-dark);
+  --submenu-selected-bgcolor: var(--phaeno-green-100);
+  --submenu-selected-color: var(--color-brand-strong);
     
-  --submenu-focus-bgcolor: #f0f4ff;
-  --submenu-focus-color: black;
+  --submenu-focus-bgcolor: var(--phaeno-green-50);
+  --submenu-focus-color: var(--color-brand-strong);
   
-  --submenu-hover-bgcolor: #f0f4ff;
-  --submenu-hover-color: black;
+  --submenu-hover-bgcolor: var(--phaeno-green-100);
+  --submenu-hover-color: var(--color-brand-strong);
   
-  --submenu-active-bgcolor: #f0f4ff;
-  --submenu-active-color: black;
+  --submenu-active-bgcolor: var(--phaeno-green-200);
+  --submenu-active-color: var(--color-brand-strong);
 
   /* --------------------- */
   /* MOBILE Menu Settings */
