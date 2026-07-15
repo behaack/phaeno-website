@@ -1,14 +1,22 @@
-# Evidence note: An Introduction to Phased Sequencing, Parts 2 and 3
+# Evidence note: An Introduction to Phased Sequencing series
 
 ## Question and audience
 
-What scientific context can support public, introductory articles explaining how PSeq is designed to preserve source-molecule identity and why molecule-resolved transcript data may be useful in biological discovery, translational research, and machine learning?
+What scientific context and terminology constraints can support public, introductory articles explaining why molecule-level RNA linkage matters, how PSeq is designed to preserve source-molecule identity, and why molecule-resolved transcript data may be useful in biological discovery, translational research, and machine learning?
 
 Audience: scientific, biotechnology, translational-research, and technically informed general readers of the Phaeno website.
 
 Access date: 2026-07-15.
 
 ## Sources
+
+### Scientific review feedback supplied for the three-article series
+
+- Publisher/type: user-provided scientific and editorial review; unpublished expert feedback.
+- Supplied: 2026-07-15.
+- Findings: Phaeno’s use of “phased sequencing” should be identified explicitly; molecular assignment constrains but does not guarantee reconstruction; cDNA measurements should be distinguished from original RNA molecules; transcript boundaries, completeness, consensus, molecule counts, RNA editing, and coding potential require operational or inferential language.
+- Supports: terminology and qualification changes across all three articles.
+- Limitations: this is editorial review rather than independent performance evidence. It does not validate PSeq chemistry or establish assay performance.
 
 ### Phaeno, "An Introduction to Phased Sequencing: Part 1" (formerly v3)
 
@@ -69,7 +77,14 @@ Access date: 2026-07-15.
 ## Required limitations and wording
 
 - Use "designed to," "may," "could," "hypothesis," and "requires validation" for PSeq performance and future applications.
+- Identify "phased sequencing" as Phaeno’s usage for architectures that preserve linkage among observations from one source molecule; do not imply a universally accepted category definition.
 - Do not state that source-molecule identity guarantees full-length recovery, correct assembly, unbiased quantification, or biological function.
+- State near the central assembly claim that reconstruction also depends on coverage continuity, overlap, reference information, and observed boundary evidence.
+- In cDNA workflows, distinguish a captured RNA-derived molecular template from the original RNA molecule and treat cDNA ends as evidence about, not proof of, native transcript boundaries.
+- Treat "complete" and "full-length" as predefined analytical criteria. State which boundaries, splice-chain, coverage, consensus, or interpolation requirements apply.
+- Describe consensus as estimating the captured molecular template; accuracy relative to the original RNA additionally depends on errors introduced before fragment observations become independent.
+- Treat recovered molecule groups as analytical observations, not automatically unbiased counts of all input RNA molecules.
+- Use "observed 5′ transcript boundary," "observed 3′ transcript boundary," "candidate RNA-editing event," and "predicted coding sequence or open reading frame" unless stronger interpretation is independently justified.
 - Separate analytical validity, biological association, predictive performance, and clinical utility.
 - Emphasize controls for molecule recovery, assignment errors, coverage, transcript length, abundance, batch effects, feature stability, independent validation, and prospective evaluation.
 
