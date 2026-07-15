@@ -8,6 +8,7 @@ import TopPageBanner from '@/components/TopPageBanner.astro'
 import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
 import MediaSearch from '@/components/MediaSearch.astro';
 import MediaNoItems from '@/components/MediaNoItems.astro';
+import { formatContentDate } from '@/lib/dates';
 
 const events = await getCollection('events')
 const news = await getCollection('news')
@@ -58,7 +59,7 @@ const news = await getCollection('news')
             image={item.data.image} 
             link={`/media/news-and-events/${item.id}`}
           >
-            <div>{new Date(item.data.date).toLocaleDateString('en-US')}</div>
+            <div>{formatContentDate(item.data.date)}</div>
           </MediaCard>
         ))}      
       </MediaCollection>

@@ -7,6 +7,7 @@ import TopPageBanner from '@/components/TopPageBanner.astro'
 import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
 import MediaSearch from '@/components/MediaSearch.astro'
 import MediaNoItems from '@/components/MediaNoItems.astro'
+import { formatContentDate } from '@/lib/dates'
 
 const papers = await getCollection('scientific_papers')
 ---
@@ -36,7 +37,7 @@ const papers = await getCollection('scientific_papers')
           >
             <div>{paper.data.authors.join(', ')}</div>
             <div><i>{paper.data.journal}</i></div>
-            <div><i>{new Date(paper.data.date).toLocaleDateString('en-US')}</i></div>
+            <div><i>{formatContentDate(paper.data.date)}</i></div>
           </MediaCard>
         ))}      
       </MediaCollection> 

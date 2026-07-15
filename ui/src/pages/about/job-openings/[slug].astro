@@ -5,6 +5,7 @@ import Layout from '@/layouts/Layout.astro';
 import TopPageBanner from '@/components/TopPageBanner.astro';
 import { getJobPostingSchema } from '@/lib/getJobPostSchema';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { formatContentDate } from '@/lib/dates';
 
 const path  = decodeURIComponent(Astro.url.pathname).toLowerCase();
 const host  = Astro.site?.href;
@@ -67,7 +68,7 @@ export async function getStaticPaths() {
         {employmentType} • {locationType} • {locationDescription}
       </p>
       <p class="text-sm text-gray-500">
-        Posted&nbsp;{new Date(date).toLocaleDateString('en-US')}
+        Posted&nbsp;{formatContentDate(date)}
       </p>
       <p class="text-sm text-gray-600">{summary}</p>
 

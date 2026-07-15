@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro';
 import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro';
+import { formatContentDate } from '@/lib/dates';
 
 
 export async function getStaticPaths() {
@@ -37,7 +38,7 @@ const { Content } = await render(newsItem);
     <section>
       <p>Media | <a href="/media/news-and-events">News & Events</a> | {newsItem.id}</p>
       <h1 id={`${title.replace(/\s+/g, '-').toLowerCase()}`} class="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">{title}</h1>
-      <p class="text-sm text-gray-500">Posted {new Date(date).toLocaleDateString('en-US')}</p>
+      <p class="text-sm text-gray-500">Posted {formatContentDate(date)}</p>
 
       <article>
         <Content />

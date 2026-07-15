@@ -1,18 +1,22 @@
 ---
-title: "An Introduction to Phased Sequencing: Part 1 (v3)"
-summary: "Why RNA Needs Better Measurement"
+title: "An Introduction to Phased Sequencing: Part 1"
+summary: "Why RNA needs better measurement"
 image: "/images/media/blog/an-introduction-to-phased-sequencing.png"
 authors: ["William Agnew"]
-date: '2026-04-28'
+date: '2026-07-15'
 ---
 import ArticleCallout from '@/components/content/ArticleCallout.astro';
 import ArticleComparisonTable from '@/components/content/ArticleComparisonTable.astro';
 import ArticleConceptList from '@/components/content/ArticleConceptList.astro';
 import ArticleKeyPoints from '@/components/content/ArticleKeyPoints.astro';
+import ArticleSeriesNavigation from '@/components/content/ArticleSeriesNavigation.astro';
+import { phasedSequencingSeries } from '@/lib/articleSeries';
 
-<ArticleCallout align="center">
-  This is part 1 of a 3-part series
-</ArticleCallout>
+<ArticleSeriesNavigation
+  series={phasedSequencingSeries}
+  currentPart={1}
+  position="start"
+/>
 
 ## Summary
 
@@ -360,4 +364,10 @@ Long-read sequencing restores much of this connectivity by reading extended mole
 
 The potential significance of this approach is straightforward. If biological function depends on the complete structure of individual RNA molecules, then preserving those molecules as units of measurement may reveal information that is obscured by fragment-level or gene-level summaries.
 
-Part 2 of this series will describe the PSeq workflow in greater detail, including molecular tagging, library construction, read assignment, molecule-specific assembly, and consensus generation.
+[Part 2 describes the PSeq workflow in greater detail, including molecular tagging, library construction, read assignment, molecule-specific assembly, and consensus generation.](/blog/an-introduction-to-phased-sequencing-part-2)
+
+<ArticleSeriesNavigation
+  series={phasedSequencingSeries}
+  currentPart={1}
+  position="end"
+/>

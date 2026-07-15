@@ -8,6 +8,7 @@ import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
 import MediaCollection from '@/components/MediaCollection.astro'
 import MediaSearch from '@/components/MediaSearch.astro'
 import MediaNoItems from '@/components/MediaNoItems.astro'
+import { formatContentDate } from '@/lib/dates'
 
 const press = await getCollection('press')
 ---
@@ -42,7 +43,7 @@ const press = await getCollection('press')
               <div style="color: #7F943A;"><FaCaretRight size={50}/></div>
               <div>
                 <a href={`/media/press-releases/${item.id}`}><h2 class="text-xl m-0 p-0">{item.data.title}</h2></a>
-                <div>{new Date(item.data.date).toLocaleDateString('en-US')}</div>
+                <div>{formatContentDate(item.data.date)}</div>
               </div>
             </div>       
           </li>

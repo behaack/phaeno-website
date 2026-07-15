@@ -7,6 +7,7 @@ import TopPageBanner from '@/components/TopPageBanner.astro'
 import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
 import MediaSearch from '@/components/MediaSearch.astro'
 import MediaNoItems from '@/components/MediaNoItems.astro'
+import { formatContentDate } from '@/lib/dates'
 
 const papers = await getCollection('white_papers')
 ---
@@ -35,7 +36,7 @@ const papers = await getCollection('white_papers')
             link={`/media/white-papers/${paper.id}`}
           >
             <div>By {paper.data.authors.join(', ')}</div>
-            <div>{new Date(paper.data.date).toLocaleDateString('en-US')}</div>
+            <div>{formatContentDate(paper.data.date)}</div>
           </MediaCard>
         ))}      
       </MediaCollection>

@@ -4,6 +4,7 @@ import { FaCaretRight } from 'react-icons/fa6';
 import TopPageBanner from '@/components/TopPageBanner.astro';
 import Layout from '@/layouts/Layout.astro';
 import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
+import { formatContentDate } from '@/lib/dates';
 const jobs = await getCollection('jobs');
 const isJobs = (jobs.length > 0)
 ---
@@ -124,7 +125,7 @@ const isJobs = (jobs.length > 0)
                 </a>
                 <p class="text-sm text-gray-600 p-0 m-0 mb-0.5">{job.data.employmentType} • {job.data.locationType} • {job.data.locationDescription}</p>
                 <p class="text-sm text-gray-600 p-0 m-0 mb-0.5">{job.data.summary}</p>
-                <p class="text-sm text-gray-600 p-0 m-0">Posted on {new Date(job.data.date).toLocaleDateString('en-US')}</p>
+                <p class="text-sm text-gray-600 p-0 m-0">Posted on {formatContentDate(job.data.date)}</p>
               </div>
             </div>       
           </li>

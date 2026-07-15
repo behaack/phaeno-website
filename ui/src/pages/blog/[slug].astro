@@ -3,6 +3,7 @@ import ArticleSEOMeta from '@/components/meta-data-helpers/ArticleSEOMeta.astro'
 import ShareWithSocialMedia from '@/components/ShareWithSocialMedia.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getCollection, render, type CollectionEntry } from 'astro:content'
+import { formatContentDate } from '@/lib/dates'
 
 export async function getStaticPaths() {
   const blogs = await getCollection('blog')
@@ -23,7 +24,7 @@ const articleSearchKeywords = [
 ].join(' ')
 const { Content } = await render(blog)
 const articleHeadingId = title.replace(/\s+/g, '-').toLowerCase()
-const formattedDate = new Date(date).toLocaleDateString('en-US', {
+const formattedDate = formatContentDate(date, {
   month: 'long',
   day: 'numeric',
   year: 'numeric',
