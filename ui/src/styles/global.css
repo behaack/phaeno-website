@@ -188,7 +188,11 @@ p {
 a {
   text-decoration: none;
 	color: var(--color-link);
-  transition: color .3s ease;
+  transition:
+    color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard);
 }
 
 a.list-alternative {
@@ -369,23 +373,23 @@ label > input[type="checkbox"]:focus-visible + span::before {
   box-shadow:   0 0 0 3px rgba(149,154,118,0.4);
 }
 
-/* button {
-  background-color: var(--button-color);
-  color: white;
-  padding: 7px 40px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+button {
   transition:
-    transform 0.1s ease,
-    background-color 0.3s ease;
-} */
+    color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
 
-button:hover {
+button:hover:not(:disabled) {
   background-color: var(--button-hover-color);
-  transform: scale(1.02);
+  transform: translateY(-1px);
   cursor: pointer;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 button:focus {
@@ -396,6 +400,28 @@ button:focus {
 }
 
 .grecaptcha-badge { visibility: hidden; }
+
+[data-motion-reveal].motion-reveal-pending {
+  opacity: 0;
+  transform: translateY(0.75rem);
+}
+
+[data-motion-reveal].motion-reveal-pending.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+  transition-delay: var(--motion-reveal-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
 
 .science-page > section,
 .company-page > section,

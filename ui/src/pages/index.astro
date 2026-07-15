@@ -132,7 +132,11 @@ const performanceHighlights = [
 
       <div class="feature-grid">
         {platformFeatures.map((feature, index) => (
-          <article class:list={['feature-card', { 'feature-card--lead': index === 0 }]}>
+          <article
+            class:list={['feature-card', { 'feature-card--lead': index === 0 }]}
+            data-motion-reveal
+            data-motion-delay={index * 50}
+          >
             <p class="feature-card__eyebrow" data-phaeno-search-ignore>{feature.eyebrow}</p>
             <h3
               id={feature.id}
@@ -412,11 +416,25 @@ const performanceHighlights = [
   border-radius: var(--radius-pill);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
+  transition:
+    background-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
 }
 
 .platform-cta__content > a:hover {
   color: var(--color-text-on-dark);
   background: var(--phaeno-orange-600);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.platform-cta__content > a span {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.platform-cta__content > a:hover span {
+  transform: translateX(2px);
 }
 
 .platform-metrics {
@@ -515,6 +533,10 @@ const performanceHighlights = [
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   text-align: center;
+  transition:
+    background-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
 }
 
 .closing-cta__primary {
@@ -524,6 +546,8 @@ const performanceHighlights = [
 .closing-cta__primary:hover {
   color: var(--color-text-on-dark);
   background: var(--phaeno-orange-600);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 900px) {

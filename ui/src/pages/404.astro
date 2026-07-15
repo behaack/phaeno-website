@@ -96,7 +96,9 @@ import Layout from '@/layouts/Layout.astro'
     color: rgba(240, 241, 238, 0.836);
     font-weight: 600;
     border-radius: 10px;
-    transition: color background-color 0.3s ease;
+    transition:
+      color var(--duration-fast) var(--ease-standard),
+      background-color var(--duration-base) var(--ease-standard);
     display: inline-block;
   }
 
@@ -143,4 +145,11 @@ import Layout from '@/layouts/Layout.astro'
   .circle:nth-child(3) { top: 40%; left: 25%; animation-delay: .7s;}
   .circle:nth-child(4) { top: 60%; left: 80%; animation-delay: .8s;}
   .circle:nth-child(5) { top: 70%; left: 65%; animation-delay: 1s;}
+
+  @media (prefers-reduced-motion: reduce) {
+    h1,
+    .circle {
+      animation: none;
+    }
+  }
 </style>

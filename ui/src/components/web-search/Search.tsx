@@ -1,5 +1,5 @@
 import type { articletypes, webtypes } from '@/assets/docTypes'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { FaMagnifyingGlass, FaX } from 'react-icons/fa6'
 import SearchItem from './SearchItem'
 
@@ -28,6 +28,7 @@ export default function Search() {
   const BASE_URL = import.meta.env.PUBLIC_API_BASE_URL
   const isFirstRender = useRef(true)
   const [open, setOpen] = useState(false)
+  const [isClosing, setIsClosing] = useState(false)
   const [searchStr, setSearchStr] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [searchList, setSearchList] = useState<ISearchResult[]>([])
@@ -40,6 +41,7 @@ export default function Search() {
   const resultRefs = useRef<(HTMLAnchorElement | null)[]>([])
   const listRef = useRef<HTMLUListElement>(null)
   const lastActiveElementRef = useRef<HTMLElement | null>(null)
+  const closeTimerRef = useRef<number | null>(null)
   const getOptionNodes = () =>
     Array.from(listRef.current?.querySelectorAll<HTMLElement>('[role="option"]') ?? [])
   const focusOption = (index: number) => {
@@ -62,11 +64,37 @@ export default function Search() {
     return () => clearTimeout(handler)
   }, [searchStr])
 
-  const toggleSearch = () => setOpen((prev) => !prev)
+  const openSearch = () => {
+    if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current)
+    closeTimerRef.current = null
+    setIsClosing(false)
+    setOpen(true)
+  }
+
+  const closeSearch = useCallback(() => {
+    if (!open || isClosing) return
+
+    setIsClosing(true)
+    const closeDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 200
+    closeTimerRef.current = window.setTimeout(() => {
+      setOpen(false)
+      setIsClosing(false)
+      closeTimerRef.current = null
+    }, closeDelay)
+  }, [open, isClosing])
+
+  const toggleSearch = () => {
+    if (open) closeSearch()
+    else openSearch()
+  }
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === modalRef.current) setOpen(false)
+    if (e.target === modalRef.current) closeSearch()
   }
+
+  useEffect(() => () => {
+    if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current)
+  }, [])
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -207,14 +235,14 @@ export default function Search() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setOpen(false)
+        closeSearch()
         return
       }
     }
 
     if (open) document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [open])
+  }, [open, closeSearch])
 
   useEffect(() => {
     if (activeIndex < 0) return
@@ -302,7 +330,7 @@ export default function Search() {
           aria-modal="true"
           aria-labelledby="search-title"
           tabIndex={-1}
-          className="fixed inset-0 z-9999 h-dvh w-dvw flex justify-center items-start bg-black/20 backdrop-blur-sm"
+          className={`web-search-modal fixed inset-0 z-9999 h-dvh w-dvw flex justify-center items-start bg-black/20 backdrop-blur-sm${isClosing ? ' is-closing' : ''}`}
           onClick={handleBackdropClick}
         >
           <div className="web-search-panel">

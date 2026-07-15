@@ -31,6 +31,10 @@
   border-radius: var(--radius-pill);
   cursor: pointer;
   z-index: 10;
+  transition:
+    background-color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
 }
 
 .burger:focus {
@@ -44,7 +48,9 @@
   height: 2px;
   border-radius: 2px;
   background: var(--color-text);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
 }
 
 .burger.open .top {

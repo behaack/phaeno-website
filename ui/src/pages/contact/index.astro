@@ -271,10 +271,16 @@ import ReCaptchaNotification from '@/components/ReCaptchaNotification.astro';
 :global(.contact-submit) {
   color: var(--color-text-on-dark);
   background: var(--color-action-primary);
+  transition:
+    background-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
 }
 
 :global(.contact-submit:hover:not(:disabled)) {
   background: var(--color-action-primary-hover);
+  box-shadow: var(--shadow-md);
 }
 
 :global(.contact-submit:focus-visible) {

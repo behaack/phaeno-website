@@ -296,8 +296,14 @@ import Layout from '@/layouts/Layout.astro'
 .reference-groups details { border-bottom: 1px solid var(--phaeno-green-200); }
 .reference-groups summary { display: flex; justify-content: space-between; padding: 1.4rem 0; color: var(--phaeno-rna-900); font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); cursor: pointer; list-style: none; }
 .reference-groups summary::-webkit-details-marker { display: none; }
+.reference-groups summary span { transition: transform var(--duration-fast) var(--ease-standard); }
 .reference-groups details[open] summary span { transform: rotate(45deg); }
 .reference-list { padding: 0 0 var(--space-6); }
+.reference-groups details[open] > .reference-list { animation: reference-list-reveal var(--duration-base) var(--ease-standard) both; }
+@keyframes reference-list-reveal {
+  from { opacity: 0; transform: translateY(-0.25rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .reference-list p { color: var(--phaeno-neutral-600); font-size: var(--font-size-sm); line-height: 1.55; }
 .reference-list--columns { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
 .reference-list--columns div { padding: var(--space-5); border-radius: var(--radius-lg); background: var(--phaeno-neutral-50); }
@@ -307,10 +313,11 @@ import Layout from '@/layouts/Layout.astro'
 .closing-panel__content { display: flex; justify-content: space-between; gap: var(--space-7); align-items: center; }
 .closing-panel h2 { max-width: 17ch; font-size: clamp(2rem, 3.5vw, 3.2rem); }
 .closing-panel__actions { display: flex; gap: var(--space-3); flex-shrink: 0; }
-.closing-panel a { padding: .9rem 1.35rem; border: 1px solid transparent; border-radius: var(--radius-pill); font-weight: var(--font-weight-semibold); }
+.closing-panel a { padding: .9rem 1.35rem; border: 1px solid transparent; border-radius: var(--radius-pill); font-weight: var(--font-weight-semibold); transition: color var(--duration-fast) var(--ease-standard), background-color var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard), transform var(--duration-fast) var(--ease-standard); }
 .button-primary { color: var(--color-text-on-dark); background: var(--phaeno-orange-500); }
-.button-primary:hover { color: var(--color-text-on-dark); background: var(--phaeno-orange-600); }
+.button-primary:hover { color: var(--color-text-on-dark); background: var(--phaeno-orange-600); box-shadow: var(--shadow-md); transform: translateY(-1px); }
 .button-secondary { border-color: var(--phaeno-rna-800) !important; color: var(--phaeno-rna-900); }
+.button-secondary:hover { color: var(--color-text-on-dark); background: var(--phaeno-rna-900); transform: translateY(-1px); }
 
 @media (max-width: 950px) {
   .intro-section, .aso-section__body, .references-section { grid-template-columns: 1fr; }

@@ -137,6 +137,9 @@ switch (rootParts.length) {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   width: 100%;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
 }
 
 .menu-item > a.active {
@@ -189,7 +192,7 @@ switch (rootParts.length) {
   margin-left: 0.5rem; /* optional, adjust spacing from label */
   margin-right: 0;     /* optional, can be omitted */
   flex-shrink: 0;      /* prevents squishing on narrow viewports */
-  transition: transform 0.3s ease;
+  transition: transform var(--duration-fast) var(--ease-standard);
 }
 
 /* Arrow rotation on open or hover */
@@ -221,8 +224,8 @@ switch (rootParts.length) {
   gap: 0;
   font-size: smaller;
   transition:
-    opacity 0.3s ease,
-    max-height 0.4s ease;
+    opacity var(--duration-base) var(--ease-standard),
+    max-height var(--duration-slow) var(--ease-standard);
 }
 
 .sub-menu li a {
@@ -293,10 +296,16 @@ switch (rootParts.length) {
     position: relative;
   }
 
-  #nav.open > .main-menu { display: block; }
+  #nav.open > .main-menu {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition-delay: 0ms;
+  }
 
   .main-menu {
-    display: none;
+    display: block;
     position: absolute;
     top: calc(100% + 1.68rem);
     right: 0;
@@ -307,7 +316,15 @@ switch (rootParts.length) {
     min-width: min(20rem, calc(100vw - 2rem));
     margin: 0;
     padding: 0;
-    z-index: 999;    
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.5rem);
+    transition:
+      opacity var(--duration-base) var(--ease-standard),
+      transform var(--duration-base) var(--ease-standard),
+      visibility 0s linear var(--duration-base);
   }
 
   .sub-menu {
@@ -333,9 +350,4 @@ switch (rootParts.length) {
   .menu-item.main-menu-parent.open  > a::after { transform: rotate(90deg); }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .sub-menu {
-    transition: opacity .3s ease, max-height .4s ease;
-  }
-}
 </style>
