@@ -1,45 +1,66 @@
 ---
-interface ComparisonRow {
-  characteristic: string;
-  rnaSeq: string;
-  longReadSeq: string;
-  pseq: string;
+interface ComparisonColumn {
+  key: string;
+  label: string;
+  shortLabel?: string;
   highlighted?: boolean;
 }
 
-type ComparisonColumn = 'characteristic' | 'pseq' | 'rnaSeq' | 'longReadSeq';
+interface ComparisonRow {
+  label: string;
+  values: Record<string, string>;
+  highlighted?: boolean;
+}
 
 interface Props {
+  ariaLabel: string;
+  columns: ComparisonColumn[];
   rows: ComparisonRow[];
-  highlightedColumns?: ComparisonColumn[];
+  rowHeaderLabel?: string;
+  highlightedColumns?: string[];
   highlightedRows?: string[];
 }
 
-const { rows, highlightedColumns = [], highlightedRows = [] } = Astro.props;
+const {
+  ariaLabel,
+  columns,
+  rows,
+  rowHeaderLabel = 'Characteristic',
+  highlightedColumns = [],
+  highlightedRows = [],
+} = Astro.props;
+
 const highlightedColumnSet = new Set(highlightedColumns);
 const highlightedRowSet = new Set(highlightedRows);
-const isColumnHighlighted = (column: ComparisonColumn) => highlightedColumnSet.has(column);
+const isColumnHighlighted = (column: ComparisonColumn) =>
+  column.highlighted === true || highlightedColumnSet.has(column.key);
 const isRowHighlighted = (row: ComparisonRow) =>
-  row.highlighted === true || highlightedRowSet.has(row.characteristic);
+  row.highlighted === true || highlightedRowSet.has(row.label);
 ---
 
-<div class="article-comparison-table" role="region" aria-label="RNA-Seq, long-read sequencing, and PSeq comparison">
+<div class="article-comparison-table" role="region" aria-label={ariaLabel} tabindex="0">
   <table>
     <thead>
       <tr>
-        <th scope="col" data-highlight-column={isColumnHighlighted('characteristic') ? 'true' : undefined}>Characteristic</th>
-        <th scope="col" data-highlight-column={isColumnHighlighted('pseq') ? 'true' : undefined}>PSeq</th>
-        <th scope="col" data-highlight-column={isColumnHighlighted('rnaSeq') ? 'true' : undefined}>RNA-Seq</th>
-        <th scope="col" data-highlight-column={isColumnHighlighted('longReadSeq') ? 'true' : undefined}>3<sup>rd</sup> Gen Long Read Seq</th>
+        <th scope="col">{rowHeaderLabel}</th>
+        {columns.map((column) => (
+          <th
+            scope="col"
+            data-highlight-column={isColumnHighlighted(column) ? 'true' : undefined}
+          >{column.label}</th>
+        ))}
       </tr>
     </thead>
     <tbody>
       {rows.map((row) => (
         <tr data-highlight-row={isRowHighlighted(row) ? 'true' : undefined}>
-          <th scope="row" data-label="Characteristic" data-highlight-column={isColumnHighlighted('characteristic') ? 'true' : undefined}>{row.characteristic}</th>
-          <td data-label="PSeq" data-highlight-column={isColumnHighlighted('pseq') ? 'true' : undefined}>{row.pseq}</td>
-          <td data-label="RNA-Seq" data-highlight-column={isColumnHighlighted('rnaSeq') ? 'true' : undefined}>{row.rnaSeq}</td>
-          <td data-label="3rd Gen Long Read Seq" data-highlight-column={isColumnHighlighted('longReadSeq') ? 'true' : undefined}>{row.longReadSeq}</td>
+          <th scope="row" data-label={rowHeaderLabel}>{row.label}</th>
+          {columns.map((column) => (
+            <td
+              data-label={column.shortLabel ?? column.label}
+              data-highlight-column={isColumnHighlighted(column) ? 'true' : undefined}
+            >{row.values[column.key]}</td>
+          ))}
         </tr>
       ))}
     </tbody>
@@ -48,62 +69,68 @@ const isRowHighlighted = (row: ComparisonRow) =>
 
 <style>
 .article-comparison-table {
-  margin: 0.25rem 0 1.5rem;
+  margin: var(--space-1) 0 var(--space-6);
   overflow-x: auto;
+  outline-offset: var(--space-1);
 }
 
 .article-comparison-table table {
   width: 100%;
   min-width: 44rem;
   border-collapse: collapse;
-  border: 1px solid #d8dce0;
-  color: #111827;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: var(--line-height-copy);
 }
 
 .article-comparison-table th,
 .article-comparison-table td {
-  padding: 0.75rem 0.85rem;
-  border: 1px solid #d8dce0;
+  padding: var(--space-3) 0.85rem;
+  border: 1px solid var(--color-border);
   text-align: left;
   vertical-align: middle;
 }
 
 .article-comparison-table thead th {
-  background: #16647d;
-  color: #fff;
-  font-weight: 700;
+  background: var(--phaeno-rna-600);
+  color: var(--color-text-on-dark);
+  font-weight: var(--font-weight-bold);
+}
+
+.article-comparison-table thead th[data-highlight-column="true"] {
+  background: var(--phaeno-rna-800);
 }
 
 .article-comparison-table tbody th {
   width: 20%;
-  font-weight: 700;
+  color: var(--phaeno-rna-900);
+  font-weight: var(--font-weight-semibold);
 }
 
 .article-comparison-table tbody tr:nth-child(odd) {
-  background: #f7f8f8;
+  background: var(--color-surface-subtle);
 }
 
 .article-comparison-table tbody tr:nth-child(even) {
-  background: #fff;
+  background: var(--color-surface);
 }
 
 .article-comparison-table tbody tr:nth-child(odd) > [data-highlight-column="true"] {
-  background: #dff2ec;
+  background: var(--phaeno-green-100);
 }
 
 .article-comparison-table tbody tr:nth-child(even) > [data-highlight-column="true"] {
-  background: #edf8f4;
+  background: var(--phaeno-green-50);
 }
 
 .article-comparison-table tbody tr[data-highlight-row="true"] > th,
 .article-comparison-table tbody tr[data-highlight-row="true"] > td {
-  background: #fff7e8;
+  background: var(--phaeno-amber-100);
 }
 
 .article-comparison-table tbody tr[data-highlight-row="true"] > [data-highlight-column="true"] {
-  background: #d3ece3;
+  background: var(--phaeno-green-200);
 }
 
 @media (max-width: 725px) {
@@ -132,18 +159,18 @@ const isRowHighlighted = (row: ComparisonRow) =>
   }
 
   .article-comparison-table tr {
-    margin: 0 0 1rem;
-    border: 1px solid #d8dce0;
-    background: #fff;
+    margin: 0 0 var(--space-4);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
   }
 
   .article-comparison-table th,
   .article-comparison-table td {
     display: grid;
     grid-template-columns: minmax(8rem, 38%) minmax(0, 1fr);
-    gap: 0.75rem;
+    gap: var(--space-3);
     border: 0;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .article-comparison-table tr > :last-child {
@@ -153,27 +180,19 @@ const isRowHighlighted = (row: ComparisonRow) =>
   .article-comparison-table th::before,
   .article-comparison-table td::before {
     content: attr(data-label);
-    color: #4b5563;
-    font-weight: 700;
+    overflow-wrap: anywhere;
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-bold);
   }
 
   .article-comparison-table tbody th {
     width: 100%;
-    background: #16647d;
-    color: #fff;
-  }
-
-  .article-comparison-table tbody th[data-highlight-column="true"] {
-    background: #0f7894;
-  }
-
-  .article-comparison-table th::before,
-  .article-comparison-table td::before {
-    overflow-wrap: anywhere;
+    background: var(--phaeno-rna-600);
+    color: var(--color-text-on-dark);
   }
 
   .article-comparison-table tbody th::before {
-    color: #dceef4;
+    color: var(--phaeno-rna-100);
   }
 }
 </style>

@@ -235,8 +235,15 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 
 .blog-post-content :global(h2),
 .blog-post-content :global(h3) {
-  margin: clamp(2.75rem, 5vw, 4rem) 0 var(--space-4);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.blog-post-content :global(h2) {
+  margin: clamp(2.25rem, 4vw, 3rem) 0 var(--space-4);
+}
+
+.blog-post-content :global(h3) {
+  margin: clamp(1.75rem, 3vw, 2.25rem) 0 var(--space-4);
 }
 
 .blog-post-content :global(h4) {
@@ -244,35 +251,21 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   font-size: clamp(1.3rem, 2vw, 1.65rem);
 }
 
-.blog-post-content :global(ul),
-.blog-post-content :global(ol) {
+.blog-post-content :global(ul:not([class])),
+.blog-post-content :global(ol:not([class])) {
+  gap: 0;
   margin: 0 0 1.5rem;
   padding-left: 1.4rem;
 }
 
-.blog-post-content :global(li + li) {
+.blog-post-content :global(ul:not([class]) > li + li),
+.blog-post-content :global(ol:not([class]) > li + li) {
   margin-top: .5rem;
 }
 
 .blog-post-content :global(a) {
   text-decoration-thickness: 1px;
   text-underline-offset: .2em;
-}
-
-.blog-post-content :global(.article-callout-center) {
-  margin: 0 0 clamp(2.5rem, 5vw, 3.5rem);
-  padding: 1rem 1.35rem;
-  border: 1px solid var(--phaeno-green-200);
-  border-radius: var(--radius-pill);
-  color: var(--phaeno-rna-900);
-  background: var(--phaeno-green-50);
-  font-size: var(--font-size-sm);
-  font-style: normal;
-  letter-spacing: .02em;
-}
-
-.blog-post-content :global(.article-callout-center em) {
-  font-style: normal;
 }
 
 .article-footer {

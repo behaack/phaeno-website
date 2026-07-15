@@ -14,10 +14,11 @@ const { stacked=false } = Astro.props as IProps
 <style>
 .media-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.5rem), 1fr));
   justify-content: start;
   align-items: stretch;
   list-style: none;
+  max-width: none;
   margin: 0;
   padding: 0;
   gap: var(--space-6);

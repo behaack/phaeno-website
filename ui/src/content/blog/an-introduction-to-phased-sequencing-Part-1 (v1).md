@@ -1,5 +1,5 @@
 ---
-title: "An introduction to Phased Sequencing: Part 1 (Original)"
+title: "An introduction to Phased Sequencing: Part 1 (v1)"
 summary: "Why RNA Needs Better Measurement"
 image: "/images/media/blog/an-introduction-to-phased-sequencing.png"
 authors: ["William Agnew"]

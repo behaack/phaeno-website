@@ -1,5 +1,5 @@
 ---
-title: "An Introduction to Phased Sequencing: Part 1 (New)"
+title: "An Introduction to Phased Sequencing: Part 1 (v2)"
 summary: "Why RNA Needs Better Measurement"
 image: "/images/media/blog/an-introduction-to-phased-sequencing.png"
 authors: ["William Agnew"]
@@ -12,7 +12,7 @@ import ArticleCallout from '@/components/content/ArticleCallout.astro';
 import ArticleComparisonTable from '@/components/content/ArticleComparisonTable.astro';
 
 <ArticleCallout align="center">
-  <strong><em>This is part 1 of a 3-part series</em></strong>
+  This is part 1 of a 3-part series
 </ArticleCallout>
 
 <h3 id="summary">Summary</h3>
@@ -84,37 +84,53 @@ PSeq is intended to combine two advantages: the scale and installed base of shor
 /> */}
 
 <ArticleComparisonTable
-  highlightedColumns={['pseq']}
+  ariaLabel="Comparison of RNA-Seq, long-read sequencing, and PSeq"
+  rowHeaderLabel="Characteristic"
+  columns={[
+    { key: 'pseq', label: 'PSeq', highlighted: true },
+    { key: 'rnaSeq', label: 'RNA-Seq' },
+    { key: 'longReadSeq', label: '3rd Gen Long Read Seq', shortLabel: 'Long-read sequencing' },
+  ]}
   rows={[
     {
-      characteristic: 'Instrument compatibility',
-      rnaSeq: 'Runs on existing short-read NGS instruments',
-      longReadSeq: 'Requires dedicated long-read instruments',
-      pseq: 'Runs on existing short-read NGS instruments',
+      label: 'Instrument compatibility',
+      values: {
+        rnaSeq: 'Runs on existing short-read NGS instruments',
+        longReadSeq: 'Requires dedicated long-read instruments',
+        pseq: 'Runs on existing short-read NGS instruments',
+      },
     },
     {
-      characteristic: 'Molecule identity',
-      rnaSeq: 'Usually lost',
-      longReadSeq: 'Preserved through physical separation',
-      pseq: 'Preserved through molecular tagging',
+      label: 'Molecule identity',
+      values: {
+        rnaSeq: 'Usually lost',
+        longReadSeq: 'Preserved through physical separation',
+        pseq: 'Preserved through molecular tagging',
+      },
     },
     {
-      characteristic: 'Transcript structure',
-      rnaSeq: 'Inferred statistically',
-      longReadSeq: 'Directly sampled',
-      pseq: 'Directly assembled molecule by molecule',
+      label: 'Transcript structure',
+      values: {
+        rnaSeq: 'Inferred statistically',
+        longReadSeq: 'Directly sampled',
+        pseq: 'Directly assembled molecule by molecule',
+      },
     },
     {
-      characteristic: 'Main limitation',
-      rnaSeq: 'Fragmented, inference-heavy data',
-      longReadSeq: 'Cost, throughput, and sampling depth',
-      pseq: 'New platform requiring validation and adoption',
+      label: 'Main limitation',
+      values: {
+        rnaSeq: 'Fragmented, inference-heavy data',
+        longReadSeq: 'Cost, throughput, and sampling depth',
+        pseq: 'New platform requiring validation and adoption',
+      },
     },
     {
-      characteristic: 'Best use',
-      rnaSeq: 'Gene expression and broad transcriptomic surveys',
-      longReadSeq: 'Long-read discovery and reference building',
-      pseq: 'High-scale, molecule-resolved transcriptomics',
+      label: 'Best use',
+      values: {
+        rnaSeq: 'Gene expression and broad transcriptomic surveys',
+        longReadSeq: 'Long-read discovery and reference building',
+        pseq: 'High-scale, molecule-resolved transcriptomics',
+      },
     },
   ]}
 />
@@ -140,6 +156,7 @@ Because every base can be independently sequenced with a user-selected depth of 
 Consider three examples:
 
 <ArticleExampleList
+  ariaLabel="Examples comparing RNA-Seq and PSeq"
   items={[
     {
       title: 'One million identical RNA molecules',
