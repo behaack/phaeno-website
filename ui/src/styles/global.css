@@ -532,7 +532,12 @@ main {
 }
 
 main > section {
-  padding: var(--space-10) var(--page-gutter) var(--section-space);
+  padding: var(--page-content-start-space) var(--page-gutter) var(--section-space);
+}
+
+main > .top-banner + section:first-of-type,
+main > .top-banner + .page-shell > section:first-child {
+  padding-top: var(--page-content-start-space);
 }
 
 main > section > :where(p, ul, ol):not(.data-table) {
@@ -610,6 +615,6 @@ select:focus {
 
 @media (max-width: 725px) {
   main > section {
-    padding: var(--space-8) var(--space-4) var(--space-12);
+    padding: var(--page-content-start-space) var(--space-4) var(--space-12);
   }
 }

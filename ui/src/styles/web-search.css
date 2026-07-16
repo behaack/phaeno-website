@@ -8,37 +8,42 @@
   margin-left: 0.25rem;
   margin-right: 0.25rem;
   padding: 0.625rem;
-  color: var(--phaeno-rna-900);
+  color: var(--menu-color);
   border: 1px solid var(--phaeno-green-200);
   border-radius: var(--radius-pill);
   box-shadow: none;
   transform: none;
   transition:
     background-color var(--duration-base) var(--ease-standard),
-    border-color var(--duration-base) var(--ease-standard);
+    border-color var(--duration-base) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
 }
 
 /* Hover */
-.web-search-button:hover {
-  background-color: var(--phaeno-green-50);
+.web-search-button:hover:not(:disabled) {
+  color: var(--menu-hover-color);
+  background-color: var(--phaeno-green-100);
   box-shadow: none;
   transform: none;
 }
 
 /* Focus */
 .web-search-button:focus {
-  background-color: var(--phaeno-green-50);
+  color: var(--menu-focus-color);
+  background-color: var(--menu-focus-bgcolor);
   box-shadow: none;
 }
 
 /* Focus + hover (explicit, though redundant in vanilla CSS) */
 .web-search-button:focus:hover {
-  background-color: var(--phaeno-green-50);
+  color: var(--menu-hover-color);
+  background: var(--phaeno-green-100);
 }
 
 /* Active */
 .web-search-button:active {
-  background-color: #f3f4f6; /* gray-100 */
+  color: var(--menu-active-color);
+  background-color: var(--menu-active-bgcolor);
   box-shadow: none;
   transform: none;
 }

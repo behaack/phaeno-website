@@ -103,6 +103,7 @@
   --copy-max-width: 44rem;
   --header-height: 5.1rem;
   --page-gutter: clamp(1rem, 3vw, 2rem);
+  --page-content-start-space: clamp(var(--space-8), 3vw, var(--space-10));
   --section-space: clamp(3rem, 8vw, 6rem);
 
   --duration-fast: 120ms;

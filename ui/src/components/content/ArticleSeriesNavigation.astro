@@ -19,7 +19,7 @@ const positionLabel = position === 'start' ? 'Series navigation' : 'Continue thr
 ---
 
 <nav
-  class="article-series-navigation"
+  class={`article-series-navigation article-series-navigation--${position}`}
   aria-label={`${series.title}: ${positionLabel}`}
   data-phaeno-search-ignore
 >
@@ -54,10 +54,17 @@ const positionLabel = position === 'start' ? 'Series navigation' : 'Continue thr
 
 <style>
 .article-series-navigation {
-  margin: var(--space-6) 0 var(--space-8);
-  padding: var(--space-5) 0;
+  padding: var(--space-4) 0;
   border-top: 1px solid var(--phaeno-green-200);
   border-bottom: 1px solid var(--phaeno-green-200);
+}
+
+.article-series-navigation--start {
+  margin: 0 0 var(--space-4);
+}
+
+.article-series-navigation--end {
+  margin: var(--space-8) 0 0;
 }
 
 .article-series-navigation__heading {
