@@ -57,24 +57,16 @@ const { member } = Astro.props as IProp;
   border-radius: var(--radius-xl);
   background: linear-gradient(155deg, var(--color-surface), var(--phaeno-green-50));
   box-shadow: var(--shadow-sm);
-  transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard);
 
   /* Allow the grid to shrink but not below the image size */
   min-width: 180px;
-}
-
-.member-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 .member-photo {
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
-  border: 3px solid var(--color-surface);
   border-radius: var(--radius-pill);
-  box-shadow: 0 0 0 1px var(--phaeno-green-200);
   max-width: 130px;
 }
 

@@ -22,7 +22,7 @@ const team: ITeamMember[] = [
     fname: 'William',
     lname: 'Agnew, PhD',
     title: 'Founder, CEO',
-    image: 'wagnew.webp',
+    image: 'wagnew-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/william-agnew-a6482228/',
   },
   {
@@ -49,7 +49,7 @@ const team: ITeamMember[] = [
     fname: 'Hedi',
     lname: 'Mouchard',
     title: 'Founder, COO',
-    image: 'hmouchard.webp',
+    image: 'hmouchard-illustrated-v2.png',
     linkedIn: 'https://www.linkedin.com/in/hedi-mouchard-50b6a47/',
   },
   {
@@ -58,7 +58,7 @@ const team: ITeamMember[] = [
     fname: 'Bill',
     lname: 'Haack, MA',
     title: 'CFO | CBO',
-    image: 'bhaack.webp',
+    image: 'bhaack-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/bill-haack-aa1a743/',
   },
   {
@@ -67,7 +67,7 @@ const team: ITeamMember[] = [
     fname: 'James',
     lname: 'Wallace, MBA',
     title: 'VP, Business Development',
-    image: 'jwallace.webp',
+    image: 'jwallace-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/james-wallace-msc-mba-841152b/',
   },  
   // {
@@ -85,7 +85,7 @@ const team: ITeamMember[] = [
     fname: 'Baoqing',
     lname: 'Zhou, PhD',
     title: 'Senior Scientist',
-    image: 'bzhou.webp',
+    image: 'bzhou-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/baoqing-zhou-7717a552/',
   },
   {
@@ -94,7 +94,7 @@ const team: ITeamMember[] = [
     fname: 'Brandon',
     lname: 'Young',
     title: 'Consulting Scientist',
-    image: 'byoung.webp',
+    image: 'byoung-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/brandon-young-231b24/',
   },
   {
@@ -103,7 +103,7 @@ const team: ITeamMember[] = [
     fname: 'Christopher',
     lname: ' Yourch',
     title: 'Consulting Software Engineer',
-    image: 'cyourch.webp',
+    image: 'cyourch-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/chris-yourch/',
   },    
   {
@@ -112,7 +112,7 @@ const team: ITeamMember[] = [
     fname: 'Samir',
     lname: 'Abed',
     title: 'Advisor',
-    image: 'sabed.webp',
+    image: 'sabed-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/samir-abed-69195110/',
   },
   {
@@ -121,7 +121,7 @@ const team: ITeamMember[] = [
     fname: 'Mark',
     lname: 'Bouzyk, PhD',
     title: 'Advisor',
-    image: 'mbouzyk.webp',
+    image: 'mbouzyk-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/mark-b-8a42648/',
   },
   {
@@ -130,7 +130,7 @@ const team: ITeamMember[] = [
     fname: 'Ellen',
     lname: 'Beasley, PhD',
     title: 'Advisor',
-    image: 'ebeasley.webp',
+    image: 'ebeasley-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/ellen-beasley-b58577/',
   },
   {
@@ -139,7 +139,7 @@ const team: ITeamMember[] = [
     fname: 'Ed',
     lname: 'Cho, PhD',
     title: 'Advisor',
-    image: 'echo.webp',
+    image: 'echo-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/edcho/',
   },
   {
@@ -148,7 +148,7 @@ const team: ITeamMember[] = [
     fname: 'Paul',
     lname: 'Owen',
     title: 'Advisor',
-    image: 'powen.webp',
+    image: 'powen-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/powen/',
   },
   {
@@ -157,7 +157,7 @@ const team: ITeamMember[] = [
     fname: 'Chase',
     lname: 'Spurlock, PhD',
     title: 'Advisor',
-    image: 'cspurlock.webp',
+    image: 'cspurlock-illustrated.png',
     linkedIn: 'https://www.linkedin.com/in/chase-spurlock/',
   },
 ]
