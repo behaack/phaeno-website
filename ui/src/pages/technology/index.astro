@@ -111,8 +111,8 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
       <h2
         id="pseq-workflow"
         data-phaeno-search="From sample to isoform-resolved PSeq data"
-        data-phaeno-search-summary="Detailed PSeq stages covering molecular tagging, molecule-aware processing, molecule-constrained reconstruction, and interoperable isoform-level output."
-        data-phaeno-search-keywords="PSeq workflow molecular tagging isothermal amplification UMI redistribution molecule-aware processing quality control molecular assignment transcript reconstruction interoperable isoform output"
+        data-phaeno-search-summary="Detailed PSeq stages covering molecular tagging, molecule-aware processing, molecule-constrained reconstruction, and ML-ready isoform-level output."
+        data-phaeno-search-keywords="PSeq workflow molecular tagging isothermal amplification UMI redistribution molecule-aware processing quality control molecular assignment transcript reconstruction ML-ready isoform output"
       >From Sample to Isoform-Resolved Data</h2>
       <p class="workflow-detail-intro">
         PSeq moves from molecular preparation through automated processing to structured, molecule-level output—within
@@ -182,16 +182,16 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
           </header>
           <ul class="workflow-card__list">
             <li>
-              <div><strong>Isoform architecture</strong><span>Connected exon structure within individual RNA molecules.</span></div>
+              <div><strong>Isoform architecture</strong><span>Connected exon and UTR structure within individual RNA molecules.</span></div>
             </li>
             <li>
-              <div><strong>Protein-coding potential</strong><span>Open reading frames and alternative translation initiation sites.</span></div>
+              <div><strong>Protein-coding potential</strong><span>Open reading frames and alternative initiation sites.</span></div>
             </li>
             <li>
               <div><strong>Polyadenylation</strong><span>Alternative cleavage and polyadenylation sites.</span></div>
             </li>
             <li>
-              <div><strong>RNA localization</strong><span>Transcript-specific sequence signals associated with RNA trafficking.</span></div>
+              <div><strong>ML-ready outputs</strong><span>Structured, molecule-level features designed as inputs to downstream ML models.</span></div>
             </li>
           </ul>
         </article>
@@ -663,13 +663,18 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
 }
 
 .workflow-card--deliver .workflow-card__header {
-  padding-block: var(--space-4);
+  padding-block: 1rem;
   background: var(--phaeno-neutral-100);
 }
 
 .workflow-card--deliver .workflow-card__header h3 {
-  margin: var(--space-4) 0 var(--space-2);
+  margin: 1rem 0 .5rem;
+  padding: 0;
   font-size: clamp(1.55rem, 2vw, 1.9rem);
+}
+
+.workflow-card--deliver .workflow-card__header p {
+  padding: 0;
 }
 
 .workflow-card--deliver .workflow-card__stage {

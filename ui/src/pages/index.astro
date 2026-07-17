@@ -5,7 +5,7 @@ import SEOMeta from '@/components/meta-data-helpers/SEOMeta.astro';
 import PerformanceMetrics from '@/components/PerformanceMetrics.astro';
 
 const homeTitle = 'Phaeno | Full-Length RNA Sequencing with Short-Read NGS';
-const homeDescription = 'Phaeno delivers full-length, isoform-resolved RNA sequencing with short-read NGS instruments for molecule-level transcriptomics and ML-ready biology.';
+const homeDescription = 'Phaeno delivers full-length, isoform-resolved RNA sequencing with short-read NGS instruments and ML-ready molecule-level outputs.';
 const siteUrl = new URL('/', Astro.site).href;
 const organizationStructuredData = {
   '@context': 'https://schema.org',
@@ -49,28 +49,28 @@ const platformFeatures = [
     search: 'PSeq Clear-Signal Architecture signal-first RNA data',
     eyebrow: '01 / Signal',
     title: 'PSeq Clear-Signal Architecture™',
-    summary: 'Full-length 5′–3′ RNA sequencing, including UTRs, without dependence on prior annotations. Measure what is present—not what is expected.',
+    summary: 'Full-length 5′–3′ isoform reconstruction, including UTRs, constrained by reads assigned to each captured molecular template.',
   },
   {
     id: 'individual-molecules',
-    search: 'Individual RNA molecules directly measured by PSeq',
+    search: 'A more direct view of individual RNA isoforms with PSeq',
     eyebrow: '02 / Molecules',
-    title: 'Individual molecules, directly measured',
-    summary: 'True molecule-level counting of every RNA, including rare and low-frequency isoforms. No inferred abundance or statistical reconstruction.',
+    title: 'A more direct view of individual isoforms',
+    summary: 'With sufficient depth and coverage, molecule-assigned reads support isoform-level measurement without reconstructing structure from pooled fragments.',
   },
   {
     id: 'automated-pipeline',
-    search: 'Automated annotation-independent PSeq pipeline',
+    search: 'Automated molecule-aware PSeq pipeline',
     eyebrow: '03 / Workflow',
-    title: 'Automated and annotation-independent',
-    summary: 'End-to-end isoform assembly from raw reads with no manual intervention and no reference bias.',
+    title: 'Automated, molecule-aware processing',
+    summary: 'Preprocessing and quality control prepare reads for molecule-specific assignment before transcript assembly.',
   },
   {
-    id: 'ai-ready-data',
-    search: 'AI-ready molecule-level RNA data',
+    id: 'ml-ready-outputs',
+    search: 'Built for downstream machine learning',
     eyebrow: '04 / Intelligence',
-    title: 'Built for machine learning from first principles',
-    summary: 'Structured, molecule-level features derived from real measurements—not averaged signals or approximations.',
+    title: 'Built for downstream machine learning',
+    summary: 'Structured, molecule-level features preserve isoform detail for use in ML models and established analysis tools.',
   },
 ];
 
@@ -101,7 +101,7 @@ const performanceHighlights = [
     description={homeDescription}
     documentType="Web Page"
     searchTitle="Home"
-    searchKeywords="PSeq phased sequencing full-length RNA sequencing isoform-resolved RNA whole-molecule RNA molecule-level transcriptomics short-read NGS ML-ready biology machine learning feature matrices"
+    searchKeywords="PSeq phased sequencing full-length RNA sequencing isoform-resolved RNA whole-molecule RNA molecule-level transcriptomics short-read NGS ML-ready outputs machine learning feature matrices"
   />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(organizationStructuredData)} />
 
@@ -124,8 +124,8 @@ const performanceHighlights = [
           <p>Gene-level counts compress biology. Isoforms capture splicing, promoter usage, UTR variation, and transcript-specific regulation—often the true functional drivers.</p>
           <p class="platform-thesis">PSeq reveals the biological drivers obscured by gene-level summaries and incomplete isoform resolution.</p>
           <div class="platform-links" data-phaeno-search-ignore>
+            <a class="platform-links__featured" href="/multi-omics">Explore PSeq + multi-omics <span aria-hidden="true">→</span></a>
             <a href="/why-isoforms-matter">Why isoforms matter <span aria-hidden="true">→</span></a>
-            <a href="/multi-omics">PSeq + multi-omics <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
@@ -278,6 +278,17 @@ const performanceHighlights = [
   transform: translateY(-1px);
 }
 
+.platform-links a.platform-links__featured {
+  color: var(--color-text-on-dark);
+  border-color: var(--color-brand-strong);
+  background: var(--color-brand-strong);
+}
+
+.platform-links a.platform-links__featured:hover {
+  border-color: var(--phaeno-rna-900);
+  background: var(--phaeno-rna-900);
+}
+
 .platform-links a span {
   transition: transform var(--duration-fast) var(--ease-standard);
 }
@@ -342,7 +353,7 @@ const performanceHighlights = [
   line-height: 1.08;
 }
 
-#ai-ready-data {
+#ml-ready-outputs {
   max-width: 100%;
 }
 

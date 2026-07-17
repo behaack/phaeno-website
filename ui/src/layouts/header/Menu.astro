@@ -189,6 +189,7 @@ switch (rootParts.length) {
 .main-menu-parent > a > .main-menu-label::after {
   content: '▸';
   font-size: 1rem;
+  line-height: 1;
   margin-left: 0.5rem; /* optional, adjust spacing from label */
   margin-right: 0;     /* optional, can be omitted */
   flex-shrink: 0;      /* prevents squishing on narrow viewports */
@@ -277,7 +278,7 @@ switch (rootParts.length) {
   background-color: var(--phaeno-green-200);
 }
 
-@media (min-width: 726px) {
+@media (min-width: 901px) {
   .menu-item.main-menu-parent:hover > a > .main-menu-label::after,
   .menu-item.main-menu-parent.open > a > .main-menu-label::after {
     transform: rotate(90deg);
@@ -291,7 +292,7 @@ switch (rootParts.length) {
   }
 }
 
-@media (max-width: 725px) {
+@media (max-width: 900px) {
   #nav {
     position: relative;
   }

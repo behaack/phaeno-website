@@ -1,7 +1,7 @@
 <script>
 function init(): void {
   /* ――― 1. helper to detect the mobile breakpoint ――― */
-  const MOBILE_BP = '(max-width: 725px)';
+  const MOBILE_BP = '(max-width: 900px)';
   const mqMobile  = window.matchMedia(MOBILE_BP);
   const isMobile  = () => mqMobile.matches;
 
@@ -294,4 +294,4 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-</script>  
+</script>

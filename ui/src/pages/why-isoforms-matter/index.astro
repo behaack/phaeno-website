@@ -12,7 +12,7 @@ import Layout from '@/layouts/Layout.astro'
     description="RNA isoforms define gene function. Full-length, isoform-resolved RNA sequencing reveals how transcripts actually behave in biology."
     documentType="Web Page"
     searchTitle="Why RNA Isoforms Matter"
-    searchKeywords="RNA isoforms isoform resolved RNA full-length transcript protein isoforms HER2 p95HER2 oncology biomarkers ASO therapies alternative splicing phenotype"
+    searchKeywords="RNA isoforms isoform resolved RNA full-length transcript protein isoforms UTR RNA localization HER2 p95HER2 oncology biomarkers ASO therapies alternative splicing phenotype"
   />
 
   <main id="main" class="isoform-page">
@@ -71,6 +71,10 @@ import Layout from '@/layouts/Layout.astro'
           <article>
             <span aria-hidden="true">◎</span>
             <div><h3>Disease-causing isoforms are resolved</h3><p>Pathogenic RNA products can remain invisible to genome sequencing and gene-level summaries.</p></div>
+          </article>
+          <article>
+            <span aria-hidden="true">⌖</span>
+            <div><h3>Localization-associated signals remain visible</h3><p>Isoform-specific UTR features can support hypotheses about RNA localization and trafficking.</p></div>
           </article>
         </div>
       </section>
@@ -168,7 +172,7 @@ import Layout from '@/layouts/Layout.astro'
         <div class="references-section__heading">
           <p class="eyebrow">Source material</p>
           <h2 id="references-heading" data-phaeno-search="References for RNA isoforms and oncology biomarkers">References</h2>
-          <p>The studies supporting the clinical examples and biomarker comparisons above.</p>
+          <p>The studies supporting the biological, clinical, and biomarker examples above.</p>
         </div>
 
         <div class="reference-groups">
@@ -205,6 +209,13 @@ import Layout from '@/layouts/Layout.astro'
               <div><p><strong>CD20</strong></p><p>Tedder TF, Engel P. <i>CD20: a regulator of cell-cycle progression of B lymphocytes.</i> Immunol Today. 1994;15(9):450–454.</p><p>Johnson NA, Boyle M, Bashashati A, et al. <i>Diffuse large B-cell lymphoma: reduced CD20 expression is associated with an inferior survival.</i> Blood. 2009;113(16):3773–3780.</p></div>
             </div>
           </details>
+
+          <details id="references-for-rna-localization">
+            <summary>UTRs and RNA localization <span aria-hidden="true">+</span></summary>
+            <div class="reference-list">
+              <p>Salehi S, Zare A, Prezza G, et al. <i>Cytosolic Ptbp2 modulates axon growth in motoneurons through axonal localization and translation of Hnrnpr.</i> Nat Commun. 2023;14:4158. doi:10.1038/s41467-023-39787-6.</p>
+            </div>
+          </details>
         </div>
       </section>
 
@@ -224,12 +235,12 @@ import Layout from '@/layouts/Layout.astro'
 <style>
 .isoform-page { background: var(--color-canvas); }
 .page-shell { width: min(100% - (2 * var(--page-gutter)), 80rem); margin: 0 auto; }
-.eyebrow { margin: 0 0 var(--space-3); color: var(--color-brand-strong); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); letter-spacing: .16em; text-transform: uppercase; }
-.intro-section { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr); gap: clamp(2rem, 7vw, 7rem); align-items: end; padding: clamp(2rem, 4vw, 3.5rem) 0; }
-.intro-section h2 { max-width: 14ch; margin: 0; color: var(--phaeno-rna-900); font-size: clamp(2.7rem, 5.5vw, 5.3rem); font-weight: var(--font-weight-medium); letter-spacing: -.055em; line-height: .96; }
+.eyebrow { margin: 0 0 var(--space-3); padding: 0; color: var(--color-brand-strong); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); letter-spacing: .16em; text-transform: uppercase; }
+.intro-section { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr); gap: clamp(2rem, 7vw, 7rem); align-items: start; padding: clamp(2rem, 4vw, 3.5rem) 0; }
+.intro-section h2 { max-width: 14ch; margin: 0; padding: 0; color: var(--phaeno-rna-900); font-size: clamp(2.7rem, 5.5vw, 5.3rem); font-weight: var(--font-weight-medium); letter-spacing: -.055em; line-height: .96; }
 .intro-section h2 span { color: var(--color-brand); }
-.intro-section__copy { padding-bottom: .35rem; }
-.intro-section__copy p { margin: 0; color: var(--phaeno-neutral-700); font-size: var(--font-size-lg); line-height: 1.65; }
+.intro-section__copy { padding-top: var(--space-5); padding-bottom: .35rem; }
+.intro-section__copy p { margin: 0; padding: 0; color: var(--phaeno-neutral-700); font-size: var(--font-size-lg); line-height: 1.65; }
 .intro-section__copy .lead { margin-bottom: var(--space-5); color: var(--phaeno-rna-900); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: var(--font-weight-medium); line-height: 1.45; }
 .resolution-section { padding: clamp(2.5rem, 4.5vw, 4.25rem); border-radius: var(--radius-2xl); background: var(--phaeno-neutral-100); }
 .section-heading { max-width: 49rem; margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem); }
@@ -244,7 +255,7 @@ import Layout from '@/layouts/Layout.astro'
 .resolution-card--emphasis .resolution-card__label { color: var(--phaeno-green-300); }
 .resolution-card--emphasis :is(h3, p:last-child) { color: var(--color-text-on-dark); }
 .resolution-path__arrow { color: var(--color-brand); font-size: 1.8rem; }
-.outcome-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-4); }
+.outcome-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-4); }
 .outcome-grid article { display: flex; gap: var(--space-4); padding: var(--space-5); border-radius: var(--radius-xl); background: var(--phaeno-green-100); }
 .outcome-grid article > span { display: grid; flex: 0 0 2.5rem; height: 2.5rem; place-items: center; border-radius: 50%; color: var(--phaeno-rna-800); background: var(--color-surface); }
 .outcome-grid h3 { margin: 0 0 .35rem; color: var(--phaeno-rna-900); font-size: var(--font-size-lg); }
@@ -257,18 +268,22 @@ import Layout from '@/layouts/Layout.astro'
 .evidence-stat strong { color: var(--color-brand-strong); font-size: clamp(2.3rem, 4vw, 3.5rem); letter-spacing: -.05em; }
 .evidence-stat span { max-width: 15rem; color: var(--phaeno-neutral-600); font-size: var(--font-size-sm); line-height: 1.4; }
 .quote-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: clamp(2rem, 5vw, 3.5rem); }
-.evidence-quote { display: flex; flex-direction: column; justify-content: space-between; min-height: 21rem; margin: 0; padding: clamp(1.6rem, 3vw, 2.5rem); border: 1px solid var(--phaeno-green-200); border-radius: var(--radius-2xl); background: linear-gradient(150deg, var(--color-surface), var(--phaeno-green-50)); }
-.evidence-quote blockquote { max-width: 30ch; margin: 0; padding: 0; border: 0; border-radius: 0; color: var(--phaeno-rna-900); background: transparent; font-size: clamp(1.3rem, 2vw, 1.75rem); line-height: 1.45; }
-.evidence-quote figcaption { display: flex; gap: var(--space-4); align-items: center; margin-top: var(--space-7); }
+.evidence-quote { display: grid; grid-template-rows: auto 1fr; min-height: 0; margin: 0; padding: clamp(1.6rem, 3vw, 2.5rem); border: 1px solid var(--phaeno-green-200); border-radius: var(--radius-2xl); background: linear-gradient(150deg, var(--color-surface), var(--phaeno-green-50)); }
+.evidence-quote blockquote { max-width: 30ch; margin: 0; padding: 0; border: 0; border-radius: 0; color: var(--phaeno-rna-900); background: transparent; box-shadow: none; font-size: clamp(1.3rem, 2vw, 1.75rem); line-height: 1.45; }
+.evidence-quote figcaption { display: flex; gap: var(--space-4); align-self: end; align-items: flex-start; margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid var(--phaeno-green-200); }
 .evidence-quote img { width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; filter: grayscale(1); }
-.evidence-quote figcaption span { display: flex; flex-direction: column; color: var(--phaeno-rna-900); }
+.evidence-quote figcaption span { display: flex; min-width: 0; flex-direction: column; color: var(--phaeno-rna-900); }
+.evidence-quote figcaption strong { color: var(--phaeno-rna-900); }
 .evidence-quote small { margin-top: .3rem; color: var(--phaeno-neutral-600); line-height: 1.4; }
 .evidence-quote--dark { border-color: var(--phaeno-rna-800); background: linear-gradient(145deg, var(--phaeno-rna-900), var(--phaeno-rna-800)); }
 .evidence-quote--dark :is(blockquote, figcaption span) { color: var(--color-text-on-dark); }
+.evidence-quote--dark figcaption { border-top-color: rgb(255 255 255 / 28%); }
+.evidence-quote--dark figcaption strong { color: var(--color-text-on-dark); }
 .evidence-quote--dark small { color: var(--phaeno-green-200); }
 .biomarker-section { padding: clamp(2.5rem, 4.5vw, 4.25rem); border-radius: var(--radius-2xl); background: var(--phaeno-green-50); }
-.section-heading--split { display: grid; grid-template-columns: 1fr minmax(18rem, .65fr); gap: clamp(2rem, 6vw, 5rem); max-width: none; align-items: end; }
-.section-heading--split > p { margin: 0 0 .25rem; color: var(--phaeno-neutral-700); font-size: var(--font-size-lg); line-height: 1.6; }
+.section-heading--split { display: grid; grid-template-columns: 1fr minmax(18rem, .65fr); gap: clamp(2rem, 6vw, 5rem); max-width: none; align-items: start; }
+.section-heading--split h2 { padding: 0; }
+.section-heading.section-heading--split > p { margin: 0 0 .25rem; padding: var(--space-5) 0 0; color: var(--phaeno-neutral-700); font-size: var(--font-size-lg); line-height: 1.6; }
 .biomarker-table { overflow: hidden; border: 1px solid var(--phaeno-green-200); border-radius: var(--radius-xl); background: var(--color-surface); }
 .biomarker-table__header, .biomarker-row { display: grid; grid-template-columns: .65fr 1.15fr 1fr 1.7fr; }
 .biomarker-table__header { color: var(--phaeno-green-200); background: var(--phaeno-rna-900); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); letter-spacing: .12em; text-transform: uppercase; }
@@ -322,7 +337,10 @@ import Layout from '@/layouts/Layout.astro'
 @media (max-width: 950px) {
   .intro-section, .aso-section__body, .references-section { grid-template-columns: 1fr; }
   .intro-section { align-items: start; }
-  .intro-section__copy { max-width: 48rem; }
+  .intro-section__copy { max-width: 48rem; padding-top: 0; }
+  .quote-grid { grid-template-columns: 1fr; }
+  .outcome-grid { grid-template-columns: repeat(2, 1fr); }
+  .outcome-grid article:last-child { grid-column: 1 / -1; }
   .resolution-path { grid-template-columns: 1fr; }
   .resolution-path__arrow { transform: rotate(90deg); justify-self: center; }
   .resolution-card { min-height: auto; }
@@ -338,7 +356,9 @@ import Layout from '@/layouts/Layout.astro'
   .intro-section h2 { font-size: clamp(2.5rem, 13vw, 4rem); }
   .resolution-section, .biomarker-section { margin-right: -.25rem; margin-left: -.25rem; padding: 1.5rem; border-radius: var(--radius-xl); }
   .outcome-grid, .quote-grid, .section-heading--split, .reference-list--columns { grid-template-columns: 1fr; }
-  .evidence-quote { min-height: 22rem; }
+  .section-heading.section-heading--split > p { padding-top: 0; }
+  .outcome-grid article:last-child { grid-column: auto; }
+  .evidence-quote { min-height: 0; }
   .biomarker-table { overflow: visible; border: 0; background: transparent; }
   .biomarker-table__header { display: none; }
   .biomarker-row { display: grid; grid-template-columns: 1fr; gap: var(--space-3); margin-bottom: var(--space-4); padding: var(--space-5); border: 1px solid var(--phaeno-green-200) !important; border-radius: var(--radius-xl); background: var(--color-surface) !important; }

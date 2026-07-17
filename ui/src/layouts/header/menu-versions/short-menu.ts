@@ -14,6 +14,12 @@ const menu: IMenuItem[] = [
     submenu: null
   },
   {
+    index: 2,
+    label: 'Multi-omics',
+    path: '/multi-omics',
+    submenu: null
+  },
+  {
     index: 3,
     label: 'About',
     path: '/about',
@@ -33,7 +39,7 @@ const menu: IMenuItem[] = [
     ]
   },
   {
-    index: 2,
+    index: 4,
     label: 'Contact',
     path: '/contact',
     submenu: null

@@ -475,9 +475,13 @@ button:focus {
 	}
 }
 
-@media (max-width: 725px) {
+@media (max-width: 900px) {
+  :root {
+    --header-height: 3.75rem;
+  }
+
 	main {
-		padding: 3.4rem 0 0 0;
+		padding: var(--header-height) 0 0 0;
 	}
 
   h1 {
