@@ -19,18 +19,18 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
       <h2
         id="pseq-technology"
         data-phaeno-search="PSeq sequencing technology category"
-        data-phaeno-search-summary="Visual overview of PSeq as a phased sequencing category built on NGS, chemistry, applied information theory, and software."
-        data-phaeno-search-keywords="PSeq phased sequencing NGS chemistry applied information theory software"
-      >PSeq — A New Category of Sequencing Technology</h2>
+        data-phaeno-search-summary="Visual overview of PSeq as a phased sequencing category that adds molecule-level isoform resolution to established NGS workflows."
+        data-phaeno-search-keywords="PSeq phased sequencing NGS molecular identity molecule-level isoform resolution transcript reconstruction software"
+      >PSeq — A New Category Built Around Resolution</h2>
       <div class="category-context">
         <p>
-          Each generation of sequencing advanced what scientists could observe—first through direct reads, then scale,
-          and then read length. PSeq marks a different kind of advance: it combines molecular chemistry, applied
-          information theory, and automated software on the NGS instruments already in use.
+          Sequencing advanced through foundation, scale, and read length. PSeq adds molecule-level isoform resolution.
+          By preserving molecular identity through an NGS workflow, it allows reads from the same captured template to
+          be grouped before transcript reconstruction.
         </p>
         <p class="category-context__claim">
           <strong>Not another sequencer.</strong>
-          <span>A new architecture for full-length, isoform-resolved RNA data.</span>
+          <span>A new architecture for molecule-resolved RNA measurement.</span>
         </p>
       </div>
       <div class="category-timeline-wrap">
@@ -111,8 +111,8 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
       <h2
         id="pseq-workflow"
         data-phaeno-search="From sample to isoform-resolved PSeq data"
-        data-phaeno-search-summary="Detailed PSeq stages covering molecular tagging, isothermal amplification, UMI redistribution, automated software assembly, and isoform-resolved output."
-        data-phaeno-search-keywords="PSeq workflow molecular tagging isothermal amplification UMI redistribution software stack isoform resolved insights"
+        data-phaeno-search-summary="Detailed PSeq stages covering molecular tagging, molecule-aware processing, molecule-constrained reconstruction, and interoperable isoform-level output."
+        data-phaeno-search-keywords="PSeq workflow molecular tagging isothermal amplification UMI redistribution molecule-aware processing quality control molecular assignment transcript reconstruction interoperable isoform output"
       >From Sample to Isoform-Resolved Data</h2>
       <p class="workflow-detail-intro">
         PSeq moves from molecular preparation through automated processing to structured, molecule-level output—within
@@ -148,53 +148,50 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
           <header class="workflow-card__header">
             <span class="workflow-card__stage">Execute</span>
             <h3>PSeq Software</h3>
-            <p>A fully automated pipeline enables direct, rapid data assembly.</p>
+            <p>
+              An automated, molecule-aware pipeline carries sequencing data through preprocessing, quality control,
+              molecular assignment, transcript reconstruction, and structured output.
+            </p>
           </header>
           <ul class="workflow-card__list">
             <li>
-              <span class="workflow-card__marker" aria-hidden="true">→</span>
-              <div><strong>Automated compute</strong><span>Data polishing is unnecessary.</span></div>
+              <div>
+                <strong>Molecule-aware processing</strong>
+                <span>Preprocessing and quality control prepare reads for molecule-specific assignment, which is evaluated before transcript assembly.</span>
+              </div>
             </li>
             <li>
-              <span class="workflow-card__marker" aria-hidden="true">→</span>
-              <div><strong>Measurement first</strong><span>No priors or statistical reconstruction algorithms.</span></div>
+              <div>
+                <strong>Molecule-constrained reconstruction</strong>
+                <span>With sufficient depth and coverage, reads assigned to each captured molecular template support a more direct view of individual isoforms than inference from pooled fragments.</span>
+              </div>
             </li>
             <li>
-              <span class="workflow-card__marker" aria-hidden="true">→</span>
-              <div><strong>AI/ML ready</strong><span><i>In silico</i> tools generate structured training sets.</span></div>
+              <div>
+                <strong>Interoperable outputs</strong>
+                <span>Structured isoform-level results can connect with biological databases and established bioinformatics, visualization, ML, and AI tools.</span>
+              </div>
             </li>
           </ul>
         </article>
         <article class="work-flow-description workflow-card--deliver">
           <header class="workflow-card__header">
             <span class="workflow-card__stage">Deliver</span>
-            <h3>Isoform-Resolved Insights</h3>
+            <h3><span class="workflow-title__nowrap">Isoform&#8209;Resolved</span> Insights</h3>
             <p>Individual-molecule data, structured for analysis and discovery.</p>
           </header>
           <ul class="workflow-card__list">
             <li>
-              <span class="workflow-card__marker" aria-hidden="true">→</span>
-              <div><strong>Consolidated data</strong><span>Low-cost transmission and ML-optimized output.</span></div>
+              <div><strong>Isoform architecture</strong><span>Connected exon structure within individual RNA molecules.</span></div>
             </li>
             <li>
-              <span class="workflow-card__marker" aria-hidden="true">→</span>
-              <div><strong>Protein-coding structure</strong><span>ORF-constitutive and alternative exons.</span></div>
+              <div><strong>Protein-coding potential</strong><span>Open reading frames and alternative translation initiation sites.</span></div>
             </li>
             <li>
-              <span class="workflow-card__marker" aria-hidden="true">→</span>
-              <div><strong>Translation initiation</strong><span>Alternative initiation sites.</span></div>
+              <div><strong>Polyadenylation</strong><span>Alternative cleavage and polyadenylation sites.</span></div>
             </li>
             <li>
-              <span class="workflow-card__marker" aria-hidden="true">→</span>
-              <div><strong>Polyadenylation</strong><span>Alternative chain-termination sites.</span></div>
-            </li>
-            <li>
-              <span class="workflow-card__marker" aria-hidden="true">→</span>
-              <div><strong>RNA trafficking</strong><span>Transcript-specific “zip” codes.</span></div>
-            </li>
-            <li>
-              <span class="workflow-card__marker" aria-hidden="true">+</span>
-              <div><strong>And more</strong><span>Additional molecule-level features.</span></div>
+              <div><strong>RNA localization</strong><span>Transcript-specific sequence signals associated with RNA trafficking.</span></div>
             </li>
           </ul>
         </article>
@@ -492,7 +489,7 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
 .work-flow-description {
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(16rem, .72fr) minmax(0, 1.8fr);
+  grid-template-columns: minmax(18rem, .85fr) minmax(0, 1.8fr);
   border: 1px solid var(--phaeno-green-200);
   border-radius: var(--radius-xl);
   background: var(--color-surface);
@@ -538,6 +535,10 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
   color: var(--phaeno-rna-900);
   font-size: clamp(1.6rem, 2.4vw, 2.1rem);
   line-height: 1.08;
+}
+
+.workflow-title__nowrap {
+  white-space: nowrap;
 }
 
 .workflow-card__header p {
@@ -590,6 +591,26 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
   gap: var(--space-1);
 }
 
+.workflow-card__list:not(.workflow-card__list--numbered) li > div {
+  width: 100%;
+}
+
+.workflow-card__list:not(.workflow-card__list--numbered) li {
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--space-3);
+}
+
+.workflow-card__list:not(.workflow-card__list--numbered) li::before {
+  width: 2rem;
+  height: 2px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-strong);
+  content: '';
+}
+
 .workflow-card__list strong {
   color: var(--phaeno-rna-900);
   font-size: var(--font-size-sm);
@@ -624,12 +645,6 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
   color: var(--phaeno-neutral-200);
 }
 
-.workflow-card--execute .workflow-card__marker {
-  color: var(--phaeno-rna-600);
-  border-color: var(--phaeno-rna-200);
-  background: var(--phaeno-rna-50);
-}
-
 .workflow-card--execute .workflow-card__list {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   background: var(--color-surface);
@@ -639,8 +654,22 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
   background: var(--phaeno-neutral-50);
 }
 
+.workflow-card--execute .workflow-card__list li::before {
+  background: var(--phaeno-rna-600);
+}
+
+.workflow-card--execute .workflow-card__list strong {
+  font-size: var(--font-size-md);
+}
+
 .workflow-card--deliver .workflow-card__header {
+  padding-block: var(--space-4);
   background: var(--phaeno-neutral-100);
+}
+
+.workflow-card--deliver .workflow-card__header h3 {
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: clamp(1.55rem, 2vw, 1.9rem);
 }
 
 .workflow-card--deliver .workflow-card__stage {
@@ -649,14 +678,20 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
   background: var(--phaeno-white);
 }
 
-.workflow-card--deliver .workflow-card__marker {
-  color: var(--phaeno-rna-600);
-  border-color: var(--phaeno-rna-200);
-  background: var(--phaeno-rna-50);
+.workflow-card--deliver .workflow-card__list {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: clamp(1rem, 1.6vw, 1.5rem);
 }
 
-.workflow-card--deliver .workflow-card__list {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.workflow-card--deliver .workflow-card__list li {
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+}
+
+@media (max-width: 1100px) {
+  .workflow-card--deliver .workflow-card__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 950px) {
