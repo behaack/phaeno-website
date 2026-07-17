@@ -57,6 +57,10 @@ import ReCaptchaNotification from '@/components/ReCaptchaNotification.astro';
 </Layout>
 
 <style>
+.contact-page {
+  container-type: inline-size;
+}
+
 .contact-details-container {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -139,9 +143,9 @@ import ReCaptchaNotification from '@/components/ReCaptchaNotification.astro';
 :global(.demo-band) {
   position: relative;
   overflow: hidden;
-  width: 100vw;
+  width: 100cqw;
   max-width: none;
-  margin: clamp(3rem, 5vw, 4.5rem) calc(50% - 50vw);
+  margin: clamp(3rem, 5vw, 4.5rem) calc(50% - 50cqw);
   padding: 0;
   color: var(--color-text-on-dark);
   background:

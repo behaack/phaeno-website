@@ -233,7 +233,7 @@ import Layout from '@/layouts/Layout.astro'
 </Layout>
 
 <style>
-.isoform-page { background: var(--color-canvas); }
+.isoform-page { container-type: inline-size; background: var(--color-canvas); }
 .page-shell { width: 100%; max-width: 80rem; margin: 0 auto; padding-inline: var(--page-gutter); }
 .eyebrow { margin: 0 0 var(--space-3); padding: 0; color: var(--color-brand-strong); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); letter-spacing: .16em; text-transform: uppercase; }
 .intro-section { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr); gap: clamp(2rem, 7vw, 7rem); align-items: start; padding: clamp(2rem, 4vw, 3.5rem) 0; }
@@ -293,7 +293,7 @@ import Layout from '@/layouts/Layout.astro'
 .biomarker-row:nth-child(odd) { background: var(--phaeno-neutral-50); }
 .biomarker-name { color: var(--phaeno-rna-900); font-size: var(--font-size-base); font-weight: var(--font-weight-semibold); }
 .mobile-label { display: none; }
-.aso-section { width: 100vw; max-width: none; margin: clamp(3rem, 5vw, 4.5rem) calc(50% - 50vw); padding: 0; background: var(--phaeno-rna-900); }
+.aso-section { width: 100cqw; max-width: none; margin: clamp(3rem, 5vw, 4.5rem) calc(50% - 50cqw); padding: 0; background: var(--phaeno-rna-900); }
 .aso-section__inner { width: 100%; max-width: var(--content-max-width); margin: 0 auto; padding: clamp(3rem, 6vw, 5rem) var(--page-gutter); }
 .aso-section .eyebrow { color: var(--phaeno-green-300); }
 .aso-section__body { display: grid; grid-template-columns: 1fr .8fr; gap: clamp(2rem, 7vw, 6rem); align-items: center; }
@@ -323,7 +323,7 @@ import Layout from '@/layouts/Layout.astro'
 .reference-list--columns { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
 .reference-list--columns div { padding: var(--space-5); border-radius: var(--radius-lg); background: var(--phaeno-neutral-50); }
 .reference-list--columns p:first-child { margin-top: 0; color: var(--phaeno-rna-900); }
-.closing-panel { width: 100vw; max-width: none; margin: 0 calc(50% - 50vw); padding: 0; background: var(--phaeno-green-100); }
+.closing-panel { width: 100cqw; max-width: none; margin: 0 calc(50% - 50cqw); padding: 0; background: var(--phaeno-green-100); }
 .closing-panel__inner { width: 100%; max-width: var(--content-max-width); margin: 0 auto; padding: clamp(3rem, 6vw, 5rem) var(--page-gutter); }
 .closing-panel__content { display: flex; justify-content: space-between; gap: var(--space-7); align-items: center; }
 .closing-panel h2 { max-width: 17ch; font-size: clamp(2rem, 3.5vw, 3.2rem); }
