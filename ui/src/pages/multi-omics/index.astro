@@ -204,8 +204,10 @@ const benefits = [
 }
 
 .page-shell {
-  width: min(100% - (2 * var(--page-gutter)), 80rem);
+  width: 100%;
+  max-width: 80rem;
   margin: 0 auto;
+  padding-inline: var(--page-gutter);
 }
 
 .eyebrow,
@@ -576,10 +578,6 @@ const benefits = [
 }
 
 @media (max-width: 640px) {
-  .page-shell {
-    width: min(100% - 2rem, 80rem);
-  }
-
   .intro-section {
     gap: var(--space-7, 1.75rem);
     padding: 2.5rem 0;

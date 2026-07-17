@@ -234,7 +234,7 @@ import Layout from '@/layouts/Layout.astro'
 
 <style>
 .isoform-page { background: var(--color-canvas); }
-.page-shell { width: min(100% - (2 * var(--page-gutter)), 80rem); margin: 0 auto; }
+.page-shell { width: 100%; max-width: 80rem; margin: 0 auto; padding-inline: var(--page-gutter); }
 .eyebrow { margin: 0 0 var(--space-3); padding: 0; color: var(--color-brand-strong); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); letter-spacing: .16em; text-transform: uppercase; }
 .intro-section { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr); gap: clamp(2rem, 7vw, 7rem); align-items: start; padding: clamp(2rem, 4vw, 3.5rem) 0; }
 .intro-section h2 { max-width: 14ch; margin: 0; padding: 0; color: var(--phaeno-rna-900); font-size: clamp(2.7rem, 5.5vw, 5.3rem); font-weight: var(--font-weight-medium); letter-spacing: -.055em; line-height: .96; }
@@ -351,7 +351,6 @@ import Layout from '@/layouts/Layout.astro'
 }
 
 @media (max-width: 725px) {
-  .page-shell { width: min(100% - 2rem, 80rem); }
   .intro-section { gap: var(--space-7); padding: 2rem 0; }
   .intro-section h2 { font-size: clamp(2.5rem, 13vw, 4rem); }
   .resolution-section, .biomarker-section { margin-right: -.25rem; margin-left: -.25rem; padding: 1.5rem; border-radius: var(--radius-xl); }
