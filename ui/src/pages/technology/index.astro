@@ -215,6 +215,10 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
 </Layout>
 
 <style lang="scss">
+.science-page {
+  container-type: inline-size;
+}
+
 .category-context {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(18rem, .65fr);
@@ -249,8 +253,8 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
 }
 
 .category-timeline-wrap {
-  width: 100vw;
-  margin-inline: calc(50% - 50vw);
+  width: 100cqw;
+  margin-inline: calc(50% - 50cqw);
   margin-bottom: var(--space-8);
   padding: clamp(2rem, 4vw, 3rem) 0;
   background: var(--phaeno-green-50);
@@ -385,8 +389,8 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
 .ngs-compatibility {
   position: relative;
   overflow: hidden;
-  width: 100vw;
-  margin-inline: calc(50% - 50vw);
+  width: 100cqw;
+  margin-inline: calc(50% - 50cqw);
   margin-top: clamp(2rem, 4vw, 3rem);
   color: var(--color-text-on-dark);
   background:
