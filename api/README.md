@@ -56,18 +56,16 @@ Production values should come from environment variables, not committed files.
 Required production variables:
 
 ```env
+WEBSITE_DATABASE_CONNECTION_STRING=...
 RECAPTCHA_SECRET=...
 RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH=/app/__DOCUMENTS/private/secrets/recaptcha-enterprise-service-account.json
 MAILGUN_API_KEY=...
 ```
 
-`Program.cs` reads the `ConnectionStrings:phaeno-website` key. The production
-value comes from `appsettings.json`, and `appsettings.Development.json`
-overrides that value locally.
-
-Only set `ConnectionStrings__phaeno-website` in the environment when you want
-to override the checked-in configuration value. Do not commit production `.env`
-files.
+`Program.cs` reads the `ConnectionStrings:phaeno-website` key.
+`docker-compose.yml` supplies it from `WEBSITE_DATABASE_CONNECTION_STRING`.
+Development configuration can provide a local value separately.
+Do not commit production `.env` files or database credentials.
 
 Production reCAPTCHA Enterprise validation also requires the Google service
 account JSON at the configured `RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH`. With the

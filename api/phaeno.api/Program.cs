@@ -117,8 +117,12 @@ builder.Services.Configure<ChronJobScheduleOptions>(
     builder.Configuration.GetSection("ChronJobs"));
 
 const string connectionStringName = "phaeno-website";
-var connectionString = builder.Configuration.GetConnectionString(connectionStringName)
-    ?? throw new InvalidOperationException($"Connection string '{connectionStringName}' is missing.");
+var connectionString = builder.Configuration.GetConnectionString(connectionStringName);
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException(
+        $"Connection string '{connectionStringName}' is missing.");
+}
 
 builder.Services.AddDbContext<PseqDatabase>(options =>
 {

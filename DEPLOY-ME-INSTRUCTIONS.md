@@ -14,16 +14,16 @@ Phaeno website API on the current Hetzner server.
 - File manager local binding on server: `127.0.0.1:8082`
 - File manager URL: `https://webops.phaenobiotech.com/manage-pseq-assets-7f3c9/`
 - Public documents directory: `/opt/phaeno.website-api/documents/public`
-- Production database: PostgreSQL project `phaeno-website` through
-  `ConnectionStrings:phaeno-website` in `phaeno.api/appsettings.json`
+- Production database: PostgreSQL through
+  `ConnectionStrings:phaeno-website`, supplied from the server environment
 
 The current server uses host-level Nginx for ports `80` and `443`. Do not start
 the `caddy` Compose profile on this server unless Nginx is intentionally removed
 or reconfigured.
 
-The API no longer runs a Hetzner PostgreSQL container. Production data lives in
-PostgreSQL, and the server keeps only API, file manager, and optional Caddy
-services.
+The API does not run a Hetzner PostgreSQL container. Production data lives in
+an externally managed PostgreSQL database, and the server keeps only API, file
+manager, and optional Caddy services.
 
 ## Before Deploying
 
@@ -189,6 +189,7 @@ The required variables are:
 
 ```env
 SITE_HOST=:80
+WEBSITE_DATABASE_CONNECTION_STRING=...
 RECAPTCHA_SECRET=...
 RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH=/app/__DOCUMENTS/private/secrets/recaptcha-enterprise-service-account.json
 MAILGUN_API_KEY=...
@@ -261,11 +262,11 @@ Upload and run the bundle against production:
 
 ```powershell
 scp migrate root@178.156.175.151:/tmp/migrate
-ssh root@178.156.175.151 "chmod +x /tmp/migrate && /tmp/migrate --connection 'PostgreSQL_NPGSQL_CONNECTION_STRING'"
+ssh root@178.156.175.151 "chmod +x /tmp/migrate && /tmp/migrate --connection 'POSTGRESQL_CONNECTION_STRING'"
 ```
 
-Use the PostgreSQL Npgsql connection string from `ConnectionStrings:phaeno-website`
-or a secret manager. Do not run migrations against a Hetzner-local database.
+Use the production Npgsql connection string from the deployment secret store.
+Do not commit or paste it into repository files.
 
 ## Rollback Notes
 
@@ -274,4 +275,5 @@ There is no automated rollback script. For safer rollbacks:
 - Keep a copy of the previously deployed archive before extracting a new one.
 - Confirm `docker compose ps` before and after deploys.
 - Review `docker compose logs --tail=100 api` after every restart.
-- Back up PostgreSQL before risky schema or data changes.
+- Back up the production PostgreSQL database before risky schema or data
+  changes.

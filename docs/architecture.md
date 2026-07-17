@@ -9,7 +9,7 @@ Public browser
        -> content collections for articles and jobs
        -> generated sitemap and RSS routes
   -> versioned ASP.NET Core API on Hetzner (`api/phaeno.api`)
-       -> PostgreSQL PostgreSQL via EF Core
+       -> PostgreSQL via EF Core
        -> Mailgun notifications
        -> Google reCAPTCHA Enterprise
        -> Quartz website crawl -> Lucene index
@@ -51,5 +51,5 @@ Route, heading, or metadata changes can therefore affect both public SEO and int
 
 - UI: Vercel, configured from `ui/vercel.json`.
 - API: Hetzner at the deployment path documented in `README.md` and `api/README.md`.
-- Database: PostgreSQL PostgreSQL; production connection details remain environment-owned.
+- Database: PostgreSQL; production connection details remain environment-owned.
 - Deployment procedures remain in `DEPLOY-ME.md`, `DEPLOY-ME-INSTRUCTIONS.md`, and `api/README.md`.

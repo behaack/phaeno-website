@@ -39,7 +39,7 @@ Keep the owner focused on audience, positioning, scientific and commercial messa
 ## Current architecture
 
 - `ui`: Astro 7 static site deployed on Vercel, with React 19 islands, Tailwind 4, content collections, SEO helpers, and generated sitemap/RSS routes.
-- `api/phaeno.api`: .NET 10 API deployed on Hetzner, with versioned `/api/v1` website operations, PostgreSQL PostgreSQL through EF Core, Mailgun, reCAPTCHA Enterprise, Quartz crawling, and Lucene search.
+- `api/phaeno.api`: .NET 10 API deployed on Hetzner, with versioned `/api/v1` website operations, PostgreSQL through EF Core, Mailgun, reCAPTCHA Enterprise, Quartz crawling, and Lucene search.
 - `PHAENO-DESIGN-SYSTEM.md` and `design-system/PHAENO-DESIGN-SYSTEM.md` are the design-system references.
 - `PLANS/` is the implementation-plan source of truth.
 

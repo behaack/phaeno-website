@@ -33,7 +33,7 @@ See [PHAENO-DESIGN-SYSTEM.md](PHAENO-DESIGN-SYSTEM.md) for the brand foundations
 
 ## API
 
-The API is the backend service layer for the public website. It exposes versioned routes under `/api/v1` for site search, contact form submissions, and order inquiries. It also supports crawler/indexing jobs, PostgreSQL PostgreSQL persistence, Mailgun notifications, Google reCAPTCHA Enterprise validation, and public document hosting.
+The API is the backend service layer for the public website. It exposes versioned routes under `/api/v1` for site search, contact form submissions, and order inquiries. It also supports crawler/indexing jobs, PostgreSQL persistence, Mailgun notifications, Google reCAPTCHA Enterprise validation, and public document hosting.
 
 Common commands:
 
@@ -68,6 +68,7 @@ Keep production secrets out of git. The UI and API both use local environment fi
 Important API production variables:
 
 ```env
+WEBSITE_DATABASE_CONNECTION_STRING=...
 RECAPTCHA_SECRET=...
 RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH=/app/__DOCUMENTS/private/secrets/recaptcha-enterprise-service-account.json
 MAILGUN_API_KEY=...

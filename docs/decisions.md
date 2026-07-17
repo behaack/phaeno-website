@@ -12,7 +12,7 @@ Astro uses `output: 'static'`; content pages should remain static by default. Us
 
 Status: observed in current deployment docs.
 
-The Astro UI deploys to Vercel. The .NET API deploys to Hetzner and uses PostgreSQL PostgreSQL. A successful UI deployment is not proof that API, database, Mailgun, reCAPTCHA, or search indexing is healthy.
+The Astro UI deploys to Vercel. The .NET API deploys to Hetzner and uses PostgreSQL. A successful UI deployment is not proof that API, database, Mailgun, reCAPTCHA, or search indexing is healthy.
 
 ## 2026-07-14: Public HTML is the internal-search contract
 

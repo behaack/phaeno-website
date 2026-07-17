@@ -12,5 +12,5 @@
 | Crawler | The API service that reads sitemap/robots guidance and extracts public page content. |
 | Lucene index | The API-owned internal search index built from crawled content. |
 | PSEQ | Phaeno's phased-sequencing product/technology term; scientific claims about it require approved evidence. |
-| PostgreSQL | The hosted PostgreSQL provider used by the website API. |
+| PostgreSQL | The relational database used by the website API. |
 | Keepalive | The scheduled `database-ping` request used to touch the database without changing business data. |

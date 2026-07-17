@@ -7,6 +7,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__phaeno-website: ${WEBSITE_DATABASE_CONNECTION_STRING:?WEBSITE_DATABASE_CONNECTION_STRING is required}
       GoogleAuthSettings__RecaptchaSecretKey: ${RECAPTCHA_SECRET}
       GoogleAuthSettings__RecaptchaServiceAccountKeyPath: ${RECAPTCHA_SERVICE_ACCOUNT_KEY_PATH:-/app/__DOCUMENTS/private/secrets/recaptcha-enterprise-service-account.json}
       EmailServiceSettings__ApiKey: ${MAILGUN_API_KEY}

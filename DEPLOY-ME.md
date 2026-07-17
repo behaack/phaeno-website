@@ -9,8 +9,8 @@ This project can be hosted on a Hetzner Cloud server as a small Docker Compose s
 
 - The API targets `.NET 10`.
 - The app uses PostgreSQL through `Npgsql.EntityFrameworkCore.PostgreSQL`.
-- `Program.cs` reads `ConnectionStrings:phaeno-website`. `appsettings.Development.json` overrides this value locally.
-- Do not set `ConnectionStrings__phaeno-website` in Docker Compose unless you intentionally want to override the value from `appsettings.json`.
+- `Program.cs` reads `ConnectionStrings:phaeno-website`. Production Docker Compose supplies it from `WEBSITE_DATABASE_CONNECTION_STRING`; `appsettings.Development.json` can provide a local value.
+- Keep `WEBSITE_DATABASE_CONNECTION_STRING` in the server `.env` file and out of source control.
 - Rotate any secrets that have been committed to `appsettings.json` before going live. Use environment variables for production secrets.
 - Because the app calls `UseHttpsRedirection()`, hosting behind a reverse proxy should include forwarded header support in the API to avoid HTTPS redirect issues.
 
@@ -38,15 +38,15 @@ The current Hetzner server uses Nginx on the host rather than the optional Caddy
 - Public hostname: `webops.phaenobiotech.com`
 - Server IP: `178.156.175.151`
 - API container binding: `127.0.0.1:8081`
-- Production database: PostgreSQL project `phaeno-website`
+- Production database: PostgreSQL configured through the server environment
 - File manager binding: `127.0.0.1:8082`
 - Active Nginx site: `/etc/nginx/sites-enabled/phaeno-website-api.conf`
 - HTTPS certificate: `/etc/letsencrypt/live/webops.phaenobiotech.com/fullchain.pem`
 - Public file directory: `/opt/phaeno.website-api/documents/public`
 - File manager URL: `https://webops.phaenobiotech.com/manage-pseq-assets-7f3c9/`
 
-The server no longer runs a Hetzner PostgreSQL container. Production data lives
-in PostgreSQL.
+The server does not run a PostgreSQL container. Production data lives in the
+externally managed PostgreSQL database selected through runtime configuration.
 
 DNS for `webops.phaenobiotech.com` must point to `178.156.175.151`.
 
@@ -120,6 +120,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__phaeno-website: ${WEBSITE_DATABASE_CONNECTION_STRING:?WEBSITE_DATABASE_CONNECTION_STRING is required}
       GoogleAuthSettings__RecaptchaSecretKey: ${RECAPTCHA_SECRET}
       EmailServiceSettings__ApiKey: ${MAILGUN_API_KEY}
     volumes:
@@ -185,6 +186,7 @@ Create a `.env` file on the server:
 
 ```env
 SITE_HOST=:80
+WEBSITE_DATABASE_CONNECTION_STRING=Host=database-host;Database=database-name;Username=database-user;Password=replace-with-database-password;SSL Mode=Require
 RECAPTCHA_SECRET=rotated-recaptcha-secret
 MAILGUN_API_KEY=rotated-mailgun-key
 ```
@@ -233,16 +235,17 @@ dotnet ef migrations bundle --project phaeno.api -o migrate
 Then run it against the production database connection string:
 
 ```bash
-./migrate --connection "PostgreSQL_NPGSQL_CONNECTION_STRING"
+./migrate --connection "POSTGRESQL_CONNECTION_STRING"
 ```
 
-Use the PostgreSQL Npgsql connection string from `ConnectionStrings:phaeno-website`
-or a secret manager. Do not run migrations against a Hetzner-local database.
+Use the production Npgsql connection string from the deployment secret store.
+Do not commit or paste it into repository files.
 
 ## Backups
 
-At minimum, use PostgreSQL backups or manual `pg_dump` exports before risky schema
-or data changes. The Hetzner server no longer stores production database data.
+At minimum, use the database platform's managed backups or manual `pg_dump`
+exports before risky schema or data changes. The Hetzner server does not store
+production database data.
 
 ## Security Checklist
 
