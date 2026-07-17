@@ -206,8 +206,8 @@ const performanceHighlights = [
 
 .platform-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(20rem, .75fr);
-  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+  gap: clamp(2rem, 4vw, 4rem);
   align-items: start;
 }
 
@@ -248,7 +248,7 @@ const performanceHighlights = [
 
 .platform-links {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--space-3);
   margin-top: var(--space-6);
 }
@@ -380,7 +380,7 @@ const performanceHighlights = [
 .platform-cta {
   width: 100vw;
   margin-inline: calc(50% - 50vw);
-  margin-top: var(--space-4);
+  margin-top: var(--space-8);
   color: var(--color-text-on-dark);
   background:
     radial-gradient(circle at 78% 18%, rgb(28 127 152 / .28), transparent 38%),
@@ -494,7 +494,7 @@ const performanceHighlights = [
 }
 
 .metrics-shell {
-  margin-top: clamp(2.5rem, 4vw, 4rem);
+  margin-top: var(--space-12);
 }
 
 .closing-cta {
@@ -561,18 +561,33 @@ const performanceHighlights = [
   transform: translateY(-1px);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1150px) {
   .platform-intro {
     grid-template-columns: 1fr;
     gap: var(--space-4);
   }
 
   .platform-copy {
+    max-width: 48rem;
     padding-top: 0;
   }
+}
 
+@media (max-width: 900px) {
   .feature-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .platform-links {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .platform-links a {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 

@@ -256,6 +256,11 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
   background: transparent;
 }
 
+#new-insights-in-chemistry,
+#pseq-workflow {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
 .mechanism-intro {
   max-width: 48rem;
   margin: var(--space-3) 0 var(--space-7);
@@ -368,7 +373,7 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
   overflow: hidden;
   width: 100vw;
   margin-inline: calc(50% - 50vw);
-  margin-top: var(--space-4);
+  margin-top: clamp(2rem, 4vw, 3rem);
   color: var(--color-text-on-dark);
   background:
     radial-gradient(circle at 100% 0%, rgb(28 127 152 / 28%), transparent 36%),
