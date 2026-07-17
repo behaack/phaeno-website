@@ -196,6 +196,20 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
           </ul>
         </article>
       </div>
+      <aside
+        class="technical-discussion"
+        aria-labelledby="technical-discussion-title"
+        data-phaeno-search-ignore
+      >
+        <div class="technical-discussion__copy">
+          <p class="technical-discussion__eyebrow">Apply PSeq to your work</p>
+          <h2 id="technical-discussion-title">Ready to explore PSeq for your workflow?</h2>
+          <p>Discuss your samples, sequencing setup, and research goals with our team.</p>
+        </div>
+        <a class="technical-discussion__cta" href="/contact#request-demo">
+          Request a technical discussion <span aria-hidden="true">→</span>
+        </a>
+      </aside>
     </section>
   </main>
 </Layout>
@@ -515,6 +529,79 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
   gap: var(--space-4);
 }
 
+.technical-discussion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(2rem, 4vw, 3rem);
+  border: 1px solid var(--phaeno-green-200);
+  border-radius: var(--radius-xl);
+  background: var(--phaeno-green-50);
+}
+
+.technical-discussion__copy {
+  max-width: 42rem;
+}
+
+.technical-discussion__eyebrow {
+  margin: 0 0 var(--space-3);
+  color: var(--color-brand-strong);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.technical-discussion h2 {
+  margin: 0;
+  color: var(--phaeno-rna-900);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.08;
+}
+
+.technical-discussion__copy > p:last-child {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+  line-height: 1.55;
+}
+
+.technical-discussion__cta {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: .9rem 1.35rem;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-on-dark);
+  background: var(--phaeno-orange-500);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  transition:
+    color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.technical-discussion__cta:hover {
+  color: var(--color-text-on-dark);
+  background: var(--phaeno-orange-600);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.technical-discussion__cta span {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.technical-discussion__cta:hover span {
+  transform: translateX(2px);
+}
+
 .workflow-card__header {
   padding: clamp(1.5rem, 2.5vw, 2rem);
   border-right: 1px solid var(--color-border);
@@ -752,6 +839,17 @@ import NewSeqCategory from '@/components/NewSeqCategory.astro';
   .workflow-card--execute .workflow-card__list,
   .workflow-card--deliver .workflow-card__list {
     grid-template-columns: 1fr;
+  }
+
+  .technical-discussion {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: var(--space-8);
+    padding: var(--space-7);
+  }
+
+  .technical-discussion__cta {
+    width: 100%;
   }
 }
 </style>
